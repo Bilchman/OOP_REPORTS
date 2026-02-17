@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторні роботи</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>Лабораторні</h2>
+
+        <!-- ЛР №1 -->
+        <div class="lab-title" onclick="openLab('lab1', this)">ЛР №1</div>
+        <ul class="submenu">
+            <li><a href="#lab1-meta">Мета</a></li>
+            <li><a href="#lab1-condition">Умова</a></li>
+            <li><a href="#lab1-analysis">Аналіз</a></li>
+            <li><a href="#lab1-diagram">Діаграма класів</a></li>
+            <li><a href="#lab1-code">Код</a></li>
+            <li><a href="#lab1-examples">Приклади</a></li>
+            <li><a href="#lab1-tests">Перевірки</a></li>
+            <li><a href="#lab1-conclusion">Висновки</a></li>
+        </ul>
+
+        <!-- ЛР №2 -->
+        <div class="lab-title" onclick="openLab('lab2', this)">ЛР №2</div>
+        <ul class="submenu">
+            <li><a href="#lab2-meta">Мета</a></li>
+            <li><a href="#lab2-condition">Умова</a></li>
+            <li><a href="#lab2-analysis">Аналіз</a></li>
+            <li><a href="#lab2-diagram">Діаграма класів</a></li>
+            <li><a href="#lab2-code">Код</a></li>
+            <li><a href="#lab2-examples">Приклади</a></li>
+            <li><a href="#lab2-tests">Перевірки</a></li>
+            <li><a href="#lab2-conclusion">Висновки</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+
+        <div class="author">
+            Автор: Нікіта Більчук
+        </div>
+
+        <!-- ===== ЛР 1 ===== -->
+        <section id="lab1" class="lab-section">
+            <h1>Лабораторна робота №1</h1>
+
+            <article id="lab1-meta">
+                <h3>Мета</h3>
+                <p>Текст мети...</p>
+            </article>
+
+            <article id="lab1-condition">
+                <h3>Умова</h3>
+                <p>Текст умови...</p>
+            </article>
+
+            <article id="lab1-analysis">
+                <h3>Аналіз</h3>
+                <p>Текст аналізу...</p>
+            </article>
+
+            <article id="lab1-diagram">
+                <h3>Діаграма класів</h3>
+                <p>Опис діаграми або зображення...</p>
+            </article>
+
+            <article id="lab1-code" class="code-block">
+                <h3>Код</h3>
+                <!-- Назва файлу завжди видима -->
+                <div class="code-header" onclick="toggleCode(this)">
+                    Lab1.cs
+                </div>
+                <!-- Сам код, спочатку прихований -->
+                <pre>
+<code>
+using System;
+using System.Threading.Channels;
+
+namespace Lab1_var3
+{
+    class Program
+    {
+        /// &lt;summary&gt;
+        /// Вивід інформації про автора
+        /// &lt;/summary&gt;
+        static void printAuthorInfo()
+        {
+            Console.WriteLine("Last name: Bilchuk\nFirst name: Nikita\nAge: 18\nGroup: IPZ-14\nCourse: 1\nE-mail: bilchuk.nikita@knu.ua");
+        }
+
+        /// &lt;summary&gt;
+        /// Обчилення значення многочлена
+        /// &lt;/summary&gt;
+        static void calcPolinom()
+        {
+            Console.WriteLine("Calculate the value of polinom: p = 2x^5 + 3x^4 + 5x + 10");
+
+            int a = 2;
+            int b = 3;
+            int c = 5;
+            int d = 10;
+
+            Console.Write("Enter x: ");
+            input(out double x);
+
+            double p = a * x * x * x * x * x + b * x * x * x * x + c * x + d;
+            Console.WriteLine("Polinom is equal to " + p);
+        }
+
+        /// &lt;summary&gt;
+        /// Обчислення значення виразу з використанням методів класу Math
+        /// &lt;/summary&gt;
+        static void calcWithMath()
+        {
+            Console.WriteLine("Calculate the value of x = (a + b)^2 / (a - b)^2 + e^(a - 1)");
+
+            const double e = 2.72; // константа e
+            double a = 1;
+            double b = 1;
+
+            while (a == b) // перевірка на те, що a і b не рівні, щоб не було ділення на нуль
+            {
+                Console.Write("Enter a: ");
+                input(out a);
+                Console.Write("Enter b: ");
+                input(out b);
+                if (a == b) // якщо a і b рівні, виводимо повідомлення і просимо ввести ще раз
+                    Console.WriteLine("a and b have to be different numbers, try again");
+            }
+
+            double x = Math.Pow(a + b, 2) / Math.Pow(a - b, 2) + Math.Pow(e, a - 1);
+            Console.WriteLine("x is equal to " + x);
+        }
+
+        /// &lt;summary&gt;
+        /// Обчислення значення функції, заданої формулою з умовами на x
+        /// &lt;/summary&gt;
+        static void calcFunction()
+        {
+            Console.WriteLine("       { (sin(x))^2  , x &gt; 0");
+            Console.WriteLine("f(x) = { 1 + 2cos(x) , x &lt; 0");
+            Console.WriteLine("       {      1      , x = 0");
+
+            Console.Write("Enter x: ");
+            input(out double x);
+            double f = 1; // за замовчуванням f = 1, якщо x = 0
+
+            // обчислення значення функції в залежності від умови на x
+            if (x &gt; 0)
+                f = Math.Pow(Math.Sin(x), 2);
+            else if (x &lt; 0)
+                f = 1 + 2 * Math.Cos(x);
+
+            Console.WriteLine("f(x) is equal to " + f);
+        }
+
+        /// &lt;summary&gt;
+        /// Переведення номера місяця в пору року
+        /// &lt;/summary&gt;
+        static void monthToSeason()
+        {
+            int m = 0;
+
+            while (m &lt; 1 || m &gt; 12) // перевірка на те, що введене число є номером місяця
+            {
+                Console.Write("Enter month number: ");
+                input(out m);
+                if (m &lt; 1 || m &gt; 12) // якщо число не є номером місяця, виводимо повідомлення і просимо ввести ще раз
+                    Console.WriteLine("It`s not a month number, try again");
+            }
+            
+            switch (m) // визначення пори року в залежності від номера місяця
+            {
+                case &lt; 3: Console.WriteLine("It`s Winter"); break;
+                case &lt; 6: Console.WriteLine("It`s Spring"); break;
+                case &lt; 9: Console.WriteLine("It`s Summer"); break;
+                case &lt; 12: Console.WriteLine("It`s Autumn"); break;
+                case 12: Console.WriteLine("It`s Winter"); break;
+            }
+        }
+
+        /// &lt;summary&gt;
+        /// Обчислення суми заданого ряду з рекурентними співвідношеннями для a(k) та b(k)
+        /// &lt;/summary&gt;
+        static void calcSum()
+        {
+            Console.WriteLine("     n                 ");
+            Console.WriteLine("    ___                a(1) = 1;  a(k) = 3b(k - 1) + 1,");
+            Console.WriteLine("    \\                                                             for k &gt; 1");
+            Console.WriteLine("S = /__ a(i) * b(i),   b(1) = 3;  b(k) = 1/2 * a(k) - b(k - 1),");
+            Console.WriteLine("    i=1                ");
+
+            Console.Write("Enter integer n: ");
+            int n = 0;
+            while (n &lt; 1)
+            {
+                input(out n);
+                if (n &lt; 0)
+                    Console.WriteLine("n has to be equal or more than 1.");
+            }
+            double a = 1;// початкове значення a при i = 1
+            double b = 3;// початкове значення b при i = 1
+            double sum = 3; // початкове значення суми при i = 1
+
+            for (int i = 1; i &lt; n; i++)// цикл для обчислення суми від i = 1 до n - 1, оскільки при i = 1 сума вже дорівнює 3
+            {
+                a = 3 * b + 1;
+                b = 0.5 * a - b;
+                sum += a * b;
+            }
+
+            Console.WriteLine("Sum is " + sum);
+        }
+
+        /// &lt;summary&gt;
+        /// Меню програми
+        /// &lt;/summary&gt;
+        static void printMenu()
+        {
+            Console.WriteLine("1. Author info\n2. Calculate polinom\n3. Calculate equasion with 'Math'\n4. Calculate function\n5. Convert month to season\n6. Calculate sum\n7. Exit");
+        }
+
+        /// &lt;summary&gt;
+        /// Перевірка введення цілочисельної змінної
+        /// &lt;/summary&gt;
+        /// &lt;param name="variable"&gt; змінна в яку вводится вихідне значення після перевірки &lt;/param&gt;
+        static void input(out int variable)
+        {
+            while (!int.TryParse(Console.ReadLine(), out variable))
+                Console.Write("Enter integer number please: ");
+        }
+
+        /// &lt;summary&gt;
+        /// Перевірка введення дробово-чисельної змінної
+        /// &lt;/summary&gt;
+        /// &lt;param name="variable"&gt; змінна в яку вводится вихідне значення після перевірки &lt;/param&gt;
+        static void input(out double variable)
+        {
+            while (!double.TryParse(Console.ReadLine(), out variable))
+                Console.Write("Enter number please: ");
+        }
+
+        /// &lt;summary&gt;
+        /// точка входу в програму
+        /// &lt;/summary&gt;
+        /// &lt;param name="args"&gt;&lt;/param&gt;
+        static void Main(string[] args)
+        {
+            int choice; // змінна для збереження вибору користувача
+            bool exit = false; // змінна для визначення, чи потрібно виходити з програми
+            while (!exit)
+            {
+                printMenu();
+                Console.Write("Choice: ");
+                choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("******************************");
+                switch (choice) // виконання дії в залежності від вибору користувача
+                {
+                    case 1: printAuthorInfo(); Console.WriteLine("******************************"); break;
+                    case 2: calcPolinom(); Console.WriteLine("******************************"); break;
+                    case 3: calcWithMath(); Console.WriteLine("******************************"); break;
+                    case 4: calcFunction(); Console.WriteLine("******************************"); break;
+                    case 5: monthToSeason(); Console.WriteLine("******************************"); break;
+                    case 6: calcSum(); Console.WriteLine("******************************"); break;
+                    case 7: exit = true; break;
+                    default: Console.WriteLine("Invalid choice"); Console.WriteLine("******************************"); break;
+                }
+            }
+        }
+    }
+}
+</code>
+                </pre>
+            </article>
+
+            <article id="lab1-examples">
+                <h3>Приклади</h3>
+                <p>Приклади роботи програми...</p>
+            </article>
+
+            <article id="lab1-tests">
+                <h3>Перевірки</h3>
+                <p>Опис тестування...</p>
+            </article>
+
+            <article id="lab1-conclusion">
+                <h3>Висновки</h3>
+                <p>Підсумок виконаної роботи...</p>
+            </article>
+        </section>
+
+        <!-- ===== ЛР 2 ===== --
+        <section id="lab2" class="lab-section">
+            <h1>Лабораторна робота №2</h1>
+
+            <article id="lab2-meta">
+                <h3>Мета</h3>
+                <p>Текст мети...</p>
+            </article>
+
+            <article id="lab2-condition">
+                <h3>Умова</h3>
+                <p>Текст умови...</p>
+            </article>
+
+            <article id="lab2-analysis">
+                <h3>Аналіз</h3>
+                <p>Текст аналізу...</p>
+            </article>
+
+            <article id="lab2-diagram">
+                <h3>Діаграма класів</h3>
+                <p>Опис діаграми...</p>
+            </article>
+
+            <article id="lab2-code" class="code-block">
+                <h3 onclick="toggleCode(this)">Код (клік щоб розгорнути/згорнути)</h3>
+                <pre>
+<code>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Привіт, світ!" &lt;&lt; endl;
+    return 0;
+}
+</code>
+                </pre>
+            </article>
+
+            <article id="lab2-examples">
+                <h3>Приклади</h3>
+                <p>Приклади використання...</p>
+            </article>
+
+            <article id="lab2-tests">
+                <h3>Перевірки</h3>
+                <p>Тестові дані...</p>
+            </article>
+
+            <article id="lab2-conclusion">
+                <h3>Висновки</h3>
+                <p>Підсумок...</p>
+            </article>
+        </section>
+
+    </div> -->
+
+    <script src="script.js"></script>
+</body>
+</html>

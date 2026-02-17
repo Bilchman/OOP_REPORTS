@@ -1,0 +1,103 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    background: #313244;
+    color: #cdd6f4;
+}
+
+/* ===== ЛІВЕ МЕНЮ ===== */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 20px;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.lab-title {
+    cursor: pointer;
+    padding: 8px 0;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.submenu {
+    list-style: none;
+    margin-left: 15px;
+    display: none; /* приховано поки не відкриємо */
+}
+
+    .submenu li {
+        margin: 6px 0;
+    }
+
+    .submenu a {
+        color: #bac2de;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .submenu a:hover {
+            color: #b4befe;
+        }
+
+/* ===== ПРАВА ЧАСТИНА ===== */
+.content {
+    margin-left: 300px; /* щоб не залізло під меню */
+    padding: 40px;
+    max-width: 900px;
+}
+
+.lab-section {
+    display: none; /* всі лабораторні приховані */
+}
+
+    .lab-section.active {
+        display: block; /* показується лише активна */
+    }
+
+article {
+    margin-bottom: 60px;
+}
+
+    article h3 {
+        margin-bottom: 10px;
+        color: #b4befe;
+    }
+/* Заголовок коду — завжди видно */
+.code-header {
+    background: #45475a;
+    color: white;
+    padding: 10px 15px;
+    font-family: monospace;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+}
+
+/* Блок коду */
+.code-block pre {
+    max-height: 0; /* спочатку прихований */
+    overflow: hidden; /* вертикальне ховання */
+    overflow-x: auto; /* горизонтальний скрол */
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 0 15px; /* спочатку padding нуль */
+    font-family: monospace;
+    white-space: pre;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    border-radius: 0 0 6px 6px; /* закруглення внизу */
+}
+
+.code-block.open pre {
+    max-height: 100000px; /* Достатньо велике, щоб вміст помістився */
+    padding: 15px; /* Додаємо відступи при розгортанні */
+}
