@@ -52,11 +52,18 @@ body {
 
 /* ===== ПРАВА ЧАСТИНА ===== */
 .content {
+    flex: 1;
+    height: 100vh;
+    overflow-y: auto;
     margin-left: 300px; /* щоб не залізло під меню */
-    padding: 40px;
+    padding: 20px;
     /*max-width: 900px;*/
 }
-
+.content h1,
+.content h2,
+.content h3 {
+    text-align: center;
+}
 .lab-section {
     display: none; /* всі лабораторні приховані */
 }
@@ -66,7 +73,8 @@ body {
     }
 
 article {
-    margin-bottom: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
     article h3 {
@@ -101,4 +109,12 @@ article {
     max-height: 100000px; /* Достатньо велике, щоб вміст помістився */
     padding: 15px; /* Додаємо відступи при розгортанні */
 
+}
+
+.photo {
+    padding: 10px;
+    max-width: 30%;
+    display: block;
+    border-radius:20px;
+    margin: 0 auto;
 }

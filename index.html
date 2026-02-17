@@ -24,7 +24,7 @@
         </ul>
 
         <!-- ЛР №2 -->
-        <div class="lab-title" onclick="openLab('lab2', this)">ЛР №2</div>
+        <!-- <div class="lab-title" onclick="openLab('lab2', this)">ЛР №2</div>
         <ul class="submenu">
             <li><a href="#lab2-meta">Мета</a></li>
             <li><a href="#lab2-condition">Умова</a></li>
@@ -34,27 +34,41 @@
             <li><a href="#lab2-examples">Приклади</a></li>
             <li><a href="#lab2-tests">Перевірки</a></li>
             <li><a href="#lab2-conclusion">Висновки</a></li>
-        </ul>
-    </div>
+	</ul> -->
+    </div> 
 
     <div class="content">
 
-        <div class="author">
+        <!-- <div class="author">
             Автор: Нікіта Більчук
-        </div>
+	</div> -->
 
         <!-- ===== ЛР 1 ===== -->
         <section id="lab1" class="lab-section">
-            <h1>Лабораторна робота №1</h1>
+		<h1>Лабораторна робота №1<br></h1>
+		<h2>Методи введення, виведення, перетворення типів,  
+			оператори: умовний, вибору, циклу в мові C#<br></h2>
 
             <article id="lab1-meta">
                 <h3>Мета</h3>
-                <p>Текст мети...</p>
+                <ol>
+			<li>Ознайомитись з технологією створення консульних застосунків в IDE Visual Studio для використання виразів в арифметичниxобчисленнях.</li>
+			<li>Опанувати методи класу Console для консольного введення та виведення даних.</li>
+			<li>Навчитись здійснювати перетворення типів даних в процесі їх консольного введення за допомогою методів класу Convert та з використанням методів Parse(), TryParse().</li>
+			<li>Навчитись використовувати метод ToString() для перетворення об’єктів в його рядкове подання.</li>
+		</ol>
             </article>
 
             <article id="lab1-condition">
                 <h3>Умова</h3>
-                <p>Текст умови...</p>
+		<p>Створити консольний застосунок мовою C#. Вхідні дані ввести з клавіатури. Результати вивести на консоль. Використати методи класів Console, Convert в процесі введення та виведення даних. Реалізувати перераховані завдання у вигляді методів класу Program. Виклик методів здійснити за допомогою меню, застосувавши оператор вибору switch. Усі завдання варіанта реалізувати в одному консольному проєкті Lab1.<br></p>
+		<ol>
+			<li>Вивести на консоль власні анкетні дані: прізвище, ім'я, вік, група, курс, e-mail. Обчислити значення поліному p=2*x^5 + 3*x^4+5*x+10. Значення a, b, c, d – дійсні числа, які слід ініціалізувати у функції, значення змінної x увести з консолі. Результат вивести на консоль.</li>
+			<li>За даними, що введені з консолі, визначити значення виразу, використовуючи математичні функції класу Math, і вивести результат на консоль.<br><img src = "photos\Lab1\Screenshot 2026-02-17 154540.png" class = "photo"></img></li>
+			<li>Обчислити значення функції в точці х, значення якої ввести з консолі:<br><img src = "photos\Lab1\Screenshot 2026-02-17 154606.png" class = "photo"></img></li>
+			<li>Написати метод, який в залежності від порядкового номера місяця року (1, 2,..., 12) виводить на екран пору року (зима, весна....)</li>
+			<li>Дано натуральне число n. Обчислити<br><img src = "photos\Lab1\Screenshot 2026-02-17 154622.png" class = "photo" style = "max-width: 60%;"></img></li>
+		</ol>
             </article>
 
             <article id="lab1-analysis">
@@ -64,14 +78,14 @@
 
             <article id="lab1-diagram">
                 <h3>Діаграма класів</h3>
-                <p>Опис діаграми або зображення...</p>
+		<p><img src = "photos\Lab1\classDiagram.png" class = "photo"></img></p>
             </article>
 
             <article id="lab1-code" class="code-block">
                 <h3>Код</h3>
                 <!-- Назва файлу завжди видима -->
                 <div class="code-header" onclick="toggleCode(this)">
-                    Lab1.cs
+                    Program.cs
                 </div>
                 <!-- Сам код, спочатку прихований -->
                 <pre>
@@ -255,7 +269,7 @@ namespace Lab1_var3
             {
                 printMenu();
                 Console.Write("Choice: ");
-                choice = Convert.ToInt32(Console.ReadLine());
+                input(out choice);
                 Console.WriteLine("******************************");
                 switch (choice) // виконання дії в залежності від вибору користувача
                 {
@@ -276,9 +290,176 @@ namespace Lab1_var3
                 </pre>
             </article>
 
-            <article id="lab1-examples">
+            <article id="lab1-examples" class = "code-block">
                 <h3>Приклади</h3>
-                <p>Приклади роботи програми...</p>
+		<div class="code-header" onclick="toggleCode(this)">
+                    Console
+                </div>
+
+		<pre>
+		<p>1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 1
+******************************
+Last name: Bilchuk
+First name: Nikita
+Age: 18
+Group: IPZ-14
+Course: 1
+E-mail: bilchuk.nikita@knu.ua
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 2
+******************************
+Calculate the value of polinom: p = 2x^5 + 3x^4 + 5x + 10
+Enter x: lalala
+Enter number please: 1
+Polinom is equal to 20
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 3
+******************************
+Calculate the value of x = (a + b)^2 / (a - b)^2 + e^(a - 1)
+Enter a: 2
+Enter b: 1
+x is equal to 11,72
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 4
+******************************
+       { (sin(x))^2  , x &gt; 0
+f(x) = { 1 + 2cos(x) , x &lt; 0
+       {      1      , x = 0
+Enter x: 0
+f(x) is equal to 1
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 4
+******************************
+       { (sin(x))^2  , x &gt; 0
+f(x) = { 1 + 2cos(x) , x &lt; 0
+       {      1      , x = 0
+Enter x: -3,14
+f(x) is equal to -0,999997463455079
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 4
+******************************
+       { (sin(x))^2  , x &gt; 0
+f(x) = { 1 + 2cos(x) , x &lt; 0
+       {      1      , x = 0
+Enter x: 1,57
+f(x) is equal to 0,9999993658637698
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 5
+******************************
+Enter month number: 2
+It`s Winter
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 5
+******************************
+Enter month number: 5
+It`s Spring
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 5
+******************************
+Enter month number: 7
+It`s Summer
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 5
+******************************
+Enter month number: 10
+It`s Autumn
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice: 6
+******************************
+     n
+    ___                a(1) = 1;  a(k) = 3b(k - 1) + 1,
+    \                                                            for k &gt; 1
+S = /__ a(i) * b(i),   b(1) = 3;  b(k) = 1/2 * a(k) - b(k - 1),
+    i=1
+Enter integer n: 2
+Sum is 23
+******************************
+1. Author info
+2. Calculate polinom
+3. Calculate equasion with 'Math'
+4. Calculate function
+5. Convert month to season
+6. Calculate sum
+7. Exit
+Choice:</p>
+		</pre>
             </article>
 
             <article id="lab1-tests">
