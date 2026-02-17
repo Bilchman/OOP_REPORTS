@@ -54,7 +54,7 @@ body {
 .content {
     margin-left: 300px; /* щоб не залізло під меню */
     padding: 40px;
-    max-width: 900px;
+    /*max-width: 900px;*/
 }
 
 .lab-section {
@@ -100,4 +100,5 @@ article {
 .code-block.open pre {
     max-height: 100000px; /* Достатньо велике, щоб вміст помістився */
     padding: 15px; /* Додаємо відступи при розгортанні */
+
 }
