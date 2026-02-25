@@ -24,7 +24,7 @@
         </ul>
 
         <!-- ЛР №2 -->
-        <!-- <div class="lab-title" onclick="openLab('lab2', this)">ЛР №2</div>
+        <div class="lab-title" onclick="openLab('lab2', this)">ЛР №2</div>
         <ul class="submenu">
             <li><a href="#lab2-meta">Мета</a></li>
             <li><a href="#lab2-condition">Умова</a></li>
@@ -34,7 +34,7 @@
             <li><a href="#lab2-examples">Приклади</a></li>
             <li><a href="#lab2-tests">Перевірки</a></li>
             <li><a href="#lab2-conclusion">Висновки</a></li>
-	</ul> -->
+	</ul>
     </div> 
 
     <div class="content">
@@ -47,7 +47,7 @@
         <section id="lab1" class="lab-section">
 		<h1>Лабораторна робота №1<br></h1>
 		<h2>Методи введення, виведення, перетворення типів,  
-			оператори: умовний, вибору, циклу в мові C#<br></h2>
+			оператори: умовний, вибору, циклу в мові C#<br>Варіант №3<br></h2>
 
             <article id="lab1-meta">
                 <h3>Мета</h3>
@@ -305,7 +305,7 @@ namespace Lab1_var3
                 </div>
 
 		<pre>
-		<p>1. Author info
+1. Author info
 2. Calculate polinom
 3. Calculate equasion with 'Math'
 4. Calculate function
@@ -466,7 +466,7 @@ Sum is 23
 5. Convert month to season
 6. Calculate sum
 7. Exit
-Choice:</p>
+Choice:
 		</pre>
             </article>
 
@@ -537,62 +537,1514 @@ p = 2*x^5 + 3*x^4 + 5*x + 10, де x = 1, тоді<img src="photos/Lab1/2.png" c
             </article>
         </section>
 
-        <!-- ===== ЛР 2 ===== --
+        <!-- ===== ЛР 2 ===== -->
         <section id="lab2" class="lab-section">
-            <h1>Лабораторна робота №2</h1>
+		    <h1>Лабораторна робота №2<br></h1>
+            <h2>
+                Масиви, матриці, рядки. Методи класів Console, Convert, Random, Math в C#
+                <br>Варіант №4<br>
+            </h2>
 
             <article id="lab2-meta">
                 <h3>Мета</h3>
-                <p>Текст мети...</p>
+                <ol>
+                    <li>
+                        Ознайомитись з теорією обробки одновимірних і багатовимірних масиві в C#.
+                    </li>
+                    <li>
+                        Опанувати технологію застосування масивів даних в прикладних задачах.
+                    </li>
+                    <li>
+                        Навчитися розробляти алгоритми та програми із застосуванням одновимірних і багатовимірних масивів.
+                    </li>
+                    <li>
+                        Застосовувати алгоритми лінійного та двійкового пошуку для реалізації пошукових завдань в процесі обробки масивів.
+                    </li>
+		        </ol>
             </article>
 
             <article id="lab2-condition">
                 <h3>Умова</h3>
-                <p>Текст умови...</p>
+                <p>
+                    Створити консольний застосунок мовою C#. Вхідні дані вводити з клавіатури. Результати виводити на консоль. Використати методи класів Console, Convert в процесі введення та виведення даних. Реалізувати перераховані завдання у вигляді методів класу Program. Виклик методів здійснити за допомогою меню, застосувавши оператор вибору switch. Для створення масиву і матриці використати методи класу Random. Для виконання математичних обчислень використати методи класу Math. Усі завдання варіанта реалізувати в одному консольному проєкті Lab2.<br>
+                </p>
+		        <ol>
+            <li>
+                Згенерувати додатні та від’ємні значення елементів одновимірного масиву, задавши їх кількість та діапазон значень з консолі. Відсортувати згенерований масив за зростанням значень його елементів алгоритмом сортування включенням. Вивести на консоль масив до та після сортування.
+            </li>
+            <li>
+                Визначити прості числа серед додатних елементів згенерованого в п.1 масиву, використавши алгоритм Ератосфена. Вивести прості числа на консоль. Якщо в згенерованому масиві відсутні прості числа, то вивести на консоль відповідне повідомлення.
+            </li>
+            <li>
+                Переставити елементи згенерованого в п.1. масиву так, щоб спочатку були розташовані всі від’ємні елементи, потім усі додатні елементи, потім усі нульові. Порядок серед додатних і від’ємних елементів має зберегтися. Надрукувати масив після переставлення елементів.
+            </li>
+            <li>
+                Знайти найбільший серед від’ємних та найменший серед додатних елементів згенерованого в п.1 масиву, застосувавши алгоритм лінійного пошуку. Вивести значення знайдених елементів та їх індекси.
+            </li>
+            <li>
+                Визначити кількість і значення елементів масиву, що кратні заданому  з консолі числу, застосувавши метод бінарного пошуку. У разі їх відсутності вивести відповідне повідомлення. Модифікувати функцію бінарного пошуку у масиві, використавши метод BinarySearch() класу Array
+            </li>
+            <li>
+                Згенерувати елементи матриці, задавши її вимірність та діапазон значень з консолі. На перетині i-го рядка та j-го стовпчика матриці записаний прибуток за j-й місяць від продажу i-го товару в магазині. Вивести матрицю на консоль у вигляді таблиці. Визначити загальний прибуток від продажу кожного товару, загальний прибуток магазину від продажу усіх  товарів за усі місяці, індекс товару, який приносить прибуток. Вивести результати на консоль.
+            </li>
+            <li>
+                Вивести на консоль значення мінімального та максимального елементів матриці та їх індекси, застосувавши методи класу Math.
+            </li>
+            <li>
+                Знайти корені нелінійного рівняння (x^2−5*x+7)^2−(x−2)*(x−3)=0, застосувавши метод половинного ділення (метод бісекції). Вивести результати на консоль. Здійснити перевірку правильності рішення, підставивши знайдені значення коренів в нелінійне рівняння.
+            </li>
+            <li>
+                Увести з консолі рядок символів (тип string), що містить круглі, квадратні та фігурні дужки. Визначити чи є послідовність дужок правильною, тобто кількість дужок, що відкривається, дорівнює кількості дужок, що закриваються. Результати вивести на консоль.
+            </li>
+		</ol>
             </article>
 
             <article id="lab2-analysis">
                 <h3>Аналіз</h3>
-                <p>Текст аналізу...</p>
+                <ol>
+                    <li>Для генерації масиву використовуватимемо клас Random. Перед генерацією зчитаємо кількість та діапазон значень. Залежно від введеного діапазону зробимо різні режими генерації для правильного утворення додатніх та від'ємних значень. Сортування зробимо за класичним алгоритмом сортування вставкою. Виведення масиву буде виконан через використання типізованого методу виведення масиву printArray().</li>
+                    <li>Для визначення простих чисел створимо булевий масив що міститиме дані про те які числа є простими від 0 до максимального значення елемента у масиві. За допомогою решета Ератосфена визначемо прості числа та запишемо результат до булевого масиву. Далі пройдемося по масиву елементів та виводитиме лише ті, що записані як прості у булевому масиві.</li>
+                    <li>Щоб переставити елементи у порядку від'ємні, додатні, нулі варто спочатку перестаити додатні елементи у кінець масиву, а потім нульові. Проте щоб зберегти порядок між елементами одного знаку варто проходити з кінця масиву та переставляти перший знайдений додатній елемент у кінець, потім наступний на передостанню позицію, а так далі, поки всі додатні елементи не будуть перемішені у кінець, після чого прото переставляємо нульові елементи у кінець масиву.</li>
+                    <li>Щоб визначити найменший додатній елемент, варто визначити перший додатній елемент у масіві і, якщо такий існує, порівнювати його з рештою додатніх елементів у масиві поки не буде знайдено найменший серед них. Для знаходження найбільшого від'ємного значення робитимемо аналогічно.</li>
+                    <li>Для знаходження всіх кратних вимагають використовувати бінарний пошук замість традиційної перевірки остачі. Отже, перш за все визначимо найбільше за модулем число у масиві та, за допомогою бінарного пошуку, шукатимемо додатне та від'ємне значення заданого числа а потім збільшувати за модулем на саме ж шукане число до тих пір, поки воно менше або дорівнює максимальному за модулем елементу. Таким чином ми переглянемо всі можливі складні числа, що мають у складі шукане число та зможемо визначити чи присутні вони у масиві.</li>
+                    <li>Матрицю згенеруємо зчитавши її розміри та діапазон прибутку і використавши клас Random. Виводитимемо матрицю у вигляді таблиці з місяцями та товарами, де на перетині показаний прибуток відповідного товару за певний місяць. Крім того додамо додаткові колонку та стовпець що показуватимуть загальний прибуток за кожен місяць та з кожного товару і загальний прибуток.</li>
+                    <li>Пошук максимального значення у матриці здійснюватимемо через лінійній пошук найбільшого елементу та запам'ятання його позиції і подальше виведення результат. Пошук найменшого значення здійснюватимемо аналогічно.</li>
+                    <li>Для знаходження коренів спочатку знайдемо проміжок на якому знаки функції будуть різними, після чого за допомогою методу половинного ділення шукатимемо наближений корінь рівняння.</li>
+                    <li>Для перевірки правильності розставлення дужок створимо список, в якому зберігатимуться дані про відкриті та закриті дужки. Оскільки дужки мають відкриватися і закриватися у зеркальній послідовності, ми можемо записувати всі відкриті дужки до списку та видаляти коли вони закриваються, але лише якщо вони закриваються у правильній послідовності і якщо послідовність порушена необхідно завершити побідьше проходження по тексту та вивести повідомлення про порушення послідовності.</li>
+                </ol>
+                <ul><li>Додатково створимо типізовані методи обміну значеннями елементів та виведення масиву, а також метод захищеного введення чисел за допомогою TryParse()</li></ul>
             </article>
 
             <article id="lab2-diagram">
                 <h3>Діаграма класів</h3>
-                <p>Опис діаграми...</p>
+		        <p>
+                    <img src = "photos\Lab2\ClassDiagram.png" class = "photo"/>
+                </p>
             </article>
 
             <article id="lab2-code" class="code-block">
-                <h3 onclick="toggleCode(this)">Код (клік щоб розгорнути/згорнути)</h3>
-                <pre>
-<code>
-#include &lt;iostream&gt;
-using namespace std;
+                <h3>Код</h3>
+                <!-- Назва файлу завжди видима -->
+                <div class="code-header" onclick="toggleCode(this)">
+                    Program.cs
+                </div>
+                <!-- Сам код, спочатку прихований -->
+                <pre><code>
+using System;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Xml.Schema;
 
-int main() {
-    cout &lt;&lt; "Привіт, світ!" &lt;&lt; endl;
-    return 0;
+namespace Lab2_var4;
+
+class Program
+{
+    //=== 1 ===
+    /// &lt;summary&gt;
+    /// Генерація масиву з випадковими цілими числами в заданому діапазоні.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;Масив випадкових цілих чисел.&lt;/returns&gt;
+    static int[] genArray()
+    {
+        int n = 0;
+        while (n &lt; 1)
+        {
+            Console.Write("Enter number of elements: ");
+            input(out n);
+            if (n &lt; 1)
+                Console.WriteLine("Value can`t be less than one, try again!");
+        }
+        Console.Write("Enter lower limit: ");
+        input(out int l);
+        Console.Write("Enter upper limit: ");
+        input(out int h);
+
+        int mode = 0;
+        int[] array = new int[n];
+        Random random = new Random();
+
+        if(l &gt; h)
+            swap(ref l, ref h);
+
+        if (l &gt; 0 && h &gt; 0)
+            mode = 1;
+        else if (h &gt; 0)
+        {
+            l *= -1;
+            mode = 2;
+        }
+        else
+        {
+            l *= -1;
+            h *= -1;
+            mode = 3;
+        }
+
+        for (int i = 0; i &lt; array.Length; i++)
+        {
+             switch(mode)
+             {
+                 case 1:
+                 {
+                     array[i] = random.Next(l, h + 1);
+                     break;
+                 }
+                 case 2:
+                 {
+                     int posOrNeg = random.Next(0, 2);
+                     if (posOrNeg == 1)
+                         array[i] = random.Next(0, h + 1);
+                     else
+                         array[i] = -1 * random.Next(0, l + 1);
+                     break;
+                 }
+                 case 3:
+                 {
+                     array[i] = -1 * random.Next(h, l + 1);
+                     break;
+                 }
+             }
+        }
+        return array;
+    }
+    /// &lt;summary&gt;
+    /// Сортування масиву за допомогою алгоритму вставками.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для сортування.&lt;/param&gt;
+    static void insertionSort(int[] array)
+    {
+        if (array != null && array.Length &gt; 1)
+        {
+            for (int i = 1; i &lt; array.Length; i++)
+            {
+                int key = array[i];
+                int j = i - 1;
+
+                while (j &gt;= 0 && array[j] &gt; key)
+                {
+                    array[j + 1] = array[j];
+                    j--;
+                }
+
+                array[j + 1] = key;
+            }
+        }
+    }
+    //=== 2 ===
+    /// &lt;summary&gt;
+    /// Пошук простих чисел серед додатніх елементів масиву та виведення їх на екран.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для пошуку простих чисел.&lt;/param&gt;
+    static void lookForPrime(int[] array)
+    {
+        int maxNum = array.Max();
+        bool prime = false;
+        bool[] isPrime = new bool[maxNum + 1];
+
+        for (int i = 0; i &lt; isPrime.Length; i++) // Ініціалізуємо всі числа як прості
+            isPrime[i] = true;
+
+        // 0 і 1 не є простими числами
+        isPrime[0] = false;
+        isPrime[1] = false;
+
+        // Використовуємо решето Ератосфена для позначення складних чисел
+        for (int i = 2; i * i &lt; isPrime.Length; i++)
+            if (isPrime[i])
+                for(int j = 2 * i; j &lt; isPrime.Length; j += i)
+                    isPrime[j] = false;
+
+        // Перевіряємо, чи є серед додатніх елементів масиву прості числа
+        for (int i = 0; i &lt; isPrime.Length; i++)
+            if (isPrime[i] == true)
+                prime = true;
+
+        if (prime == true)
+        {
+            Console.Write("Prime numbers: ");
+            for (int i = 0; i &lt; array.Length; i++)
+            {
+                if (array[i] &gt; 1)
+                    if (isPrime[array[i]] == true)
+                        Console.Write(" " + array[i]);
+            }
+            Console.WriteLine();
+        }
+        else
+            Console.WriteLine("There is no prime numbers in the array");
+    }
+    //=== 3 ===
+    /// &lt;summary&gt;
+    /// Перестановка додатніх і від’ємних елементів масиву.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для перестановки.&lt;/param&gt;
+    static void shuffle(int[] array)
+    {
+        int n = array.Length - 1;
+        for(int i = array.Length - 1; i &gt;= 0; i--)
+        {
+            if(array[i] &gt; 0)
+            {
+                int temp = array[i];
+                for(int j = i;  j &lt; n; j++)
+                {
+                    array[j] = array[j + 1];
+                }
+                array[n--] = temp;
+            }
+        }
+        for(int i = array.Length - 1; i &gt;= 0; i--)
+        {
+            if(array[i] == 0)
+            {
+                int temp = array[i];
+                for(int j = i;  j &lt; array.Length - 1; j++)
+                {
+                    array[j] = array[j + 1];
+                }
+                array[array.Length - 1] = temp;
+            }
+        }
+    }
+    //=== 4 ===
+    /// &lt;summary&gt;
+    /// Пошук найменшого додатнього елемента масиву та виведення на екран разом з позицією в масиві.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для пошуку елементів.&lt;/param&gt;
+    static void smallestPositive(int[] array)
+    {
+        int? number = null;
+        int pos = -1;
+
+        for (int i = 0; i &lt; array.Length; i++)
+        {
+            if (array[i] &gt; 0 && (number == null || array[i] &lt; number))
+            {
+                number = array[i];
+                pos = i;
+            }
+        }
+
+        if (number != null)
+            Console.WriteLine($"The smallest positive number is {number} at position {pos}");
+        else
+            Console.WriteLine("There are no positive numbers in the array");
+    }
+    /// &lt;summary&gt;
+    /// Пошук найбільшого від’ємного елемента масиву та виведення на екран разом з позицією в масиві.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для пошуку елементів.&lt;/param&gt;
+    static void biggestNegative(int[] array)
+    {
+        int? number = null;
+        int pos = -1;
+
+        for (int i = 0; i &lt; array.Length; i++)
+        {
+            if (array[i] &lt; 0 && (number == null || array[i] &gt; number))
+            {
+                number = array[i];
+                pos = i;
+            }
+        }
+
+        if (number != null)
+            Console.WriteLine($"The biggest negative number is {number} at position {pos}");
+        else
+            Console.WriteLine("There are no negative numbers in the array");
+    }
+    //=== 5 ===
+    /// &lt;summary&gt;
+    /// Пошук кратного заданого числа серед елементів масиву.
+    /// &lt;/summary&gt;
+    /// &lt;param name="array"&gt;Масив цілих чисел для пошуку кратних значень.&lt;/param&gt;
+    static void lookForMultiple(int[] array)
+    {
+        Console.Write("Enter the number: ");
+        input(out int num);
+
+        if (num == 0)
+        {
+            Console.WriteLine("Can't divide by zero");
+        }
+        else
+        {
+            insertionSort(array);
+
+            int maxNum = Math.Max(Math.Abs(array[0]), Math.Abs(array[array.Length - 1]));
+            int step = Math.Abs(num);
+
+            List&lt;int&gt; result = new List&lt;int&gt;();
+
+            for (int multiple = step; multiple &lt;= maxNum; multiple += step)
+            {
+                searchAll(result, array, multiple);
+                searchAll(result, array, -multiple);
+            }
+
+            if (result.Count &gt; 0)
+            {
+                Console.Write("\nFound elements: ");
+                foreach (int item in result)
+                    Console.Write(item + " ");
+
+                Console.WriteLine("\nCount: " + result.Count);
+            }
+            else
+            {
+                Console.WriteLine("There are no numbers multiple by " + num + " in the array");
+            }
+        }
+    }
+    /// &lt;summary&gt;
+    /// Шукач всіх елементів, кратних заданому числу, у відсортованому масиві за допомогою бінарного пошуку та додавання їх до списку результатів.
+    /// &lt;/summary&gt;
+    /// &lt;param name="storage"&gt;Список для зберігання знайдених елементів.&lt;/param&gt;
+    /// &lt;param name="array"&gt;Відсортований масив цілих чисел.&lt;/param&gt;
+    /// &lt;param name="value"&gt;Значення, кратні якому потрібно знайти.&lt;/param&gt;
+    static void searchAll(List&lt;int&gt; storage, int[] array, int value)
+    {
+        int i = Array.BinarySearch(array, value);
+
+        if (i &gt;= 0)
+        {
+            storage.Add(array[i]);
+
+            for (int l = i - 1; l &gt;= 0 && array[l] == value; l--)
+                storage.Add(array[l]);
+
+            for (int r = i + 1; r &lt; array.Length && array[r] == value; r++)
+                storage.Add(array[r]);
+        }
+    }
+    //=== 6 ===
+    /// &lt;summary&gt;
+    /// Генерація матриці прибутків для магазину.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;Згенерована матриця прибутків.&lt;/returns&gt;
+    static int[,] genMatrix()
+    {
+        int products = 0;
+        int mounths = 0;
+        int minProfit = -1;
+        int maxProfit = -1;
+
+        Console.Write("Enter amount of products: ");
+        while (products &lt; 1)
+        {
+            input(out products);
+            if(products &lt; 1)
+                Console.WriteLine("Value can`t be less than one, try again: ");
+        }
+        Console.Write("Enter amount of mounth: ");
+        while (mounths &lt; 1)
+        {
+            input(out mounths);
+            if (mounths &lt; 1)
+                Console.WriteLine("Value can`t be less than one, try again: ");
+        }
+        Console.Write("Enter min profit: ");
+        while (minProfit &lt; 0)
+        {
+            input(out minProfit);
+            if (minProfit &lt; 0)
+                Console.WriteLine("Value can`t be less than zero, try again: ");
+        }
+        Console.Write("Enter max profit: ");
+        while (maxProfit &lt; 0)
+        {
+            input(out maxProfit);
+            if (maxProfit &lt; 0)
+                Console.WriteLine("Value can`t be less than zero, try again: ");
+        }
+        
+        if(maxProfit < minProfit)
+            swap(ref minProfit, ref maxProfit);
+
+        int[,] matrix = new int[mounths, products];
+        Random random = new Random();
+
+        for (int i = 0; i &lt; mounths; i++)
+            for(int j = 0; j &lt; products; j++)
+                matrix[i, j] = random.Next(minProfit, maxProfit + 1);
+
+        return matrix;
+    }
+    /// &lt;summary&gt;
+    /// Виведення матриці прибутків у вигляді таблиці з підрахунком загального прибутку по місяцях, по товарах та визначення найбільш прибуткового товару.
+    /// &lt;/summary&gt;
+    /// &lt;param name="matrix"&gt;Матриця прибутків.&lt;/param&gt;
+    static void printMatrixWithProfit(int[,] matrix)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+
+        int cellWidth = 12;
+
+        int[] itemProfits = new int[cols];
+        int totalProfit = 0;
+
+        // Заголовок
+        Console.Write("\n{0,-12}|", "Month");
+        for (int j = 0; j &lt; cols; j++)
+            Console.Write("{0," + cellWidth + "}", "Item " + (j + 1));
+        Console.Write("{0," + cellWidth + "}", "Total");
+        Console.WriteLine();
+
+        Console.WriteLine(new string('-', 12 + 1 + cellWidth * (cols + 1)));
+
+        // Дані по місяцях
+        for (int i = 0; i &lt; rows; i++)
+        {
+            int monthProfit = 0;
+
+            Console.Write("{0,-12}|", "Month " + (i + 1));
+
+            for (int j = 0; j &lt; cols; j++)
+            {
+                Console.Write("{0," + cellWidth + "}", matrix[i, j]);
+                monthProfit += matrix[i, j];
+                itemProfits[j] += matrix[i, j];
+            }
+
+            totalProfit += monthProfit;
+            Console.Write("{0," + cellWidth + "}", monthProfit);
+            Console.WriteLine();
+        }
+
+        Console.WriteLine(new string('-', 12 + 1 + cellWidth * (cols + 1)));
+
+        // Прибуток по товарах
+        Console.Write("{0,-12}|", "Profit");
+        for (int j = 0; j &lt; cols; j++)
+            Console.Write("{0," + cellWidth + "}", itemProfits[j]);
+        Console.Write("{0," + cellWidth + "}", totalProfit);
+        Console.WriteLine();
+
+        Console.WriteLine(new string('-', 12 + 1 + cellWidth * (cols + 1)));
+
+        // Найприбутковіший товар
+        int maxProfit = itemProfits[0];
+        int maxIndex = 0;
+        for (int j = 1; j &lt; cols; j++)
+        {
+            if (itemProfits[j] &gt; maxProfit)
+            {
+                maxProfit = itemProfits[j];
+                maxIndex = j;
+            }
+        }
+        Console.WriteLine("Most profitable item: Item " + (maxIndex + 1) + " (Profit: " + maxProfit + ")");
+    }
+    /// &lt;summary&gt;
+    /// Виведення матриці у вигляді таблиці.
+    /// &lt;/summary&gt;
+    /// &lt;param name="matrix"&gt;Матриця&lt;/param&gt;
+    static void printMatrix(int[,] matrix)
+    {
+        int rows = matrix.GetLength(0);
+        int cols = matrix.GetLength(1);
+        int cellWidth = 12;
+
+        // Заголовок
+        Console.Write("\n{0,-12}|", "Row\\Col");
+        for (int j = 0; j &lt; cols; j++)
+            Console.Write("{0," + cellWidth + "}", "Col " + j);
+        Console.WriteLine();
+
+        // Розділювач
+        Console.WriteLine(new string('-', 12 + 1 + cellWidth * cols));
+
+        // Дані
+        for (int i = 0; i &lt; rows; i++)
+        {
+            Console.Write("{0,-12}|", "Row " + i);
+
+            for (int j = 0; j &lt; cols; j++)
+                Console.Write("{0," + cellWidth + "}", matrix[i, j]);
+
+            Console.WriteLine();
+        }
+    }
+    //=== 7 ===
+    /// &lt;summary&gt;
+    /// Пошук максимального елемента матриці та виведення його значення разом з позицією в матриці.
+    /// &lt;/summary&gt;
+    /// &lt;param name="matrix"&gt;Матриця&lt;/param&gt;
+    static void lookForMax(int[,] matrix)
+    {
+        int maxValue = matrix[0, 0];
+        int maxI = 0;
+        int maxJ = 0;
+
+        for (int i = 0; i &lt; matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j &lt; matrix.GetLength(1); j++)
+            {
+                if (matrix[i, j] &gt; maxValue)
+                {
+                    maxValue = matrix[i, j];
+                    maxI = i;
+                    maxJ = j;
+                }
+            }
+        }
+
+        Console.WriteLine($"\nThe max value is {maxValue} at i = {maxI}, j = {maxJ}");
+    }
+    /// &lt;summary&gt;
+    /// Пошук мінімального елемента матриці та виведення його значення разом з позицією в матриці.
+    /// &lt;/summary&gt;
+    /// &lt;param name="matrix"&gt;Матриця&lt;/param&gt;
+    static void lookForMin(int[,] matrix)
+    {
+        int minValue = matrix[0, 0];
+        int minI = 0;
+        int minJ = 0;
+
+        for (int i = 0; i &lt; matrix.GetLength(0); i++)
+        {
+            for (int j = 0; j &lt; matrix.GetLength(1); j++)
+            {
+                if (matrix[i, j] &lt; minValue)
+                {
+                    minValue = matrix[i, j];
+                    minI = i;
+                    minJ = j;
+                }
+            }
+        }
+
+        Console.WriteLine($"The min value is {minValue} at i = {minI}, j = {minJ}");
+    }
+    //=== 8 ===
+    /// &lt;summary&gt;
+    /// Функція для обчислення значення нелінійного рівняння (x^2 − 5x + 7)^2 − (x − 2)(x − 3) = 0.
+    /// &lt;/summary&gt;
+    /// &lt;param name="x"&gt;Значення x&lt;/param&gt;
+    /// &lt;returns&gt;Результат обчислення&lt;/returns&gt;
+    static double F(double x)
+    {
+        return Math.Pow(x * x - 5 * x + 7, 2) - (x - 2) * (x - 3);
+    }
+    /// &lt;summary&gt;
+    /// Пошук коренів нелінійного рівняння за допомогою методу половинного ділення на заданому інтервалі [a, b] з точністю eps.
+    /// &lt;/summary&gt;
+    /// &lt;param name="a"&gt;Ліва межа інтервалу&lt;/param&gt;
+    /// &lt;param name="b"&gt;Права межа інтервалу&lt;/param&gt;
+    /// &lt;param name="eps"&gt;Точність&lt;/param&gt;
+    /// &lt;returns&gt;Корінь рівняння або NaN, якщо корінь не знайдено&lt;/returns&gt;
+    static double bisection(double a, double b, double eps = 1e-12)
+    {
+        if (F(a) * F(b) &gt; 0)
+            return double.NaN; // Немає коренів на цьому інтервалі
+
+        double c = a;
+        while ((b - a) / 2 &gt; eps)
+        {
+            c = (a + b) / 2;
+            double fc = F(c);
+
+            if (Math.Abs(fc) &lt; eps)
+                return c;
+
+            if (F(a) * fc &lt; 0)
+                b = c;
+            else
+                a = c;
+        }
+
+        return (a + b) / 2; // Повертаємо середину інтервалу як наближення кореня
+    }
+    /// &lt;summary&gt;
+    /// Пошук усіх коренів нелінійного рівняння на заданому інтервалі з кроком step та точністю eps.
+    /// &lt;/summary&gt;
+    /// &lt;param name="start"&gt;Ліва межа інтервалу&lt;/param&gt;
+    /// &lt;param name="end"&gt;Права межа інтервалу&lt;/param&gt;
+    /// &lt;param name="step"&gt;Крок&lt;/param&gt;
+    /// &lt;param name="eps"&gt;Точність&lt;/param&gt;
+    static void findAllRoots(double start = -10, double end = 10, double step = 0.1, double eps = 1e-12)
+    {
+        List&lt;double&gt; roots = new List&lt;double&gt;();
+
+        double a = start;
+        double b = a + step;
+
+        while (b &lt;= end)
+        {
+            if (F(a) * F(b) &lt; 0)
+            {
+                double root = bisection(a, b, eps);
+
+                bool exists = false;
+
+                for(int i = 0; i &lt; roots.Count() && exists == false; i++)
+                {
+                    if (Math.Abs(roots[i] - root) &lt; 1e-10)
+                        exists = true;
+                }
+
+                if (double.IsNaN(root) == false && exists == false)
+                {
+                    roots.Add(root);
+                }
+            }
+
+            a = b;
+            b = a + step;
+        }
+
+        if (roots.Count == 0)
+        {
+            Console.WriteLine("No roots found on the interval.");
+            return;
+        }
+
+        Console.WriteLine("Found roots:");
+        foreach (var r in roots)
+            Console.WriteLine($"x = {r:F5}, F(x) = {F(r):F5}| {checkAnswer(r)}");
+    }
+    /// &lt;summary&gt;
+    /// Перевірка правильності знайденого кореня рівняння шляхом обчислення значення функції F(x)
+    /// &lt;/summary&gt;
+    /// &lt;param name="x"&gt;Вхідний параметр&lt;/param&gt;
+    /// &lt;returns&gt;Результат перевірки&lt;/returns&gt;
+    static string checkAnswer(double x)
+    {
+        double value = F(x);
+        if (Math.Abs(value) &lt; 1e-10)
+            return "Correct";
+        else
+            return "Incorrect";
+    }
+    //=== 9 ===
+    /// &lt;summary&gt;
+    /// Перевірка послідовності дужок у рядку на правильність.
+    /// &lt;/summary&gt;
+    /// &lt;param name="text"&gt;Вхідний рядок&lt;/param&gt;
+    static void bracketsChecker(string text)
+    {
+        bool wrongBracketSequance = false;
+        List&lt;int&gt; brackets = new List&lt;int&gt;();
+        for (int i = 0; i &lt; text.Length && wrongBracketSequance == false; i++)
+        {
+            switch (text[i])
+            {
+                case '(':
+                {
+                    brackets.Add(1);
+                    break;
+                }
+                case '[':
+                {
+                    brackets.Add(2);
+                    break;
+                }
+                case '{':
+                {
+                    brackets.Add(3);
+                    break;
+                }
+                case ')':
+                {
+                    if (brackets[brackets.Count - 1] == 1)
+                        brackets.RemoveAt(brackets.Count - 1);
+                    else
+                        wrongBracketSequance = true;
+                    break;
+                }
+                case ']':
+                {
+                    if (brackets[brackets.Count - 1] == 2)
+                        brackets.RemoveAt(brackets.Count - 1);
+                    else
+                        wrongBracketSequance = true;
+                    break;
+                }
+                case '}':
+                {
+                    if (brackets[brackets.Count - 1] == 3)
+                        brackets.RemoveAt(brackets.Count - 1);
+                    else
+                        wrongBracketSequance = true;
+                    break;
+                }
+            }
+        }
+        if (brackets.Count == 0 && wrongBracketSequance == false)
+            Console.WriteLine("The sequence is correct");
+        else
+            Console.WriteLine("The sequence is incorrect");
+    }
+    //============================================
+    /// &lt;summary&gt;
+    /// Введення цілого числа з консолі.
+    /// &lt;/summary&gt;
+    /// &lt;param name="n"&gt;Введене число&lt;/param&gt;
+    static void input(out int n)
+    {
+        while(!int.TryParse(Console.ReadLine(), out n))
+            Console.Write("Enter number please: ");
+    }
+    /// &lt;summary&gt;
+    /// Виведення масиву на екран.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+    /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+    static void printArray&lt;T&gt;(T[] array)
+    {
+        foreach (T i in array)
+            Console.Write(" " + i);
+        Console.WriteLine('\n');
+    }
+    /// &lt;summary&gt;
+    /// Обмін значеннями двох змінних за допомогою тимчасової змінної.
+    /// &lt;/summary&gt;
+    /// &lt;typeparam name="T"&gt;Тип змінних&lt;/typeparam&gt;
+    /// &lt;param name="a"&gt;Перша змінна&lt;/param&gt;
+    /// &lt;param name="b"&gt;Друга змінна&lt;/param&gt;
+    static void swap&lt;T&gt;(ref T a, ref T b)
+    {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
+    /// &lt;summary&gt;
+    /// Меню.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;Вибір користувача&lt;/returns&gt;
+    static int menuChoice()
+    {
+        Console.WriteLine("******************************************************");
+        Console.WriteLine("1. Generate array and sort with insertion sort");
+        Console.WriteLine("2. Find prime numbers among positive elements");
+        Console.WriteLine("3. Shuffle array elements");
+        Console.WriteLine("4. Find largest negative and smallest positive element");
+        Console.WriteLine("5. Find elements divisible by a given number");
+        Console.WriteLine("6. Generate profit matrix and display table");
+        Console.WriteLine("7. Find minimum and maximum elements of the matrix");
+        Console.WriteLine("8. Find roots of a nonlinear equation");
+        Console.WriteLine("9. Check sequence of brackets in a string");
+        Console.WriteLine("10. Exit");
+        Console.Write("Choice: ");
+        input(out int choice);
+        return choice;
+    }
+    //============================================
+    /// &lt;summary&gt;
+    /// Точка входу в програму.
+    /// &lt;/summary&gt;
+    /// &lt;param name="args"&gt;Аргументи командного рядка&lt;/param&gt;
+    static void Main(string[] args)
+    {
+        int[]? array = null;
+        int[,]? matrix = null;
+        bool exit = false;
+        while(exit == false)
+        {
+            bool repeat = true;
+            switch(menuChoice())
+            {
+                case 1:
+                {
+                        Console.WriteLine("******************************************************");
+                        array = genArray();
+                        Console.WriteLine("\nGenerated array before sorting:");
+                        printArray(array);
+
+                        insertionSort(array);
+                        Console.WriteLine("Array after sorting:");
+                        printArray(array);
+                        break;
+                }
+                case 2:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            if (array == null)
+                            {
+                                array = genArray();
+                                repeat = true;
+                            }
+                            else
+                            {
+                                printArray(array);
+                                lookForPrime(array);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 3:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            if (array == null)
+                            {
+                                array = genArray();
+                                repeat = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Before rearrangement:");
+                                printArray(array);
+                                shuffle(array);
+                                Console.WriteLine("After rearrangement:");
+                                printArray(array);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 4:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            if (array == null)
+                            {
+                                array = genArray();
+                                repeat = true;
+                            }
+                            else
+                            {
+                                printArray(array);
+                                smallestPositive(array);
+                                biggestNegative(array);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 5:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            if (array == null)
+                            {
+                                array = genArray();
+                                repeat = true;
+                            }
+                            else
+                            {
+                                printArray(array);
+                                lookForMultiple(array);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 6:
+                {
+                        Console.WriteLine("******************************************************");
+                        matrix = genMatrix();
+                        printMatrixWithProfit(matrix);
+                        break;
+                }
+                case 7:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            if (matrix == null)
+                            {
+                                matrix = genMatrix();
+                                repeat = true;
+                            }
+                            else
+                            {
+                                printMatrix(matrix);
+                                lookForMax(matrix);
+                                lookForMin(matrix);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 8:
+                {
+                        Console.WriteLine("******************************************************");
+                        Console.WriteLine("Equation is: (x^2 − 5x + 7)^2 − (x − 2)(x − 3) = 0");
+                        findAllRoots();
+                        break;
+                }
+                case 9:
+                {
+                        Console.WriteLine("******************************************************");
+                        while (repeat == true)
+                        {
+                            Console.Write("Enter text: ");
+                            string? text = Console.ReadLine();
+                            if (string.IsNullOrWhiteSpace(text))
+                            {
+                                repeat = true;
+                            }
+                            else
+                            {
+                                bracketsChecker(text);
+                                repeat = false;
+                            }
+                        }
+                        break;
+                }
+                case 10:
+                {
+                        exit = true;
+                        break;
+                }
+                default: Console.WriteLine("Invalid choice"); break;
+            }
+        }
+    }
 }
-</code>
+                    </code></pre>
+            </article>
+
+            <article id="lab2-examples" class = "code-block">
+                <h3>Приклади</h3>
+		        <div class="code-header" onclick="toggleCode(this)">
+                    Console
+                </div>
+
+                <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 1
+******************************************************
+Enter number of elements: 30
+Enter lower limit: -20
+Enter upper limit: 20
+
+Generated array before sorting:
+ 1 10 -1 -10 0 -10 15 -17 -14 13 0 -13 19 20 15 18 14 -17 -14 -14 18 2 13 19 14 -8 -15 -20 -14 -7
+
+Array after sorting:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 2
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+Prime numbers:  2 13 13 19 19
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 3
+******************************************************
+Before rearrangement:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+After rearrangement:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 4
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+The smallest positive number is 1 at position 14
+The biggest negative number is -1 at position 13
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 5
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+Enter the number: 5
+
+Found elements: 10 -10 -10 15 15 -15 20 -20
+Count: 8
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 6
+******************************************************
+Enter amount of products: 6
+Enter amount of mounth: 4
+Enter min profit: 0
+Enter max profit: 1000
+
+Month       |      Item 1      Item 2      Item 3      Item 4      Item 5      Item 6       Total
+-------------------------------------------------------------------------------------------------
+Month 1     |         514          86         889         103          55          30        1677
+Month 2     |         415         692         622         984         998         189        3900
+Month 3     |         295         275         388         504         720         331        2513
+Month 4     |         784         562         657         574         571         145        3293
+-------------------------------------------------------------------------------------------------
+Profit      |        2008        1615        2556        2165        2344         695       11383
+-------------------------------------------------------------------------------------------------
+Most profitable item: Item 3 (Profit: 2556)
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 7
+******************************************************
+
+Row\Col     |       Col 0       Col 1       Col 2       Col 3       Col 4       Col 5
+-------------------------------------------------------------------------------------
+Row 0       |         514          86         889         103          55          30
+Row 1       |         415         692         622         984         998         189
+Row 2       |         295         275         388         504         720         331
+Row 3       |         784         562         657         574         571         145
+
+The max value is 998 at i = 1, j = 4
+The min value is 30 at i = 0, j = 5
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 8
+******************************************************
+Equation is: (x^2 - 5x + 7)^2 - (x - 2)(x - 3) = 0
+No roots found on the interval.
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 9
+******************************************************
+Enter text: He[re is the] exam(ple of{} correct bracket (seque)nce)
+The sequence is correct
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 9
+******************************************************
+Enter text: He[re i{s the exam(ple of]} inc)o(rrect br{acket (}seque)nce)
+The sequence is incorrect
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice:
                 </pre>
             </article>
 
-            <article id="lab2-examples">
-                <h3>Приклади</h3>
-                <p>Приклади використання...</p>
-            </article>
-
             <article id="lab2-tests">
-                <h3>Перевірки</h3>
-                <p>Тестові дані...</p>
+                <h3>Перевірка</h3>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка генерації та сортування масиву
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 1
+******************************************************
+Enter number of elements: 30
+Enter lower limit: -20
+Enter upper limit: 20
+
+Generated array before sorting:
+ 1 10 -1 -10 0 -10 15 -17 -14 13 0 -13 19 20 15 18 14 -17 -14 -14 18 2 13 19 14 -8 -15 -20 -14 -7
+
+Array after sorting:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+Як бачимо, програма коректно згенерувала масив з 30 елементів у діапазоні від -20 до 20
+та успішно відсортувала його за допомогою сортування вставками.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка пошуку простих чисел серед додатніх елементів
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 2
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+Prime numbers:  2 13 13 19 19
+******************************************************
+У цьому тесті програма успішно знайшла всі прості числа серед додатніх елементів масиву,
+а саме: 2, 13, 13, 19 та 19, оскільки лише вони є простими.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка перестановки елементів масиву
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 3
+******************************************************
+Before rearrangement:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 0 0 1 2 10 13 13 14 14 15 15 18 18 19 19 20
+
+After rearrangement:
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+У цьому тесті програма успішно переставила елементи масиву так, що спочатку йдуть всі від'ємні,
+потім додатні, а в кінці нулі, зберігаючи при цьому порядок елементів у кожній групі.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка пошуку найбільшого від'ємного та найменшого додатнього елементів
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 4
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+The smallest positive number is 1 at position 14
+The biggest negative number is -1 at position 13
+******************************************************
+У цьому тесті програма успішно знайшла найбільший від'ємний елемент -1 на позиції 13
+та найменший додатній елемент 1 на позиції 14.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка знаходження елементів, кратних заданому числу
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 5
+******************************************************
+ -20 -17 -17 -15 -14 -14 -14 -14 -13 -10 -10 -8 -7 -1 1 2 10 13 13 14 14 15 15 18 18 19 19 20 0 0
+
+Enter the number: 5
+
+Found elements: 10 -10 -10 15 15 -15 20 -20
+Count: 8
+******************************************************
+У цьому тесті програма успішно знайшла всі елементи масиву, які кратні числу 5, а саме: 10, -10, -10, 15, 15, -15, 20 та -20,
+бо 10 = 5 * 2, -10 = 5 * (-2), 15 = 5 * 3, -15 = 5 * (-3), 20 = 5 * 4 та -20 = 5 * (-4), на відміну від інших чисел у масиві.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка генерації та підрахунку прибутку в матриці
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 6
+******************************************************
+Enter amount of products: 6
+Enter amount of mounth: 4
+Enter min profit: 0
+Enter max profit: 1000
+
+Month       |      Item 1      Item 2      Item 3      Item 4      Item 5      Item 6       Total
+-------------------------------------------------------------------------------------------------
+Month 1     |         514          86         889         103          55          30        1677
+Month 2     |         415         692         622         984         998         189        3900
+Month 3     |         295         275         388         504         720         331        2513
+Month 4     |         784         562         657         574         571         145        3293
+-------------------------------------------------------------------------------------------------
+Profit      |        2008        1615        2556        2165        2344         695       11383
+-------------------------------------------------------------------------------------------------
+Most profitable item: Item 3 (Profit: 2556)
+******************************************************
+                        <img src="photos\Lab2\6.png" class="photo" style="max-width: 80%" />
+У цьому тесті програма успішно згенерувала матрицю прибутку для 6 товарів за 4 місяці з випадковими значеннями в діапазоні
+від 0 до 1000, коректно обчислила загальний прибуток для кожного товару та місяця, а також визначила
+найбільш прибутковий товар - Item 3 з прибутком 2556.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка пошуку мінімального та максимального елементів матриці
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 7
+******************************************************
+
+Row\Col     |       Col 0       Col 1       Col 2       Col 3       Col 4       Col 5
+-------------------------------------------------------------------------------------
+Row 0       |         514          86         889         103          55          30
+Row 1       |         415         692         622         984         998         189
+Row 2       |         295         275         388         504         720         331
+Row 3       |         784         562         657         574         571         145
+
+The max value is 998 at i = 1, j = 4
+The min value is 30 at i = 0, j = 5
+******************************************************
+
+У цьому тесті програма успішно знайшла максимальний елемент матриці 998 на позиції i = 1, j = 4
+та мінімальний елемент 30 на позиції i = 0, j = 5.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка знаходження коренів нелінійного рівняння
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 8
+******************************************************
+Equation is: (x^2 - 5x + 7)^2 - (x - 2)(x - 3) = 0
+No roots found on the interval.
+******************************************************
+
+Переглянемо графік функції f(x) = (x^2 - 5x + 7)^2 - (x - 2)(x - 3):
+<img src="photos\Lab2\8.png" class="photo" style="max-width: 80%" />
+Як видно з графіка, функція f(x) не перетинає вісь x, отже, рівняння не має дійсних коренів, що підтверджує результат тесту.
+Крім того, з формули видно, що графік має параболічний вигляд та (x^2 - 5x + 7)^2 завжди додатне, а (x - 2)(x - 3) може бути
+як додатнім, так і від'ємним, проте їх різниця ніколи не буде рівною нулю для дійсних x.
+                    </pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка послідовності дужок у рядку
+                    </div>
+                    <pre>
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 9
+******************************************************
+Enter text: He[re is the] exam(ple of{} correct bracket (seque)nce)
+The sequence is correct
+******************************************************
+
+Переглянемо відповідність дужок у рядку:
+  1         1     2      33                 4     4   2
+He[re is the] exam(ple of{} correct bracket (seque)nce)
+
+У цьому рядку всі відкриваючі дужки мають відповідні закриваючі дужки у правильному порядку, тому послідовність є коректною.
+
+******************************************************
+1. Generate array and sort with insertion sort
+2. Find prime numbers among positive elements
+3. Shuffle array elements
+4. Find largest negative and smallest positive element
+5. Find elements divisible by a given number
+6. Generate profit matrix and display table
+7. Find minimum and maximum elements of the matrix
+8. Find roots of a nonlinear equation
+9. Check sequence of brackets in a string
+10. Exit
+Choice: 9
+******************************************************
+Enter text: He[re i{s the exam(ple of]} inc)o(rrect br{acket (}seque)nce)
+The sequence is incorrect
+******************************************************
+
+Переглянемо відповідність дужок у рядку:
+  1    2          3      12    3 4        5      65     6   4
+He[re i{s the exam(ple of]} inc)o(rrect br{acket (}seque)nce)
+
+У цьому рядку є невідповідність дужок, 1 дужка закривається раніше ніж 3 та 2, 5 закривається раніше 6.
+Цього вже достатньо, щоб вважати послідовність некоректною, оскільки дужки не закриваються у правильному порядку.
+                    </pre>
+                </div>
             </article>
 
             <article id="lab2-conclusion">
                 <h3>Висновки</h3>
-                <p>Підсумок...</p>
+                <p>
+                    У ході лабораторної роботи було здобуто навички роботи та застосування одновимірних та багатовимірних масивів, а також методів класів Console, Convert, Random, Math і Array. Отримано навички розробки алгоритмів з використанням масивів. Для реалізації пошукових завдань було застосовано алгоритми лінійного та бінарного пошуку.
+
+                    Було реалізовано генерацію масиву із заданою кількістю та діапазоном значень за допомогою класу Random, після чого виконано сортування елементів алгоритмом вставками. Застосовано алгоритм решета Ератосфена для визначення простих чисел серед додатних елементів масиву. Реалізовано перестановку елементів із збереженням їх відносного порядку таким чином, щоб від’ємні, додатні та нульові значення були згруповані відповідно до умови.
+
+                    За допомогою алгоритму лінійного пошуку визначено найбільший від’ємний та найменший додатний елементи масиву разом із їх індексами. Для пошуку кратних заданому числу застосовано алгоритм двійкового пошуку та модифіковано його з використанням методу BinarySearch() класу Array.
+
+                    Також реалізовано генерацію матриці прибутків. Виконано обчислення загального прибутку для кожного товару, загального прибутку магазину та визначення індексу найбільш прибуткового товару. Знайдено мінімальний і максимальний елементи матриці та їх індекси.
+
+                    Окремо реалізовано чисельне розв’язання нелінійного рівняння методом половинного ділення. Для обробки рядків створено алгоритм перевірки правильності розташування круглих, квадратних і фігурних дужок із використанням структури даних для контролю послідовності відкриття та закриття.
+
+                    Додатково розроблено допоміжні методи для обміну елементів, виведення масивів і захищеного введення числових даних із застосуванням TryParse(), що підвищило надійність та структурованість програми. У результаті виконання роботи було закріплено навички побудови алгоритмів обробки масивів і матриць, реалізації пошукових та чисельних методів, а також організації структурованого консольного застосунку.
+                </p>
             </article>
         </section>
 
-    </div> -->
+        
 
     <script src="script.js"></script>
 </body>
