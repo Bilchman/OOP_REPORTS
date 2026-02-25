@@ -958,7 +958,7 @@ class Program
                 Console.WriteLine("Value can`t be less than zero, try again: ");
         }
         
-        if(maxProfit < minProfit)
+        if(maxProfit &lt; minProfit)
             swap(ref minProfit, ref maxProfit);
 
         int[,] matrix = new int[mounths, products];
@@ -1090,7 +1090,7 @@ class Program
             }
         }
 
-        Console.WriteLine($"\nThe max value is {maxValue} at i = {maxI}, j = {maxJ}");
+        Console.WriteLine($"\nThe max value is {maxValue} at Row = {maxI}, Col = {maxJ}");
     }
     /// &lt;summary&gt;
     /// Пошук мінімального елемента матриці та виведення його значення разом з позицією в матриці.
@@ -1115,7 +1115,7 @@ class Program
             }
         }
 
-        Console.WriteLine($"The min value is {minValue} at i = {minI}, j = {minJ}");
+        Console.WriteLine($"The min value is {minValue} at Row = {minI}, Col = {minJ}");
     }
     //=== 8 ===
     /// &lt;summary&gt;
@@ -2049,5 +2049,6 @@ He[re i{s the exam(ple of]} inc)o(rrect br{acket (}seque)nce)
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
