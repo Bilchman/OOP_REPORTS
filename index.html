@@ -34,7 +34,20 @@
             <li><a href="#lab2-examples">Приклади</a></li>
             <li><a href="#lab2-tests">Перевірки</a></li>
             <li><a href="#lab2-conclusion">Висновки</a></li>
-	</ul>
+	    </ul>
+
+        <!-- ЛР №3 -->
+        <div class="lab-title" onclick="openLab('lab3', this)">ЛР №3</div>
+        <ul class="submenu">
+            <li><a href="#lab3-meta">Мета</a></li>
+            <li><a href="#lab3-condition">Умова</a></li>
+            <li><a href="#lab3-analysis">Аналіз</a></li>
+            <li><a href="#lab3-diagram">Діаграма класів</a></li>
+            <li><a href="#lab3-code">Код</a></li>
+            <li><a href="#lab3-examples">Приклади</a></li>
+            <li><a href="#lab3-tests">Перевірки</a></li>
+            <li><a href="#lab3-conclusion">Висновки</a></li>
+	    </ul>
     </div> 
 
     <div class="content">
@@ -958,7 +971,7 @@ class Program
                 Console.WriteLine("Value can`t be less than zero, try again: ");
         }
         
-        if(maxProfit &lt; minProfit)
+        if(maxProfit < minProfit)
             swap(ref minProfit, ref maxProfit);
 
         int[,] matrix = new int[mounths, products];
@@ -1090,7 +1103,7 @@ class Program
             }
         }
 
-        Console.WriteLine($"\nThe max value is {maxValue} at Row = {maxI}, Col = {maxJ}");
+        Console.WriteLine($"\nThe max value is {maxValue} at i = {maxI}, j = {maxJ}");
     }
     /// &lt;summary&gt;
     /// Пошук мінімального елемента матриці та виведення його значення разом з позицією в матриці.
@@ -1115,7 +1128,7 @@ class Program
             }
         }
 
-        Console.WriteLine($"The min value is {minValue} at Row = {minI}, Col = {minJ}");
+        Console.WriteLine($"The min value is {minValue} at i = {minI}, j = {minJ}");
     }
     //=== 8 ===
     /// &lt;summary&gt;
@@ -1653,8 +1666,8 @@ Row 1       |         415         692         622         984         998       
 Row 2       |         295         275         388         504         720         331
 Row 3       |         784         562         657         574         571         145
 
-The max value is 998 at Row = 1, Col = 4
-The min value is 30 at Row = 0, Col = 5
+The max value is 998 at i = 1, j = 4
+The min value is 30 at i = 0, j = 5
 ******************************************************
 1. Generate array and sort with insertion sort
 2. Find prime numbers among positive elements
@@ -1932,8 +1945,8 @@ Row 1       |         415         692         622         984         998       
 Row 2       |         295         275         388         504         720         331
 Row 3       |         784         562         657         574         571         145
 
-The max value is 998 at Row = 1, Col = 4
-The min value is 30 at Row = 0, Col = 5
+The max value is 998 at i = 1, j = 4
+The min value is 30 at i = 0, j = 5
 ******************************************************
 
 У цьому тесті програма успішно знайшла максимальний елемент матриці 998 на позиції i = 1, j = 4
@@ -2044,12 +2057,1385 @@ He[re i{s the exam(ple of]} inc)o(rrect br{acket (}seque)nce)
             </article>
         </section>
 
-        
+        <!-- ===== ЛР 3 ===== -->
+        <section id="lab3" class="lab-section">
+		    <h1>Лабораторна робота №3<br></h1>
+            <h2>
+                Конструктори та аксесори класів, покажчик this, вкладені клаcи, статичні поля та методи класу, використання текстових файлів в C#
+                <br>Варіант №4<br>
+            </h2>
+
+            <article id="lab3-meta">
+                <h3>Мета</h3>
+                <ol>
+                    <li>
+                        Навчитись розробляти власні класи та використовувати їх у програмах.
+                    </li>
+                    <li>
+                        Застосовувати конструктори класів для створення об’єктів.
+                    </li>
+                    <li>
+                        Використовувати властивості (аксесори) класів для доступу до членів класу.
+                    </li>
+                    <li>
+                        Опанувати технології вкладення класів і часткових класів і методів.
+                    </li>
+                    <li>
+                        Навчитись використовувати статичні класи, поля та методи
+                    </li>
+                    <li>
+                        Набути досвіду використання текстових файлів для збереження даних про об’єкти.
+                    </li>
+		        </ol>
+            </article>
+
+            <article id="lab3-condition">
+                <h3>Умова</h3>
+                <p>
+                    Розробити консольний застосунок мовою C# для обробки даних про факультет і кафедру.
+                </p>
+		        <ol>
+                    <li>
+                        Створити класи: Faculty та Department. Визначити в класах закриті поля:
+                        <ul>
+                            <li>клас Faculty: назва факультету, кількість кафедр, кількість спеціальностей, загальна кількість студентів за всіма спеціальностями</li>
+                            <li>клас Department: назва кафедри, кількість викладачів, кількість студентів, кількість дисциплін, закріплених за кафедрою, обсяг навчального навантаження кафедри (загальна кількість годин на усі дисципліни).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Визначити в класах конструктори без параметрів для ініціалізації полів класів нульовими та пустими (для типу string) значеннями.
+                    </li>
+                    <li>
+                        Визначити в класах конструктори з параметрами для ініціалізації полів класів початковими значеннями.
+                    </li>
+                    <li>
+                        Визначити в класах відкриті властивості (get, set) для доступу до закритих полів та зміни значень ініціалізованих в конструкторах полів класів.
+                    </li>
+                    <li>
+                        Визначити в класах відкриті методи для введення з консолі та виведення на консоль значень ініціалізованих полів класу.
+                    </li>
+                    <li>
+                        Визначити в класах відкриті методи для роботи з об’єктами:
+                        <ul>
+                            <li>
+                                клас Faculty:<br />
+                                - запис у текстовий файл значень полів класу (назва факультету, кількість кафедр, кількість спеціальностей);<br />
+                                - збільшення (зменшення) кількості кафедр в залежності від збільшення (зменшення) кількості спеціальностей (з розрахунку одна спеціальність відповідає одній кафедри), та кількості студентів (на спеціальності має навчатися не менше, ніж 200 студентів).
+                            </li>
+                            <li>
+                                клас Department:<br />
+                                - запис у текстовий файл значень полів класу (назва кафедри,  кількість викладачів, кількість студентів, кількість дисциплін, загальна кількість годин;<br />
+                                - розрахунок навчального навантаження одного викладача (співвідношення кількості студентів і викладачів 10:1, максимальне навантаження викладача за рік не перевищує 600 годин, мінімальний обсяг одної дисципліни складає 90 годин).
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Додати до класу Department вбудований (вкладений) клас Філія_кафедри (BranchChair) в ІТ-компанії з полями:
+                        <ul>
+                            <li>
+                                Назва ІТ-компанії, в якій відкрита філія кафедри;
+                            </li>
+                            <li>
+                                Рейтинг ІТ-компанії в ІТ-галузі;
+                            </li>
+                            <li>
+                                Обсяг фінансів, які ІТ-компанія вкладає в розвиток кафедри.
+                            </li>
+                        </ul>
+                        та методами:
+                        <ul>
+                            <li>
+                                Покращення якості підготовки студентів. Показник якості підготовки студентів (індекс KPI) розраховувати як<br />
+                                Індекс KPI = ((Факт – База) / (Норма – База)) * 100%, де Факт –  фактичні результати роботи; База – допустиме мінімальне значення показника. Нижче базового рівня – відсутність результату; Норма – плановий рівень, те, що студент  повинен виконувати обов'язково, нижче – студент не впорався зі своїми обов'язками; Ціль – значення, до якого потрібно прагнути, наднормативний показник, що дозволяє поліпшити результати.
+                            </li>
+                            <li>
+                                Оптимізація витрат ІТ-компанії за рахунок зменшення коштів на перенавчення молодих спеціалістів, зменшення витрат на рекламу вакансій, зменшення витрат на обладнання, зменшення витрат на навчальні курси, тренінги, семінари тощо. Числові дані генерувати методами класу Random.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Модифікувати клас Department, подавши його як частковий, тобто поділивши його на дві частини: в одну частину (окремий файл) включити метод покращення якості підготовки студентів, в іншу (інший файл) – метод розрахунку навчального навантаження одного викладача.
+                    </li>
+                    <li>
+                        Додати до проекту новий статичний клас CompanyProject (проект ІТ-компанії), включивши в нього три функції (на вибір студента) з варіанта 4 лабораторної роботи 2.
+                    </li>
+		        </ol>
+            </article>
+
+            <article id="lab3-analysis">
+                <h3>Аналіз</h3>
+                <ol>
+                    <li>
+                        Створимо два класи з, визначеними в умові, полями та зробимо їх закритими
+                    </li>
+                    <li>
+                        В кожному з класів створимо конструктори без параметрів що ініціалізуватимуть числові поля нулями, а рядкові пустими рядками.
+                    </li>
+                    <li>
+                        В кожному з класів створимо конструктор з полями що надаватиме полям відповідні значення параметрів конструктора
+                    </li>
+                    <li>
+                        Створимо відкриті властивості до кожного з закритих полів класів. Додамо корегування вхідних данів: для числових полів значення не можуть бути від'ємними, а для рядкових не може бути пустий рядок.
+                    </li>
+                    <li>
+                        Створимо відкриті методи для введення та виведення значень на консоль. Кожен з методів введення матиме свої внутрішні перевірки вхідних даних які потім передаватиме до відкритої властивості, що в свою чергу передаватиме значення до закритого поля класу. Метод виведення одразу виводитиме до консолі значення всіх полів за допомогою зчитування їх через властивості.
+                    </li>
+                    <li>
+                        Запис до файлів здійснюватимемо використовуючи клас StreamWriter. Всі результати роботи програми записуватимемо в один файл рзультатів, тому використоуватимемо запис через append.
+                    </li>
+                    <li>
+                        У класі Faculty визначимо відкритий метод корегування даних. Спочатку в методі вираховуватимется необхідна кількість спеціальностей, а потім відповідно до кількості спеціальностей визначатимтся кількість кафедр.
+                    </li>
+                    <li>
+                        У класі Department визначимо відкритий метод розрахунку навантаження на викладача. Спочатку в методі вираховуватимется необхідна кількість викладачів та мінімальний час навантаження, після чого якщо навантаження вчителя перевищуватиме норму то кількість робочих годин змінюватимется поки всі дані не відповідатимуть нормам.
+                    </li>
+                    <li>
+                        У класі Department створимо вкладений клас BranchDepartment, в якому визначимо відповідні поля та властивості. У вкладеному класі створимо відкриті методи з покращення якості підготовки студентів та оптимізації витрат. 
+                        <br />Метод покращення якості підготовки студентів відповідно до формули з умови вираховуватиме KPI та базуючись на отриманому результаті навчання виводитиме відповідний коментар стосовно підготовни студента.
+                        <br />Метод оптимізації витрат випадково за допомогою класу Random визначатиме початкові витрати компанії, далі визначатиме відсоток на який їх можна оптимізувати та виводитиме результат до та після оптимізації витрат.
+                    </li>
+                    <li>
+                        Клас Department розділимо за допомогою partial на три файли, в двох нових міститимутся методи з поклащення якості підготовки студентів та розрахунку навантаження на одного викладача.
+                    </li>
+                    <li>
+                        До класу CompanyProject додамо з ЛР2 методи визначення простих чисел в масиві, метод перестановки чисел та метод визначення порядку дужок.
+                    </li>
+                </ol>
+                <ul>
+                    <li>
+                        Додатково створимо клас Log для одночасного виведення даних у консоль та запису їх до файлу результатів роботи програми. Для побудови рядків масиву використовуватимемо клас StringBuilder а для запису у файл клас File.
+                    </li>
+                </ul>
+            </article>
+
+            <article id="lab3-diagram">
+                <h3>Діаграма класів</h3>
+		        <p>
+                    <img src = "photos\Lab3\ClassDiagram.png" class = "photo" style="max-width: 80%"/>
+                </p>
+            </article>
+
+            <article id="lab3-code">
+                <h3>Код</h3>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Program.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using Lab3;
+using System;
+using System.IO;
+using System.Collections.Generic;
+
+namespace Lab3_var4
+{
+    class Program
+    {
+        /// &lt;summary&gt;
+        /// Точка входу програми. Демонструє роботу класів Faculty, Department та CompanyProject,
+        /// логуючи результати у файл та виводячи їх у консоль.
+        /// &lt;/summary&gt;
+        /// &lt;param name="args"&gt;Аргументи командного рядка.&lt;/param&gt;
+        static void Main(string[] args)
+        {
+            // Initialize results logger (clears previous results)
+            Log.Init();
+
+            // =========================
+            Log.WriteLine("-- Faculty 1 (user input) --\n");
+            Faculty faculty1 = new Faculty();
+            faculty1.edit();
+            faculty1.printInfo();
+            faculty1.SaveToFile("Results.txt");
+
+            Log.WriteLine($"Faculty updated:\n");
+            faculty1.UpdateDepartmentsAndStudents();
+            faculty1.printInfo();
+            faculty1.SaveToFile("Results.txt");
+
+            // =========================
+            Log.WriteLine("-- Faculty 2 (predefined) --\n");
+            Faculty faculty2 = new Faculty("IT Faculty", 3, 3, 500);
+            faculty2.printInfo();
+            faculty2.SaveToFile("Results.txt");
+
+            Log.WriteLine($"Faculty updated:\n");
+            faculty2.UpdateDepartmentsAndStudents();
+            faculty2.printInfo();
+            faculty2.SaveToFile("Results.txt");
+
+            // =========================
+            Log.WriteLine("-- Department 1 (user input) --\n");
+            Department department1 = new Department();
+            department1.edit();
+            department1.printInfo();
+            department1.SaveToFile("Results.txt");
+
+            double workloadPerProfessor = department1.UpdateProfessorsWorkload();
+            Log.WriteLine($"Department updated:\n");
+            department1.printInfo();
+            department1.SaveToFile("Results.txt");
+            Log.WriteLine($"Workload per professor: {workloadPerProfessor:F2} hours/year\n");
+            department1.improveKPI();
+
+            // =========================
+            Log.WriteLine("\n-- Department 2 (predefined) --\n");
+            Department department2 = new Department("Software Engineering", 8, 120, 5, 450);
+            department2.printInfo();
+            department2.SaveToFile("Results.txt");
+
+            workloadPerProfessor = department2.UpdateProfessorsWorkload();
+            Log.WriteLine($"Department updated:\n");
+            department2.printInfo();
+            department2.SaveToFile("Results.txt");
+            Log.WriteLine($"Workload per professor: {workloadPerProfessor:F2} hours/year\n");
+            department2.improveKPI();
+
+            // =========================
+            Log.WriteLine("\n== Branch Department ==\n");
+            Department.BranchDepartment branch = new Department.BranchDepartment("SoftServe", 90, 200000);
+
+            branch.optimizeExpenses();
+
+            // =========================
+            Log.WriteLine("\n== Company Project ==");
+
+            int[] array = { 3, -5, 8, -2, 0, 5, 0, 4};
+
+            Log.WriteLine("\n-- Looking for prime --");
+            Log.Write("Array: ");
+            Log.LogArray(array);
+            CompanyProject.LookForPrime(array);
+
+            Log.WriteLine("\n-- Shuffling array --");
+            Log.Write("Initial array: ");
+            Log.LogArray(array);
+            CompanyProject.Shuffle(array);
+            Log.Write("Shuffled array: ");
+            Log.LogArray(array);
+
+            Log.WriteLine("\n-- Brackets checker --");
+            Console.Write("Enter text: ");
+            CompanyProject.BracketsChecker(Console.ReadLine());
+
+            Log.WriteLine("\nAll methods executed successfully.");
+        }
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Log.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using System;
+using System.IO;
+using System.Text;
+
+namespace Lab3
+{
+    internal static class Log
+    {
+        private static readonly string Path = "Results.txt";
+
+        /// &lt;summary&gt;
+        /// Ініціалізує лог-файл, очищаючи попередній вміст і записуючи заголовок.
+        /// &lt;/summary&gt;
+        public static void Init()
+        {
+            File.WriteAllText(Path, "=== PROGRAM RESULTS ===\n\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує рядок у консоль та додає його у файл лога з переходом на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+            File.AppendAllText(Path, text + "\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує текст у консоль та додає його у файл лога без переходу на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void Write(string text)
+        {
+            Console.Write(text);
+            File.AppendAllText(Path, text);
+        }
+
+        /// &lt;summary&gt;
+        /// Виведення масиву на екран.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+        /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+        public static void LogArray&lt;T&gt;(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T i in array)
+                sb.Append(i + " ");
+            Log.WriteLine(sb.ToString());
+        }
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Faculty.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace Lab3
+{
+    internal class Faculty
+    {
+        private string _name;
+        private int _departmentCount;
+        private int _majorCount;
+        private int _studentCount;
+        //====================
+        /// &lt;summary&gt;
+        /// Конструктор за замовчуванням. Ініціалізує поля значеннями за замовчуванням.
+        /// &lt;/summary&gt;
+        public Faculty()
+        {
+            _name = string.Empty;
+            _departmentCount = 0;
+            _majorCount = 0;
+            _studentCount = 0;
+        }
+        /// &lt;summary&gt;
+        /// Ініціалізує екземпляр факультету з вказаними значеннями.
+        /// &lt;/summary&gt;
+        /// &lt;param name="name"&gt;Назва факультету.&lt;/param&gt;
+        /// &lt;param name="departmentCount"&gt;Кількість кафедр.&lt;/param&gt;
+        /// &lt;param name="majorCount"&gt;Кількість спеціальностей.&lt;/param&gt;
+        /// &lt;param name="studentCount"&gt;Кількість студентів.&lt;/param&gt;
+        public Faculty(string name, int departmentCount, int majorCount, int studentCount)
+        {
+            Name = name;
+            DepartmentCount = departmentCount;
+            MajorCount = majorCount;
+            StudentCount = studentCount;
+        }
+        //====================
+        public string Name
+        {
+            get { return _name; }
+            set 
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                    _name = value;
+                else
+                    _name = "Undefined";
+            }
+
+        }
+        public int DepartmentCount
+        {
+            get { return _departmentCount; }
+            set 
+            {
+                if (value &gt; 0)
+                    _departmentCount = value;
+                else
+                    _departmentCount = 0;
+            }
+        }
+        public int MajorCount
+        {
+            get { return _majorCount; }
+            set 
+            {
+                if (value &gt; 0)
+                    _majorCount = value;
+                else
+                    _majorCount = 0;
+            }
+        }
+        public int StudentCount
+        {
+            get { return _studentCount; }
+            set 
+            {
+                if (value &gt; 0)
+                    _studentCount = value;
+                else
+                    _studentCount = 0;
+            }
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Виводить інформацію про факультет у консоль.
+        /// &lt;/summary&gt;
+        public void printInfo()
+        {
+            Console.WriteLine($"\nFaculty: {Name}");
+            Console.WriteLine($"Departments: {DepartmentCount}");
+            Console.WriteLine($"Majors: {MajorCount}");
+            Console.WriteLine($"Students: {StudentCount}");
+        }
+        /// &lt;summary&gt;
+        /// Запускає послідовність методів введення даних для факультету.
+        /// &lt;/summary&gt;
+        public void edit()
+        {
+            edit_Name();
+            edit_DepartmentCount();
+            edit_MajorCount();
+            edit_StudentCount();
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Запитує та встановлює назву факультету від користувача.
+        /// &lt;/summary&gt;
+        public void edit_Name()
+        {
+            do
+            {
+                Console.Write("Enter Faculty`s name: ");
+                Name = Console.ReadLine();
+                if(Name == string.Empty || Name == "Undefined")
+                    Console.WriteLine("Name can not be empty!");
+            } while (Name == string.Empty || Name == "Undefined");
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість кафедр від користувача.
+        /// &lt;/summary&gt;
+        public void edit_DepartmentCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of departments: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    DepartmentCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість спеціальностей від користувача.
+        /// &lt;/summary&gt;
+        public void edit_MajorCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of majors: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    MajorCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість студентів від користувача.
+        /// &lt;/summary&gt;
+        public void edit_StudentCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of students: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    StudentCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Зберігає інформацію про факультет у вказаний файл (додає в кінець файлу).
+        /// &lt;/summary&gt;
+        /// &lt;param name="path"&gt;Шлях до файлу для збереження.&lt;/param&gt;
+        public void SaveToFile(string path)
+        {
+            using StreamWriter sw = new StreamWriter(path, append: true);
+            sw.WriteLine($"Faculty: {Name}");
+            sw.WriteLine($"Departments: {DepartmentCount}");
+            sw.WriteLine($"Majors: {MajorCount}");
+            sw.WriteLine($"Students: {StudentCount}");
+            sw.WriteLine();
+            sw.Close();
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Оновлює кількість спеціальностей та кафедр на основі кількості студентів.
+        /// &lt;/summary&gt;
+        public void UpdateDepartmentsAndStudents()
+        {
+            MajorCount = Math.Min(MajorCount, StudentCount / 200);
+            if (MajorCount == 0 && StudentCount &gt; 0)
+                MajorCount = 1;
+            DepartmentCount = MajorCount;
+        }
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Department.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab3
+{
+    internal partial class Department
+    {
+        private string _name;
+        private int _professorCount;
+        private int _studentCount;
+        private int _subjectCount;
+        private int _workload;
+        //====================
+        /// &lt;summary&gt;
+        /// Конструктор за замовчуванням. Ініціалізує поля значеннями за замовчуванням.
+        /// &lt;/summary&gt;
+        public Department()
+        {
+            _name = string.Empty;
+            _professorCount = 0;
+            _studentCount = 0;
+            _subjectCount = 0;
+            _workload = 0;
+        }
+        /// &lt;summary&gt;
+        /// Ініціалізує екземпляр кафедри з вказаними значеннями.
+        /// &lt;/summary&gt;
+        /// &lt;param name="name"&gt;Назва кафедри.&lt;/param&gt;
+        /// &lt;param name="professorCount"&gt;Кількість викладачів.&lt;/param&gt;
+        /// &lt;param name="studentCount"&gt;Кількість студентів.&lt;/param&gt;
+        /// &lt;param name="subjectCount"&gt;Кількість предметів.&lt;/param&gt;
+        /// &lt;param name="workload"&gt;Загальне навантаження.&lt;/param&gt;
+        public Department(string name, int professorCount, int studentCount, int subjectCount, int workload)
+        {
+            Name = name;
+            ProfessorCount = professorCount;
+            StudentCount = studentCount;
+            SubjectCount = subjectCount;
+            Workload = workload;
+        }
+        //====================
+        public string Name
+        {
+            get { return _name; }
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    _name = value;
+                else
+                    _name = "Undefined";
+            }
+        }
+        public int ProfessorCount
+        {
+            get { return _professorCount;}
+            set
+            {
+                if (value &gt; 0)
+                    _professorCount = value;
+                else
+                    _professorCount = 0;
+            }
+        }
+        public int StudentCount
+        {
+            get { return _studentCount; }
+            set
+            {
+                if (value &gt; 0)
+                    _studentCount = value;
+                else
+                    _studentCount = 0;
+            }
+        }
+        public int SubjectCount
+        {
+            get { return _subjectCount; }
+            set
+            {
+                if (value &gt; 0)
+                    _subjectCount = value;
+                else
+                    _subjectCount = 0;
+            }
+        }
+        public int Workload
+        {
+            get { return _workload; }
+            set
+            {
+                if (value &gt; 0)
+                    _workload = value;
+                else
+                    _workload = 0;
+            }
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Виводить інформацію про кафедру у консоль.
+        /// &lt;/summary&gt;
+        public void printInfo()
+        {
+            Console.WriteLine($"\nDepartment name: {Name}");
+            Console.WriteLine($"Professors: {ProfessorCount}");
+            Console.WriteLine($"Students: {StudentCount}");
+            Console.WriteLine($"Subjects: {SubjectCount}");
+            Console.WriteLine($"Workload: {Workload}");
+        }
+        /// &lt;summary&gt;
+        /// Виконує послідовне введення властивостей кафедри від користувача.
+        /// &lt;/summary&gt;
+        public void edit()
+        {
+            edit_Name();
+            edit_ProfessorCount();
+            edit_StudentCount();
+            edit_SubjectCount();
+            edit_Workload();
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Запитує та встановлює назву кафедри від користувача.
+        /// &lt;/summary&gt;
+        public void edit_Name()
+        {
+            do
+            {
+                Console.Write("Enter Department`s name: ");
+                Name = Console.ReadLine();
+                if (Name == string.Empty || Name == "Undefined")
+                    Console.WriteLine("Name can not be empty!");
+            } while (Name == string.Empty || Name == "Undefined");
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість викладачів від користувача.
+        /// &lt;/summary&gt;
+        public void edit_ProfessorCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of professors: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    ProfessorCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість студентів від користувача.
+        /// &lt;/summary&gt;
+        public void edit_StudentCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of students: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    StudentCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює кількість предметів від користувача.
+        /// &lt;/summary&gt;
+        public void edit_SubjectCount()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter number of subjects: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    SubjectCount = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        /// &lt;summary&gt;
+        /// Запитує та встановлює загальне навантаження від користувача.
+        /// &lt;/summary&gt;
+        public void edit_Workload()
+        {
+            bool isValid = false;
+            do
+            {
+                Console.Write("Enter workload: ");
+                isValid = int.TryParse(Console.ReadLine(), out int value);
+                if (isValid)
+                    Workload = value;
+                else
+                    Console.WriteLine("Value should be a number!");
+            } while (!isValid);
+        }
+        //====================
+        /// &lt;summary&gt;
+        /// Зберігає інформацію про кафедру у вказаний файл (додає в кінець файлу).
+        /// &lt;/summary&gt;
+        /// &lt;param name="path"&gt;Шлях до файлу для збереження.&lt;/param&gt;
+        public void SaveToFile(string path)
+        {
+            using StreamWriter sw = new StreamWriter(path, append: true);
+            sw.WriteLine($"Department: {Name}");
+            sw.WriteLine($"Professors: {ProfessorCount}");
+            sw.WriteLine($"Students: {StudentCount}");
+            sw.WriteLine($"Subjects: {SubjectCount}");
+            sw.WriteLine($"Workload: {Workload}");
+            sw.WriteLine();
+            sw.Close();
+        }
+        //====================
+        public class BranchDepartment
+        {
+            string _companyName;
+            int _companyRating;
+            int _investment;
+
+            Random random = new Random();
+
+            //====================
+            /// &lt;summary&gt;
+            /// Ініціалізує гілку кафедри з корпоративним партнером.
+            /// &lt;/summary&gt;
+            /// &lt;param name="companyName"&gt;Назва компанії-партнера.&lt;/param&gt;
+            /// &lt;param name="companyRating"&gt;Рейтинг компанії.&lt;/param&gt;
+            /// &lt;param name="investment"&gt;Інвестиції компанії.&lt;/param&gt;
+            public BranchDepartment(string companyName, int companyRating, int investment)
+            {
+                CompanyName = companyName;
+                CompanyRating = companyRating;
+                Investment = investment;
+            }
+            //====================
+            public string CompanyName
+            {
+                get { return _companyName; }
+                set
+                {
+                    if (!string.IsNullOrWhiteSpace(value))
+                        _companyName = value;
+                    else
+                        _companyName = "Unknown Company";
+                }
+            }
+            public int CompanyRating
+            {
+                get { return _companyRating; }
+                set
+                {
+                    if (value &gt;= 0 && value &lt;= 100)
+                        _companyRating = value;
+                    else
+                        _companyRating = 0;
+                }
+            }
+            public int Investment
+            {
+                get { return _investment; }
+                set
+                {
+                    if (value &gt;= 0)
+                        _investment = value;
+                    else
+                        _investment = 0;
+                }
+            }
+            //====================
+            /// &lt;summary&gt;
+            /// Оптимізує витрати компанії, симулюючи зниження окремих статей витрат.
+            /// &lt;/summary&gt;
+            public void optimizeExpenses()
+            {
+                double retraining = random.Next(1000, 5000);
+                double advertising = random.Next(500, 3000);
+                double equipment = random.Next(2000, 7000);
+                double courses = random.Next(1000, 4000);
+
+                double totalBefore = retraining + advertising + equipment + courses;
+
+                retraining *= random.Next(60, 80) / 100.0;
+                advertising *= random.Next(60, 80) / 100.0;
+                equipment *= random.Next(60, 80) / 100.0;
+                courses *= random.Next(60, 80) / 100.0;
+
+                double totalAfter = retraining + advertising + equipment + courses;
+
+                Log.WriteLine("----- Cost Optimization -----");
+                Log.WriteLine($"Total before optimization: {totalBefore:F2}$");
+                Log.WriteLine($"Total after optimization: {totalAfter:F2}$");
+                Log.WriteLine($"Savings: {(totalBefore - totalAfter):F2}$");
+            }
+        }
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Department.Workload.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab3
+{
+    internal partial class Department
+    {
+        /// &lt;summary&gt;
+        /// Оновлює навантаження професорів, коригує кількість предметів та викладачів за потреби.
+        /// Повертає середнє навантаження на одного професора.
+        /// &lt;/summary&gt;
+        /// &lt;returns&gt;Навантаження на одного професора (годин/рік).&lt;/returns&gt;
+        public double UpdateProfessorsWorkload()
+        {
+            if (ProfessorCount == 0)
+            {
+                Log.WriteLine("No professors available.");
+                return 0;
+            }
+
+            ProfessorCount = StudentCount / 10;
+
+            if (ProfessorCount &lt; 1)
+                ProfessorCount = 1;
+
+            int minTotalHours = SubjectCount * 90;
+            if (Workload &lt; minTotalHours && (double)(minTotalHours / ProfessorCount) &lt;= 600)
+            {
+                Workload = minTotalHours;
+
+            }
+
+            if ((double)(Workload / ProfessorCount) &gt; 600)
+            {
+                while ((double)(SubjectCount * 90 / ProfessorCount) &gt; 600)
+                    SubjectCount--;
+            }
+
+            minTotalHours = SubjectCount * 90;
+            if (Workload &lt; minTotalHours && (double)(minTotalHours / ProfessorCount) &lt;= 600)
+            {
+                Workload = minTotalHours;
+
+            }
+
+            double workloadPerProfessor = (double)(Workload / ProfessorCount);
+
+            return workloadPerProfessor;
+        }
+        //====================
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Department.KPI.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab3
+{
+    internal partial class Department
+    {
+        /// &lt;summary&gt;
+        /// Випадкова імітація розрахунку KPI і виведення результатів до логів.
+        /// &lt;/summary&gt;
+        public void improveKPI()
+        {
+            Random random = new Random();
+            double score = random.Next(101);
+            double threshold = 60;
+            double normal = 80;
+            double goal = 100;
+
+            double kpi = 0;
+
+            if (score &lt; threshold)
+                kpi = 0;
+            else
+                kpi = ((score - threshold) / (normal - threshold)) * 100;
+
+            Log.WriteLine("----- KPI Calculation -----");
+            Log.WriteLine($"Base: {threshold}");
+            Log.WriteLine($"Norm: {normal}");
+            Log.WriteLine($"Goal: {goal}");
+            Log.WriteLine($"Fact: {score}");
+            Log.WriteLine($"KPI Index: {kpi:F2}%");
+
+            if (score &gt;= goal)
+                Log.WriteLine("Result exceeds goal.");
+            else if (score &gt;= normal)
+                Log.WriteLine("Norm achieved.");
+            else if (score &gt;= threshold)
+                Log.WriteLine("Minimum acceptable result.");
+            else
+                Log.WriteLine("Below base level — no result.");
+        }
+        //====================
+    }
+}</code></pre>
+                </div>
+                <div class="code-block">
+                    <!-- Назва файлу завжди видима -->
+                    <div class="code-header" onclick="toggleCode(this)">
+                        CompanyProject.cs
+                    </div>
+                    <!-- Сам код, спочатку прихований -->
+                    <pre><code>
+using Lab3;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab3
+{
+    static internal class CompanyProject
+    {
+        /// &lt;summary&gt;
+        /// Пошук простих чисел серед додатніх елементів масиву та виведення їх на екран.
+        /// &lt;/summary&gt;
+        /// &lt;param name="array"&gt;Масив цілих чисел для пошуку простих чисел.&lt;/param&gt;
+        public static void LookForPrime(int[] array)
+        {
+            int maxNum = array.Max();
+            bool prime = false;
+            bool[] isPrime = new bool[maxNum + 1];
+
+            for (int i = 0; i &lt; isPrime.Length; i++) // Ініціалізуємо всі числа як прості
+                isPrime[i] = true;
+
+            // 0 і 1 не є простими числами
+            if (isPrime.Length &gt; 0) isPrime[0] = false;
+            if (isPrime.Length &gt; 1) isPrime[1] = false;
+
+            // Використовуємо решето Ератосфена для позначення складних чисел
+            for (int i = 2; i * i &lt; isPrime.Length; i++)
+                if (isPrime[i])
+                    for (int j = 2 * i; j &lt; isPrime.Length; j += i)
+                        isPrime[j] = false;
+
+            // Перевіряємо, чи є серед додатніх елементів масиву прості числа
+            for (int i = 0; i &lt; isPrime.Length; i++)
+                if (isPrime[i] == true)
+                    prime = true;
+
+            if (prime == true)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Prime numbers:");
+                for (int i = 0; i &lt; array.Length; i++)
+                {
+                    if (array[i] &gt; 1)
+                        if (isPrime[array[i]] == true)
+                            sb.Append(" " + array[i]);
+                }
+                Log.WriteLine(sb.ToString());
+            }
+            else
+                Log.WriteLine("There is no prime numbers in the array");
+        }
+        /// &lt;summary&gt;
+        /// Перестановка додатніх і від’ємних елементів масиву.
+        /// &lt;/summary&gt;
+        /// &lt;param name="array"&gt;Масив цілих чисел для перестановки.&lt;/param&gt;
+        public static void Shuffle(int[] array)
+        {
+            int n = array.Length - 1;
+            for (int i = array.Length - 1; i &gt;= 0; i--)
+            {
+                if (array[i] &gt; 0)
+                {
+                    int temp = array[i];
+                    for (int j = i; j &lt; n; j++)
+                    {
+                        array[j] = array[j + 1];
+                    }
+                    array[n--] = temp;
+                }
+            }
+            for (int i = array.Length - 1; i &gt;= 0; i--)
+            {
+                if (array[i] == 0)
+                {
+                    int temp = array[i];
+                    for (int j = i; j &lt; array.Length - 1; j++)
+                    {
+                        array[j] = array[j + 1];
+                    }
+                    array[array.Length - 1] = temp;
+                }
+            }
+        }
+        /// &lt;summary&gt;
+        /// Перевірка послідовності дужок у рядку на правильність.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Вхідний рядок&lt;/param&gt;
+        public static void BracketsChecker(string text)
+        {
+            bool wrongBracketSequance = false;
+            List&lt;int&gt; brackets = new List&lt;int&gt;();
+            for (int i = 0; i &lt; text.Length && wrongBracketSequance == false; i++)
+            {
+                switch (text[i])
+                {
+                    case '(':
+                        {
+                            brackets.Add(1);
+                            break;
+                        }
+                    case '[':
+                        {
+                            brackets.Add(2);
+                            break;
+                        }
+                    case '{':
+                        {
+                            brackets.Add(3);
+                            break;
+                        }
+                    case ')':
+                        {
+                            if (brackets.Count &gt; 0 && brackets[brackets.Count - 1] == 1)
+                                brackets.RemoveAt(brackets.Count - 1);
+                            else
+                                wrongBracketSequance = true;
+                            break;
+                        }
+                    case ']':
+                        {
+                            if (brackets.Count &gt; 0 && brackets[brackets.Count - 1] == 2)
+                                brackets.RemoveAt(brackets.Count - 1);
+                            else
+                                wrongBracketSequance = true;
+                            break;
+                        }
+                    case '}':
+                        {
+                            if (brackets.Count &gt; 0 && brackets[brackets.Count - 1] == 3)
+                                brackets.RemoveAt(brackets.Count - 1);
+                            else
+                                wrongBracketSequance = true;
+                            break;
+                        }
+                }
+            }
+            using StreamWriter sw = new StreamWriter("Results.txt", append: true);
+            sw.WriteLine($"The text: {text}");
+            sw.Close();
+
+            if (brackets.Count == 0 && wrongBracketSequance == false)
+                Log.WriteLine("The sequence is correct");
+            else
+                Log.WriteLine("The sequence is incorrect");
+        }
+    }
+}</code></pre>
+                </div>
+            </article>
+
+            <article id="lab3-examples" class = "code-block">
+                <h3>Приклади</h3>
+		        <div class="code-header" onclick="toggleCode(this)">
+                    Results.txt
+                </div>
+                <pre>
+=== PROGRAM RESULTS ===
+
+-- Faculty 1 (user input) --
+
+Faculty: FIT
+Departments: 5
+Majors: 3
+Students: 450
+
+Faculty updated:
+
+Faculty: FIT
+Departments: 2
+Majors: 2
+Students: 450
+
+-- Faculty 2 (predefined) --
+
+Faculty: IT Faculty
+Departments: 3
+Majors: 3
+Students: 500
+
+Faculty updated:
+
+Faculty: IT Faculty
+Departments: 2
+Majors: 2
+Students: 500
+
+-- Department 1 (user input) --
+
+Department: DEP
+Professors: 15
+Students: 120
+Subjects: 6
+Workload: 840
+
+Department updated:
+
+Department: DEP
+Professors: 12
+Students: 120
+Subjects: 6
+Workload: 840
+
+Workload per professor: 70,00 hours/year
+
+----- KPI Calculation -----
+Base: 60
+Norm: 80
+Goal: 100
+Fact: 85
+KPI Index: 125,00%
+Norm achieved.
+
+-- Department 2 (predefined) --
+
+Department: Software Engineering
+Professors: 8
+Students: 120
+Subjects: 5
+Workload: 450
+
+Department updated:
+
+Department: Software Engineering
+Professors: 12
+Students: 120
+Subjects: 5
+Workload: 450
+
+Workload per professor: 37,00 hours/year
+
+----- KPI Calculation -----
+Base: 60
+Norm: 80
+Goal: 100
+Fact: 34
+KPI Index: 0,00%
+Below base level — no result.
+
+== Branch Department ==
+
+----- Cost Optimization -----
+Total before optimization: 10005,00$
+Total after optimization: 6964,87$
+Savings: 3040,13$
+
+== Company Project ==
+
+-- Looking for prime --
+Array: 3 -5 8 -2 0 5 0 4 
+Prime numbers: 3 5
+
+-- Shuffling array --
+Initial array: 3 -5 8 -2 0 5 0 4 
+Shuffled array: -5 -2 3 8 5 4 0 0 
+
+-- Brackets checker --
+The text: q{we(wer)[werwer]wer}w
+The sequence is correct
+
+All methods executed successfully.
+</pre>
+            </article>
+
+            <article id="lab3-tests">
+                <h3>Перевірка</h3>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка методів введення
+                    </div>
+                    <pre>
+-- Faculty 1 (user input) --
+
+Enter Faculty`s name:
+Name can not be empty!
+Enter Faculty`s name: FIT
+Enter number of departments: blablabla
+Value should be a number!
+Enter number of departments: -1
+Enter number of majors: 5
+Enter number of students: 134
+
+Faculty: FIT
+Departments: 0
+Majors: 5
+Students: 134
+
+Як бачимо, факультет обов'язково повинен мати ім'я, а інші його поля мають бути заповнені числами завдяки методам введення,
+в той час як властивості полів не дозволяють призначити їм від'ємні значення. Отже всі методи введення працюють коректно.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка корегування даних факультету
+                    </div>
+                    <pre>
+-- Faculty 1 (user input) --
+
+Enter Faculty`s name: Fit
+Enter number of departments: 6
+Enter number of majors: 3
+Enter number of students: 450
+
+Faculty: Fit
+Departments: 6
+Majors: 3
+Students: 450
+
+Faculty updated:
+
+Faculty: Fit
+Departments: 2
+Majors: 2
+Students: 450
+
+Як бачимо, оскільки на спеціальності має навчатися не менше 200 людей, отже 450 людей можна розділити не більше ніж на
+2 спеціальності, крім того кількість спеціальностей має бути рівною кількості кафедр.
+Отже програма правильно відкорегувала дані факультету.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка розрахунку навчального навантаження
+                    </div>
+                    <pre>
+-- Department 1 (user input) --
+
+Department name: Software Engineering
+Professors: 8
+Students: 120
+Subjects: 5
+Workload: 400
+
+Department updated:
+
+Department name: Software Engineering
+Professors: 12
+Students: 120
+Subjects: 5
+Workload: 450
+Workload per professor: 37,00 hours/year
+
+Як бачимо, за умовою кількість студентів та викладачів співвідноситься як 10:1, отже оскільки на кафедрі навчається
+120 студентів, кількість викладачів має складати 12. Кожена дисципліна повинна мати як мінімум 90 годин навантаження,
+відповідно 5 предметів мають складати навантаження не менше 450 годин на рік. Оскільки загальне навантаження складає
+450 годин, то навантаження на кожного вчителя складатиме 37 годин, що не перевищує норму у 600 годин на рік.
+Отже програма правильно відкорегувала усі дані
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка розрахунку KPI
+                    </div>
+                    <pre>
+----- KPI Calculation -----
+Base: 60
+Norm: 80
+Goal: 100
+Fact: 85
+KPI Index: 125,00%
+Norm achieved.
+
+Якщо скористаємося формулою підрахунку KPI з умови то отримаємо, що (85 - 60) / (80 - 60) = 25 / 20 = 1.25,
+отже учень виконав норму, проте не досяг своєї цілі.
+
+----- KPI Calculation -----
+Base: 60
+Norm: 80
+Goal: 100
+Fact: 34
+KPI Index: 0,00%
+Below base level — no result.
+
+В даному випадку фактичний результат менший за базовий рівень, що свідчить про відсутність результату,
+отже KPI рівний нулю.
+
+Відповідно з даних результатів можна зробити висновок, що програма правильно вираховує рівень якості
+навчання та на скільки успішні учні.
+</pre>
+                </div>
+            </article>
+
+            <article id="lab3-conclusion">
+                <h3>Висновки</h3>
+                <p>
+                    У ході виконання лабораторної роботи було розроблено консольний застосунок мовою C# для обробки даних про факультет і кафедру з використанням можливостей об’єктно-орієнтованого програмування. Створено класи Faculty та Department із закритими полями, конструкторами без параметрів і з параметрами, а також відкритими властивостями (get, set) для забезпечення інкапсуляції та контролю коректності введених даних.
+
+                    Було реалізовано методи введення та виведення інформації через консоль із перевіркою правильності даних за допомогою TryParse() та внутрішньої валідації у властивостях. Для збереження результатів роботи програми використано текстовий файл із застосуванням класів StreamWriter і File, а також створено окремий статичний клас Log для одночасного виведення інформації в консоль і запису її до файлу.
+
+                    У класі Faculty реалізовано метод корегування кількості спеціальностей і кафедр відповідно до кількості студентів із врахуванням умови мінімальної кількості 200 студентів на спеціальність та принципу відповідності «одна спеціальність — одна кафедра». У класі Department реалізовано метод розрахунку навчального навантаження одного викладача з урахуванням співвідношення студентів і викладачів 10:1, мінімального обсягу дисципліни 90 годин і максимально допустимого річного навантаження 600 годин.
+
+                    Клас Department подано як partial та розділено на декілька файлів, у яких окремо реалізовано метод розрахунку навантаження викладачів і метод покращення якості підготовки студентів. Додатково створено вкладений клас BranchDepartment, що моделює філію кафедри в ІТ-компанії, із реалізацією розрахунку індексу KPI за заданою формулою та оптимізації витрат із використанням генерації випадкових значень класом Random.
+
+                    Також до проєкту додано статичний клас CompanyProject, у якому реалізовано алгоритм пошуку простих чисел (решето Ератосфена), алгоритм перестановки елементів масиву та перевірку правильності послідовності дужок у рядку.
+
+                    У результаті виконання роботи було закріплено навички створення та модифікації класів, використання конструкторів і властивостей, застосування вкладених і часткових класів, реалізації статичних методів, роботи з текстовими файлами та побудови структурованого консольного застосунку з логуванням результатів.
+                </p>
+            </article>
+        </section>
+
+    </div>    
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
 
 
