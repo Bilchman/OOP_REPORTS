@@ -50,6 +50,12 @@ body {
             color: #b4befe;
         }
 
+.subsubmenu {
+    display: none;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
 /* ===== ПРАВА ЧАСТИНА ===== */
 .content {
     flex: 1;

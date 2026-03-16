@@ -4,9 +4,8 @@
     document.querySelectorAll('.lab-section')
         .forEach(sec => sec.classList.remove('active'));
 
-    // 2. Ховаємо всі підменю
-    document.querySelectorAll('.submenu')
-        .forEach(menu => menu.style.display = 'none');
+    // 2. Ховаємо всі підменю КРІМ поточного
+    document.querySelectorAll('.submenu').forEach(menu => menu.style.display = 'none');
 
     // 3. Показуємо вибрану лабораторну
     document.getElementById(labId)
@@ -22,6 +21,10 @@
 function toggleCode(header) {
     const article = header.parentElement;
     article.classList.toggle('open');
+}
+function toggleSub(li) {
+    const sub = li.querySelector('.subsubmenu');
+    sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
 }
 
 /* Автоматично відкриваємо першу лабораторну */

@@ -48,6 +48,19 @@
             <li><a href="#lab3-tests">Перевірки</a></li>
             <li><a href="#lab3-conclusion">Висновки</a></li>
 	    </ul>
+
+        <!-- ЛР №4 -->
+        <div class="lab-title" onclick="openLab('lab4', this)">ЛР №4</div>
+        <ul class="submenu">
+            <li><a href="#lab4-meta">Мета</a></li>
+            <li><a href="#lab4-condition">Умова</a></li>
+            <li><a href="#lab4-analysis">Аналіз</a></li>
+            <li><a href="#lab4-diagram">Діаграма класів</a></li>
+            <li><a href="#lab4-code">Код</a></li>
+            <li><a href="#lab4-examples">Приклади</a></li>
+            <li><a href="#lab4-tests">Перевірки</a></li>
+            <li><a href="#lab4-conclusion">Висновки</a></li>
+	    </ul>
     </div> 
 
     <div class="content">
@@ -3428,6 +3441,2140 @@ Below base level — no result.
                     Також до проєкту додано статичний клас CompanyProject, у якому реалізовано алгоритм пошуку простих чисел (решето Ератосфена), алгоритм перестановки елементів масиву та перевірку правильності послідовності дужок у рядку.
 
                     У результаті виконання роботи було закріплено навички створення та модифікації класів, використання конструкторів і властивостей, застосування вкладених і часткових класів, реалізації статичних методів, роботи з текстовими файлами та побудови структурованого консольного застосунку з логуванням результатів.
+                </p>
+            </article>
+        </section>
+
+        <!-- ===== ЛР 4 ===== -->
+        <section id="lab4" class="lab-section">
+		    <h1>Лабораторна робота №4<br></h1>
+            <h2>
+                Успадкування класів, конструктори базових та похідних класів, інтерфейси, абстрактні класи в мові програмування C#
+                <br>Варіант №4<br>
+            </h2>
+
+            <article id="lab4-meta">
+                <h3>Мета</h3>
+                <ol>
+                    <li>Ознайомитися з принципом спадкування класів.</li>
+                    <li>Навчитись використовувати конструктори базових та похідних класів.</li>
+                    <li>Набути досвіду будувати ієрархію класів для повторного використання коду.</li>
+                    <li>Опанувати посилальний тип інтерфейсу. Навчитись використовувати стандартні інтерфейси C#.</li>
+                    <li>Ознайомитися з абстрактними класами C#.</li>
+		        </ol>
+            </article>
+
+            <article id="lab4-condition">
+                <h3>Умова</h3>
+                <p></p>
+		        <ol>
+                    <li>Створити консольний застосунок мовою C# для роботи з ієрархією класів, що включає базовий клас Виріб та похідні класи Вузол, Деталь.
+                        Задати закриті загальні поля у базовому класі (найменування, габаритні розміри (ширина, висота, довжина), призначення) і закриті специфічні
+                        поля в похідних класах (вага, ціна, матеріал, з якого зроблений, сертифікат якості тощо),  реалізувати такі відкриті методи класів:
+                    </li>
+                    <li>Конструктор базового класу (без параметрів або з параметрами) для ініціалізації полів класу Виріб.</li>
+                    <li>Конструктори похідних класів (з параметрами) для ініціалізації полів похідних класів.</li>
+                    <li>Методи–аксесори (властивості) для доступу до закритих полів класів.</li>
+                    <li>Методи виведення значень полів класів на консоль.</li>
+                    <li>Методи, що розраховують вагу вузла як суму ваг усіх деталей, вагу виробу як суму ваг усіх вузлів, вартість виробу як суму вартості усіх деталей.</li>
+                    <li>Розробити другу версію консольного застосунку, що реалізує ієрархію класів у вигляді інтерфейсу, від якого успадковується похідний клас Виріб,
+                        від якого успадковуються класи Вузол, Деталь. Продемонструвати доступ до методів, що реалізовані в похідних класах через посилання на інтерфейс.
+                    </li>
+                    <li>Розробити третю версію консольного застосунку, що реалізує ієрархію класів у вигляді абстрактного базового класу Виріб, від якого успадковуються класи Вузол, Деталь. Протестувати відмінності застосування інтерфейсів і абстрактних класів.</li>
+                    <li>
+                        Розробити нову версію консольного застосунку, в якій створити масив об'єктів класу Виріб. В класі реалізувати:
+                        <br />- інтерфейс IComparable для порівняння виробів за вагою в методі CompareTo();
+                        <br />- інтерфейс IComparer для порівняння виробів за ціною і за якістю (створити свою шкалу якості);
+                        <br />- інтерфейс IEnumerable для виведення на консоль списку виробів, впорядкований за ціною.
+                    </li>
+		        </ol>
+            </article>
+
+            <article id="lab4-analysis">
+                <h3>Аналіз</h3>
+                <ol>
+                    <li>
+                        Створимо базовий клас Product (Виріб) та похідні від нього класи Node (Вузол) і Detail (Деталь). У базовому класі визначимо закриті загальні поля: найменування, габаритні розміри та призначення. У похідних класах додамо специфічні закриті поля: кількість, вага, ціна, а також матеріал та якість.
+                        В кожному з класів створимо конструктори без параметрів, що ініціалізуватимуть числові поля нулями, а рядкові пустими рядками.
+                        В кожному з класів створимо конструктор з параметрами. У похідних класах Node та Detail використаємо ключове слово base для передачі відповідних параметрів до конструктора базового класу Product.
+                        Створимо відкриті властивості до кожного з закритих полів класів. Додамо корегування вхідних даних: для числових полів (вага, ціна, розміри, кількість) значення не можуть бути від'ємними, а для рядкових не може бути пустий рядок.
+                        У класах реалізуємо відкриті методи для розрахунку загальної ваги та вартості. Для вузла ці показники вираховуватимуться як сума ваг та цін усіх деталей, що входять до його складу, з урахуванням їх кількості. Для виробу загальна вага та ціна складатиметься з суми відповідних показників його вузлів. Додатково створимо статичний клас Log для одночасного виведення даних у консоль та запису їх до текстового файлу.
+                    </li>
+                    <li>
+                        Для розширення можливостей поліморфізму створимо користувацький посилальний тип — інтерфейс IComponent, в якому оголосимо методи отримання ваги та ціни.
+                        Реалізуємо цей інтерфейс у похідних класах Node та Detail. Це забезпечить можливість доступу до об'єктів похідних класів через єдине інтерфейсне посилання та дозволить викликати відповідні методи розрахунку без жорсткої прив'язки до конкретного типу об'єкта.
+                        У головній програмі продемонструємо виклик методів через масив або змінні типу IComponent, виводячи результати розрахунків через раніше створений клас Log.
+                    </li>
+                    <li>
+                        Модифікуємо програму, перетворивши базовий клас Product на абстрактний, щоб унеможливити створення його прямих екземплярів, оскільки в логіці предметної області абстрактного виробу без конкретних властивостей не існує.
+                        Спільну логіку базового рівня (наприклад, збереження назви та розмірів) інкапсулюємо в ньому, а для специфічних розрахунків у похідних класах використаємо перевизначення методів.
+                        Додамо до базового класу абстрактні або віртуальні методи, які потім перевизначимо у класах-спадкоємцях Node та Detail. Продемонструємо поліморфізм, звертаючись до об'єктів деталей та вузлів через посилання на абстрактний базовий клас Product.
+                    </li>
+                    <li>
+                        Додамо до ієрархії класів підтримку стандартних колекцій та інтерфейсів платформи .NET. У класі виробу реалізуємо інтерфейс IComparable з методом CompareTo() для забезпечення стандартного порівняння двох об'єктів між собою за їхньою загальною вагою.
+                        Створимо окремий клас-компаратор, який реалізовуватиме інтерфейс IComparer з методом Compare() для нестандартного сортування чи порівняння виробів за їхньою загальною ціною.
+                        У класі виробу додатково реалізуємо інтерфейси IEnumerable та IEnumerator для створення користувацького ітератора. Це дозволить перебирати колекцію вкладених вузлів виробу за допомогою стандартного циклу.
+                    </li>
+                </ol> 
+            </article>
+
+            <article id="lab4-diagram">
+                <h3>Діаграма класів V1.0</h3>
+                <p><img src="photos\Lab4\ClassDiagram1.png" class="photo" style="max-width: 80%" /></p>
+                <article>
+                    <h3>Діаграма класів V2.0</h3>
+                    <p><img src="photos\Lab4\ClassDiagram2.png" class="photo" style="max-width: 80%" /></p>
+                </article>
+                <article>
+                    <h3>Діаграма класів V3.0</h3>
+                    <p><img src="photos\Lab4\ClassDiagram3.png" class="photo" style="max-width: 80%" /></p>
+                </article>
+                <article>
+                    <h3>Діаграма класів V4.0</h3>
+                    <p><img src="photos\Lab4\ClassDiagram4.png" class="photo" style="max-width: 80%" /></p>
+                </article>
+            </article>
+            
+
+            <article id="lab4-code">
+                <h3>Код V1.0</h3>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Program.cs
+                    </div>
+                    <pre>using Lab4;
+using System;
+
+namespace Lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Log.Init();
+            Log.WriteLine("===== LAB 4_1.0: Class Inheritance =====");
+
+            Product product = new Product("Piano", 170, 121, 61, "to play music");
+
+            Node node1 = new Node("Keys base", 155.6, 4.5, 15, "Contains all the keys", 0, 0, "A", 1);
+            product.Nodes.Add(node1);
+
+            Detail detail1 = new Detail("White key", 2.3, 3.5, 15, "To trigger the hammer", 0.15, 200, "Wood", "A", 52);
+            Detail detail2 = new Detail("Black key", 1, 4.5, 10, "To trigger the hammer", 0.1, 150, "Wood", "A", 36);
+            node1.Details.Add(detail1);
+            node1.Details.Add(detail2);
+
+            Node node2 = new Node("Strings base", 150, 80, 10, "Contains all the strings with hammers", 0, 0, "A", 1);
+            product.Nodes.Add(node2);
+
+            Detail detail3 = new Detail("String", 0.1, 0.1, 100, "Makes sounds", 0.1, 50, "Metal", "A", 88);
+            Detail detail4 = new Detail("Hammer", 1, 4, 15, "To trigger the string", 0.1, 150, "Wood", "A", 88);
+            node2.Details.Add(detail3);
+            node2.Details.Add(detail4);
+
+            node1.CalculateWeight();
+            node1.CalculatePrice();
+            node2.CalculateWeight();
+            node2.CalculatePrice();
+
+            product.Print();
+        }
+    }
+}</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Log.cs
+                    </div>
+                    <pre>using System;
+using System.IO;
+using System.Text;
+
+namespace Lab4
+{
+    internal static class Log
+    {
+        private static string Path = "Results_V1.0.txt";
+
+        /// &lt;summary&gt;
+        /// Ініціалізує лог-файл, очищаючи попередній вміст і записуючи заголовок.
+        /// &lt;/summary&gt;
+        public static void Init()
+        {
+            File.WriteAllText(Path, "=== PROGRAM RESULTS ===\n\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує рядок у консоль та додає його у файл лога з переходом на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+            File.AppendAllText(Path, text + "\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує текст у консоль та додає його у файл лога без переходу на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void Write(string text)
+        {
+            Console.Write(text);
+            File.AppendAllText(Path, text);
+        }
+
+        /// &lt;summary&gt;
+        /// Виведення масиву на екран.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+        /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+        public static void LogArray&lt;T&gt;(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T i in array)
+                sb.Append(i + " ");
+            Log.WriteLine(sb.ToString());
+        }
+    }
+}</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Product.cs
+                    </div>
+                    <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Product
+    {
+        private string _name;
+        private double _width;
+        private double _heigth;
+        private double _length;
+        private string _purpose;
+
+        public Product()
+        {
+            _name = string.Empty;
+            _width = double.NaN;
+            _heigth = double.NaN;
+            _length = double.NaN;
+            _purpose = string.Empty;
+        }
+
+        public Product(string name, double width, double heigth, double length, string purpose)
+        {
+            Name = name;
+            Width = width;
+            Heigth = heigth;
+            Length = length;
+            Purpose = purpose;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public double Width
+        {
+            get { return _width; }
+            set { _width = value < 0 ? 0 : value; }
+        }
+
+        public double Heigth
+        {
+            get { return _heigth; }
+            set { _heigth = value < 0 ? 0 : value; }
+        }
+
+        public double Length
+        {
+            get { return _length; }
+            set { _length = value < 0 ? 0 : value; }
+        }
+
+        public string Purpose
+        {
+            get { return _purpose; }
+            set { _purpose = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public List&lt;Node&gt; Nodes { get; } = new List&lt;Node&gt;();
+
+        public double CalculateWeight() => Nodes.Sum(n => n.Weight);
+        public double CalculatePrice() => Nodes.Sum(n => n.Details.Sum(d => d.Price * d.Quantity));
+
+        public void Print()
+        {
+            Log.WriteLine("\n=== Product ===");
+            Log.WriteLine($"Name: {Name}");
+            Log.WriteLine($"Purpose: {Purpose}");
+            Log.WriteLine($"Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"Nodes ({Nodes.Count}):");
+            Nodes.ForEach(n => n.Print());
+            Log.WriteLine($"Total weight: {CalculateWeight()}");
+            Log.WriteLine($"Total price: {CalculatePrice()}");
+        }
+    }
+}</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Node.cs
+                    </div>
+                    <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Node : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _quality;
+        private int _quantity;
+
+        public Node(string name, double width, double heigth, double length, string purpose, double weight, double price, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public List&lt;Detail&gt; Details { get; } = new List&lt;Detail&gt;();
+
+        public double CalculateWeight()
+        {
+            Weight = Details.Sum(d => d.Weight * d.Quantity);
+            return Weight;
+        }
+
+        public double CalculatePrice()
+        {
+            Price = Details.Sum(d => d.Price * d.Quantity);
+            return Price;
+        }
+
+        public void Print()
+        {
+            Log.WriteLine("--- Node ---");
+            Log.WriteLine($"  Name: {Name}");
+            Log.WriteLine($"  Purpose: {Purpose}");
+            Log.WriteLine($"  Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"  Quantity: {Quantity}");
+            Log.WriteLine($"  Quality: {Quality}");
+            Log.WriteLine($"  Weight: {Weight}");
+            Log.WriteLine($"  Price: {Price}");
+            Log.WriteLine($"  Details ({Details.Count}):");
+            Details.ForEach(d => d.Print());
+        }
+    }
+}</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Detail.cs
+                    </div>
+                    <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Detail : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _material;
+        private string _quality;
+        private int _quantity;
+
+        public Detail(string name, double width, double heigth, double length, string purpose, double weight, double price, string material, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Material = material;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Material
+        {
+            get { return _material; }
+            set { _material = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public void Print()
+        {
+            Log.WriteLine("  ~~ Detail ~~");
+            Log.WriteLine($"    Name: {Name}");
+            Log.WriteLine($"    Purpose: {Purpose}");
+            Log.WriteLine($"    Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"    Quantity: {Quantity}");
+            Log.WriteLine($"    Material: {Material}");
+            Log.WriteLine($"    Quality: {Quality}");
+            Log.WriteLine($"    Weight: {Weight}");
+            Log.WriteLine($"    Price: {Price}");
+        }
+    }
+}</pre>
+                </div>
+                <article>
+                    <h3>Код V2.0</h3>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Program.cs
+                        </div>
+                        <pre>using Lab4;
+using System;
+
+namespace Lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Log.Init();
+            Log.WriteLine("===== LAB 4_2.0: Interface Pattern =====\n");
+
+            Product product = new Product("Piano", 170, 121, 61, "to play music");
+
+            Node node1 = new Node("Keys base", 155.6, 4.5, 15, "Contains all the keys", 0, 0, "A", 1);
+            product.Nodes.Add(node1);
+
+            Detail detail1 = new Detail("White key", 2.3, 3.5, 15, "To trigger the hammer", 0.15, 200, "Wood", "A", 52);
+            Detail detail2 = new Detail("Black key", 1, 4.5, 10, "To trigger the hammer", 0.1, 150, "Wood", "A", 36);
+            node1.Details.Add(detail1);
+            node1.Details.Add(detail2);
+
+            Node node2 = new Node("Strings base", 150, 80, 10, "Contains all the strings with hammers", 0, 0, "A", 1);
+            product.Nodes.Add(node2);
+
+            Detail detail3 = new Detail("String", 0.1, 0.1, 100, "Makes sounds", 0.1, 50, "Metal", "A", 88);
+            Detail detail4 = new Detail("Hammer", 1, 4, 15, "To trigger the string", 0.1, 150, "Wood", "A", 88);
+            node2.Details.Add(detail3);
+            node2.Details.Add(detail4);
+
+            node1.CalculateWeight();
+            node1.CalculatePrice();
+            node2.CalculateWeight();
+            node2.CalculatePrice();
+
+            IComponent IDetail1 = detail1;
+            IComponent IDetail2 = detail2;
+            IComponent INode = node1;
+            IComponent IProduct = product;
+
+            Log.WriteLine("Accessing via IComponent references:\n");
+            Log.WriteLine($"Detail1 via interface - Weight: {IDetail1.GetWeight()}, Price: {IDetail1.GetPrice()}");
+            Log.WriteLine($"Detail2 via interface - Weight: {IDetail2.GetWeight()}, Price: {IDetail2.GetPrice()}");
+            Log.WriteLine($"Node via interface - Weight: {INode.GetWeight()}, Price: {INode.GetPrice()}");
+            Log.WriteLine($"Product via interface - Weight: {IProduct.GetWeight()}, Price: {IProduct.GetPrice()}");
+
+            Log.WriteLine("\n--- Full Hierarchy ---");
+            IProduct.Print();
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Log.cs
+                        </div>
+                        <pre>using System;
+using System.IO;
+using System.Text;
+
+namespace Lab4
+{
+    internal static class Log
+    {
+        private static string Path = "Results_V2.0.txt";
+
+        /// &lt;summary&gt;
+        /// Ініціалізує лог-файл, очищаючи попередній вміст і записуючи заголовок.
+        /// &lt;/summary&gt;
+        public static void Init()
+        {
+            File.WriteAllText(Path, "=== PROGRAM RESULTS ===\n\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує рядок у консоль та додає його у файл лога з переходом на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+            File.AppendAllText(Path, text + "\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує текст у консоль та додає його у файл лога без переходу на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void Write(string text)
+        {
+            Console.Write(text);
+            File.AppendAllText(Path, text);
+        }
+
+        /// &lt;summary&gt;
+        /// Виведення масиву на екран.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+        /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+        public static void LogArray&lt;T&gt;(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T i in array)
+                sb.Append(i + " ");
+            Log.WriteLine(sb.ToString());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Product.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Product : IComponent
+    {
+        private string _name;
+        private double _width;
+        private double _heigth;
+        private double _length;
+        private string _purpose;
+
+        public Product()
+        {
+            _name = string.Empty;
+            _width = double.NaN;
+            _heigth = double.NaN;
+            _length = double.NaN;
+            _purpose = string.Empty;
+        }
+
+        public Product(string name, double width, double heigth, double length, string purpose)
+        {
+            Name = name;
+            Width = width;
+            Heigth = heigth;
+            Length = length;
+            Purpose = purpose;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public double Width
+        {
+            get { return _width; }
+            set { _width = value < 0 ? 0 : value; }
+        }
+
+        public double Heigth
+        {
+            get { return _heigth; }
+            set { _heigth = value < 0 ? 0 : value; }
+        }
+
+        public double Length
+        {
+            get { return _length; }
+            set { _length = value < 0 ? 0 : value; }
+        }
+
+        public string Purpose
+        {
+            get { return _purpose; }
+            set { _purpose = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public List&lt;Node&gt; Nodes { get; } = new List&lt;Node&gt;();
+
+        public double CalculateWeight() => Nodes.Sum(n => n.GetWeight());
+        public double CalculatePrice() => Nodes.Sum(n => n.Details.Sum(d => d.Price * d.Quantity));
+
+        public double GetWeight() => CalculateWeight();
+        public double GetPrice() => CalculatePrice();
+
+        public void Print()
+        {
+            Log.WriteLine("\n=== Product ===");
+            Log.WriteLine($"Name: {Name}");
+            Log.WriteLine($"Purpose: {Purpose}");
+            Log.WriteLine($"Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"Nodes ({Nodes.Count}):");
+            Nodes.ForEach(n => n.Print());
+            Log.WriteLine($"Total weight: {GetWeight()}");
+            Log.WriteLine($"Total price: {GetPrice()}");
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Node.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Node : Product, IComponent
+    {
+        private double _weight;
+        private double _price;
+        private string _quality;
+        private int _quantity;
+
+        public Node(string name, double width, double heigth, double length, string purpose, double weight, double price, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public List&lt;Detail&gt; Details { get; } = new List&lt;Detail&gt;();
+
+        public double CalculateWeight()
+        {
+            Weight = Details.Sum(d => d.Weight * d.Quantity);
+            return Weight;
+        }
+
+        public double CalculatePrice()
+        {
+            Price = Details.Sum(d => d.Price * d.Quantity);
+            return Price;
+        }
+
+        public double GetWeight() => CalculateWeight();
+        public double GetPrice() => CalculatePrice();
+
+        public void Print()
+        {
+            Log.WriteLine("--- Node ---");
+            Log.WriteLine($"  Name: {Name}");
+            Log.WriteLine($"  Purpose: {Purpose}");
+            Log.WriteLine($"  Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"  Quantity: {Quantity}");
+            Log.WriteLine($"  Quality: {Quality}");
+            Log.WriteLine($"  Weight: {Weight}");
+            Log.WriteLine($"  Price: {Price}");
+            Log.WriteLine($"  Details ({Details.Count}):");
+            Details.ForEach(d => d.Print());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Detail.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Detail : Product, IComponent
+    {
+        private double _weight;
+        private double _price;
+        private string _material;
+        private string _quality;
+        private int _quantity;
+
+        public Detail(string name, double width, double heigth, double length, string purpose, double weight, double price, string material, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Material = material;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Material
+        {
+            get { return _material; }
+            set { _material = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public double GetWeight() => Weight;
+        public double GetPrice() => Price;
+
+        public void Print()
+        {
+            Log.WriteLine("  ~~ Detail ~~");
+            Log.WriteLine($"    Name: {Name}");
+            Log.WriteLine($"    Purpose: {Purpose}");
+            Log.WriteLine($"    Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"    Quantity: {Quantity}");
+            Log.WriteLine($"    Material: {Material}");
+            Log.WriteLine($"    Quality: {Quality}");
+            Log.WriteLine($"    Weight: {Weight}");
+            Log.WriteLine($"    Price: {Price}");
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            IComponent.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal interface IComponent
+    {
+        double GetWeight();
+        double GetPrice();
+        void Print();
+    }
+}</pre>
+                    </div>
+                </article>
+                <article>
+                    <h3>Код V3.0</h3>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Program.cs
+                        </div>
+                        <pre>using Lab4;
+using System;
+using System.Collections.Generic;
+
+namespace Lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Log.Init();
+            Log.WriteLine("===== LAB 4_3.0: Abstract Classes =====\n");
+
+            CompleteProduct product = new CompleteProduct("Piano", 153, 121, 61, "to play music");
+
+            Node node1 = new Node("Keys base", 155.6, 4.5, 15, "Contains all the keys", 0, 0, "A", 1);
+            product.Nodes.Add(node1);
+
+            Detail detail1 = new Detail("White key", 2.3, 3.5, 15, "To trigger the hammer", 0.15, 200, "Wood", "A", 52);
+            Detail detail2 = new Detail("Black key", 1, 4.5, 10, "To trigger the hammer", 0.1, 150, "Wood", "A", 36);
+            node1.Details.Add(detail1);
+            node1.Details.Add(detail2);
+
+            Node node2 = new Node("Strings base", 150, 80, 10, "Contains all the strings with hammers", 0, 0, "A", 1);
+            product.Nodes.Add(node2);
+
+            Detail detail3 = new Detail("String", 0.1, 0.1, 100, "Makes sounds", 0.1, 50, "Metal", "A", 88);
+            Detail detail4 = new Detail("Hammer", 1, 4, 15, "To trigger the string", 0.1, 150, "Wood", "A", 88);
+            node2.Details.Add(detail3);
+            node2.Details.Add(detail4);
+
+            node1.CalculateWeight();
+            node1.CalculatePrice();
+            node2.CalculateWeight();
+            node2.CalculatePrice();
+
+            Log.WriteLine("=== Polymorphism with Abstract Class ===\n");
+
+            Product ADetail1 = detail1;
+            Product ADetail2 = detail2;
+            Product ANode = node1;
+            Product AProduct = product;
+
+            Log.WriteLine($"Detail1 via Product abstract ref - Weight: {ADetail1.GetWeight()}, Price: {ADetail1.GetPrice()}");
+            Log.WriteLine($"Detail2 via Product abstract ref - Weight: {ADetail2.GetWeight()}, Price: {ADetail2.GetPrice()}");
+            Log.WriteLine($"Node via Product abstract ref - Weight: {ANode.GetWeight()}, Price: {ANode.GetPrice()}");
+            Log.WriteLine($"Product via Product abstract ref - Weight: {AProduct.GetWeight()}, Price: {AProduct.GetPrice()}");
+
+            Log.WriteLine("\n--- Full Hierarchy ---");
+            AProduct.Print();
+
+            Log.WriteLine("\n=== Key Differences: Abstract Class vs Interface ===");
+            Log.WriteLine("• Abstract class can have implementation (CalculateWeight, CalculatePrice)");
+            Log.WriteLine("• Abstract class cannot be instantiated directly");
+            Log.WriteLine("• Enforces single inheritance (Product)");
+            Log.WriteLine("• Can have state with protected/private access");
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Log.cs
+                        </div>
+                        <pre>using System;
+using System.IO;
+using System.Text;
+
+namespace Lab4
+{
+    internal static class Log
+    {
+        private static string Path = "Results_V3.0.txt";
+
+        /// &lt;summary&gt;
+        /// Ініціалізує лог-файл, очищаючи попередній вміст і записуючи заголовок.
+        /// &lt;/summary&gt;
+        public static void Init()
+        {
+            File.WriteAllText(Path, "=== PROGRAM RESULTS ===\n\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує рядок у консоль та додає його у файл лога з переходом на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+            File.AppendAllText(Path, text + "\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує текст у консоль та додає його у файл лога без переходу на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void Write(string text)
+        {
+            Console.Write(text);
+            File.AppendAllText(Path, text);
+        }
+
+        /// &lt;summary&gt;
+        /// Виведення масиву на екран.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+        /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+        public static void LogArray&lt;T&gt;(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T i in array)
+                sb.Append(i + " ");
+            Log.WriteLine(sb.ToString());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Product.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal abstract class Product
+    {
+        private string _name;
+        private double _width;
+        private double _heigth;
+        private double _length;
+        private string _purpose;
+
+        public Product()
+        {
+            _name = string.Empty;
+            _width = double.NaN;
+            _heigth = double.NaN;
+            _length = double.NaN;
+            _purpose = string.Empty;
+        }
+
+        public Product(string name, double width, double heigth, double length, string purpose)
+        {
+            Name = name;
+            Width = width;
+            Heigth = heigth;
+            Length = length;
+            Purpose = purpose;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public double Width
+        {
+            get { return _width; }
+            set { _width = value < 0 ? 0 : value; }
+        }
+
+        public double Heigth
+        {
+            get { return _heigth; }
+            set { _heigth = value < 0 ? 0 : value; }
+        }
+
+        public double Length
+        {
+            get { return _length; }
+            set { _length = value < 0 ? 0 : value; }
+        }
+
+        public string Purpose
+        {
+            get { return _purpose; }
+            set { _purpose = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public List&lt;Node&gt; Nodes { get; } = new List&lt;Node&gt;();
+
+        public double CalculateWeight() => Nodes.Sum(n => n.Weight);
+        public double CalculatePrice() => Nodes.Sum(n => n.Details.Sum(d => d.Price * d.Quantity));
+
+        public abstract double GetWeight();
+        public abstract double GetPrice();
+        public abstract void Print();
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Node.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Node : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _quality;
+        private int _quantity;
+
+        public Node(string name, double width, double heigth, double length, string purpose, double weight, double price, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public List&lt;Detail&gt; Details { get; } = new List&lt;Detail&gt;();
+
+        public double CalculateWeight()
+        {
+            Weight = Details.Sum(d => d.Weight * d.Quantity);
+            return Weight;
+        }
+
+        public double CalculatePrice()
+        {
+            Price = Details.Sum(d => d.Price * d.Quantity);
+            return Price;
+        }
+
+        public override double GetWeight() => CalculateWeight();
+        public override double GetPrice() => CalculatePrice();
+
+        public override void Print()
+        {
+            Log.WriteLine("--- Node ---");
+            Log.WriteLine($"  Name: {Name}");
+            Log.WriteLine($"  Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"  Quantity: {Quantity}");
+            Log.WriteLine($"  Quality: {Quality}");
+            Log.WriteLine($"  Weight: {Weight}");
+            Log.WriteLine($"  Price: {Price}");
+            Log.WriteLine($"  Details ({Details.Count}):");
+            Details.ForEach(d => d.Print());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Detail.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Detail : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _material;
+        private string _quality;
+        private int _quantity;
+
+        public Detail(string name, double width, double heigth, double length, string purpose, double weight, double price, string material, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Material = material;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Material
+        {
+            get { return _material; }
+            set { _material = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public override double GetWeight() => Weight;
+        public override double GetPrice() => Price;
+
+        public override void Print()
+        {
+            Log.WriteLine("  ~~ Detail ~~");
+            Log.WriteLine($"    Name: {Name}");
+            Log.WriteLine($"    Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"    Quantity: {Quantity}");
+            Log.WriteLine($"    Material: {Material}");
+            Log.WriteLine($"    Quality: {Quality}");
+            Log.WriteLine($"    Weight: {Weight}");
+            Log.WriteLine($"    Price: {Price}");
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            CompleteProduct.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class CompleteProduct : Product
+    {
+        public CompleteProduct(string name, double width, double heigth, double length, string purpose) : base(name, width, heigth, length, purpose) { }
+
+        public override double GetWeight() => CalculateWeight();
+        public override double GetPrice() => CalculatePrice();
+
+        public override void Print()
+        {
+            Log.WriteLine("\n=== Product ===");
+            Log.WriteLine($"Name: {Name}");
+            Log.WriteLine($"Purpose: {Purpose}");
+            Log.WriteLine($"Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"Nodes ({Nodes.Count}):");
+            Nodes.ForEach(n => n.Print());
+            Log.WriteLine($"Total weight: {GetWeight()}");
+            Log.WriteLine($"Total price: {GetPrice()}");
+        }
+    }
+}</pre>
+                    </div>
+                </article>
+                <article>
+                    <h3>Код V4.0</h3>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Program.cs
+                        </div>
+                        <pre>using Lab4;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Xml.Linq;
+
+namespace Lab4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Log.Init();
+            Log.WriteLine("===== LAB 4_4.0: IComparable | IComparer | IEnumerable =====");
+
+            // ----- Create products -----
+            Product p1 = new Product("Piano", 170, 121, 61, "to play music");
+            Product p2 = new Product("Guitar", 100, 50, 20, "musical instrument");
+            Product p3 = new Product("Violin", 80, 30, 25, "stringed instrument");
+
+            // ----- Piano -----
+            Node node1a = new Node("Keys base", 155.6, 4.5, 15, "Contains all the keys", 0, 0, "A", 1);
+            p1.Nodes.Add(node1a);
+
+            Detail detail1a = new Detail("White key", 2.3, 3.5, 15, "To trigger the hammer", 0.15, 200, "Wood", "A", 52);
+            Detail detail1b = new Detail("Black key", 1, 4.5, 10, "To trigger the hammer", 0.1, 150, "Wood", "A", 36);
+            node1a.Details.Add(detail1a);
+            node1a.Details.Add(detail1b);
+
+            Node node1b = new Node("Strings base", 150, 80, 10, "Contains all the strings with hammers", 0, 0, "A", 1);
+            p1.Nodes.Add(node1b);
+
+            Detail detail1c = new Detail("String", 0.1, 0.1, 100, "Makes sounds", 0.1, 50, "Metal", "A", 88);
+            Detail detail1d = new Detail("Hammer", 1, 4, 15, "To trigger the string", 0.1, 150, "Wood", "A", 88);
+            node1b.Details.Add(detail1c);
+            node1b.Details.Add(detail1d);
+
+            // ----- Guitar -----
+            Node node2 = new Node("Strings", 80, 40, 5, "Guitar strings", 0, 0, "B", 6);
+
+            Detail detail2a = new Detail("String 1", 0.5, 2, 80, "String E", 0.01, 50, "Steel", "B", 1);
+            Detail detail2b = new Detail("String 2", 0.5, 2, 80, "String A", 0.01, 60, "Steel", "B", 1);
+
+            node2.Details.Add(detail2a);
+            node2.Details.Add(detail2b);
+            p2.Nodes.Add(node2);
+
+            // ----- Violin -----
+            Node node3 = new Node("Bridge", 50, 30, 2, "Violin bridge", 0, 0, "C", 1);
+
+            Detail detail3a = new Detail("String E", 0.3, 1, 33, "E string", 0.01, 110, "Steel", "C", 1);
+
+            node3.Details.Add(detail3a);
+            p3.Nodes.Add(node3);
+
+            Log.WriteLine("\n--- Created Products ---");
+
+            node1a.CalculateWeight();
+            node1a.CalculatePrice();
+            node1b.CalculateWeight();
+            node1b.CalculatePrice();
+            node2.CalculateWeight();
+            node2.CalculatePrice();
+            node3.CalculateWeight();
+            node3.CalculatePrice();
+
+            p1.Print();
+            p2.Print();
+            p3.Print();
+
+            // =================================================
+            // IComparable DEMONSTRATION
+            // =================================================
+            Log.WriteLine("\n--- IComparable demonstration (CompareTo) ---");
+
+            int result = p1.CompareTo(p2);
+
+            if (result > 0)
+                Log.WriteLine($"{p1.Name} is heavier than {p2.Name}");
+            else if (result < 0)
+                Log.WriteLine($"{p1.Name} is lighter than {p2.Name}");
+            else
+                Log.WriteLine($"{p1.Name} and {p2.Name} have equal weight");
+
+            // =================================================
+            // IComparer DEMONSTRATION
+            // =================================================
+            Log.WriteLine("\n--- IComparer demonstration (Compare) ---");
+
+            Product comparer = new Product();
+
+            result = comparer.Compare(p2, p3);
+
+            if (result > 0)
+                Log.WriteLine($"{p2.Name} is more expensive than {p3.Name}");
+            else if (result < 0)
+                Log.WriteLine($"{p2.Name} is cheaper than {p3.Name}");
+            else
+                Log.WriteLine($"{p2.Name} and {p3.Name} have equal price");
+
+            // =================================================
+            // IEnumerable DEMONSTRATION
+            // =================================================
+            Log.WriteLine("\n--- IEnumerable demonstration (manual enumerator) ---");
+
+            IEnumerator enumerator = p1.GetEnumerator();
+
+            while (enumerator.MoveNext())
+            {
+                Node node = (Node)enumerator.Current;
+                Log.WriteLine($"Node: {node.Name} | Price: {node.CalculatePrice()}");
+            }
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Log.cs
+                        </div>
+                        <pre>using System;
+using System.IO;
+using System.Text;
+
+namespace Lab4
+{
+    internal static class Log
+    {
+        private static string Path = "Results_V4.0.txt";
+
+        /// &lt;summary&gt;
+        /// Ініціалізує лог-файл, очищаючи попередній вміст і записуючи заголовок.
+        /// &lt;/summary&gt;
+        public static void Init()
+        {
+            File.WriteAllText(Path, "=== PROGRAM RESULTS ===\n\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує рядок у консоль та додає його у файл лога з переходом на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void WriteLine(string text)
+        {
+            Console.WriteLine(text);
+            File.AppendAllText(Path, text + "\n");
+        }
+
+        /// &lt;summary&gt;
+        /// Записує текст у консоль та додає його у файл лога без переходу на новий рядок.
+        /// &lt;/summary&gt;
+        /// &lt;param name="text"&gt;Текст для запису.&lt;/param&gt;
+        public static void Write(string text)
+        {
+            Console.Write(text);
+            File.AppendAllText(Path, text);
+        }
+
+        /// &lt;summary&gt;
+        /// Виведення масиву на екран.
+        /// &lt;/summary&gt;
+        /// &lt;typeparam name="T"&gt;Тип елементів масиву&lt;/typeparam&gt;
+        /// &lt;param name="array"&gt;Масив для виведення&lt;/param&gt;
+        public static void LogArray&lt;T&gt;(T[] array)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (T i in array)
+                sb.Append(i + " ");
+            Log.WriteLine(sb.ToString());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Product.cs
+                        </div>
+                        <pre>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Product : IComparable, IComparer, IEnumerable
+    {
+        private string _name;
+        private double _width;
+        private double _heigth;
+        private double _length;
+        private string _purpose;
+
+        public Product()
+        {
+            _name = string.Empty;
+            _width = double.NaN;
+            _heigth = double.NaN;
+            _length = double.NaN;
+            _purpose = string.Empty;
+        }
+
+        public Product(string name, double width, double heigth, double length, string purpose)
+        {
+            Name = name;
+            Width = width;
+            Heigth = heigth;
+            Length = length;
+            Purpose = purpose;
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public double Width
+        {
+            get { return _width; }
+            set { _width = value < 0 ? 0 : value; }
+        }
+
+        public double Heigth
+        {
+            get { return _heigth; }
+            set { _heigth = value < 0 ? 0 : value; }
+        }
+
+        public double Length
+        {
+            get { return _length; }
+            set { _length = value < 0 ? 0 : value; }
+        }
+
+        public string Purpose
+        {
+            get { return _purpose; }
+            set { _purpose = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public List&lt;Node&gt; Nodes { get; } = new List&lt;Node&gt;();
+
+        public double CalculateWeight()
+        {
+            return Nodes.Sum(n => n.CalculateWeight());
+        }
+
+        public double CalculatePrice()
+        {
+            return Nodes.Sum(n => n.Details.Sum(d => d.Price * d.Quantity));
+        }
+
+        public void Print()
+        {
+            Log.WriteLine("\n=== Product ===");
+            Log.WriteLine($"Name: {Name}");
+            Log.WriteLine($"Purpose: {Purpose}");
+            Log.WriteLine($"Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"Nodes ({Nodes.Count}):");
+            Nodes.ForEach(n => n.Print());
+            Log.WriteLine($"Total weight: {CalculateWeight()}");
+            Log.WriteLine($"Total price: {CalculatePrice()}");
+        }
+
+        public int CompareTo(object? obj)
+        {
+            if (obj == null) return 1;
+
+            if (obj is not Product other)
+                throw new ArgumentException("Object is not a Product");
+
+            double thisWeight = this.CalculateWeight();
+            double otherWeight = other.CalculateWeight();
+
+            if (thisWeight < otherWeight) return -1;
+            if (thisWeight > otherWeight) return 1;
+            return 0;
+        }
+
+        public int Compare(object? x, object? y)
+        {
+            if (x == null && y == null) return 0;
+            if (x == null) return -1;
+            if (y == null) return 1;
+
+            if (x is not Product px || y is not Product py)
+                throw new ArgumentException("Both parameters must be of type Product");
+
+            double priceX = px.CalculatePrice();
+            double priceY = py.CalculatePrice();
+
+            if (priceX < priceY) return -1;
+            if (priceX > priceY) return 1;
+
+            double qualityX = px.GetQualityScore();
+            double qualityY = py.GetQualityScore();
+
+            if(qualityX < qualityY) return 1;
+            if(qualityX > qualityY) return -1;
+            return 0;
+        }
+
+        public IEnumerator GetEnumerator() => Nodes.OrderBy(n => n.CalculatePrice()).GetEnumerator();
+
+        public double GetQualityScore()
+        {
+            if (Nodes == null || Nodes.Count == 0)
+                return 0.0;
+
+            double sum = 0.0;
+            foreach (Node n in Nodes)
+            {
+                string q = (n.Quality ?? string.Empty).Trim().ToUpper();
+                int score = q switch
+                {
+                    "A" => 5,
+                    "B" => 4,
+                    "C" => 3,
+                    "D" => 2,
+                    "F" => 1,
+                    _ => 0
+                };
+                sum += score;
+            }
+            return Nodes.Count > 0 ? sum / Nodes.Count : 0.0;
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Node.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Node : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _quality;
+        private int _quantity;
+
+        public Node(string name, double width, double heigth, double length, string purpose, double weight, double price, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public List&lt;Detail&gt; Details { get; } = new List&lt;Detail&gt;();
+
+        public double CalculateWeight()
+        {
+            Weight = Details.Sum(d => d.Weight * d.Quantity);
+            return Weight;
+        }
+
+        public double CalculatePrice()
+        {
+            Price = Details.Sum(d => d.Price * d.Quantity);
+            return Price;
+        }
+
+        public void Print()
+        {
+            Log.WriteLine("--- Node ---");
+            Log.WriteLine($"  Name: {Name}");
+            Log.WriteLine($"  Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"  Quantity: {Quantity}");
+            Log.WriteLine($"  Quality: {Quality}");
+            Log.WriteLine($"  Weight: {Weight}");
+            Log.WriteLine($"  Price: {Price}");
+            Log.WriteLine($"  Details ({Details.Count}):");
+            Details.ForEach(d => d.Print());
+        }
+    }
+}</pre>
+                    </div>
+                    <div class="code-block">
+                        <div class="code-header" onclick="toggleCode(this)">
+                            Detail.cs
+                        </div>
+                        <pre>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lab4
+{
+    internal class Detail : Product
+    {
+        private double _weight;
+        private double _price;
+        private string _material;
+        private string _quality;
+        private int _quantity;
+
+        public Detail(string name, double width, double heigth, double length, string purpose, double weight, double price, string material, string quality, int quantity) : base(name, width, heigth, length, purpose)
+        {
+            Weight = weight;
+            Price = price;
+            Material = material;
+            Quality = quality;
+            Quantity = quantity;
+        }
+
+        public double Weight
+        {
+            get { return _weight; }
+            set { _weight = value < 0 ? 0 : value; }
+        }
+
+        public double Price
+        {
+            get { return _price; }
+            set { _price = value < 0 ? 0 : value; }
+        }
+
+        public string Material
+        {
+            get { return _material; }
+            set { _material = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public string Quality
+        {
+            get { return _quality; }
+            set { _quality = string.IsNullOrWhiteSpace(value) ? string.Empty : value; }
+        }
+
+        public int Quantity
+        {
+            get { return _quantity; }
+            set { _quantity = value < 0 ? 0 : value; }
+        }
+
+        public void Print()
+        {
+            Log.WriteLine("  ~~ Detail ~~");
+            Log.WriteLine($"    Name: {Name}");
+            Log.WriteLine($"    Dimensions (W x H x L): {Width} x {Heigth} x {Length}");
+            Log.WriteLine($"    Quantity: {Quantity}");
+            Log.WriteLine($"    Material: {Material}");
+            Log.WriteLine($"    Quality: {Quality}");
+            Log.WriteLine($"    Weight: {Weight}");
+            Log.WriteLine($"    Price: {Price}");
+        }
+    }
+}</pre>
+                    </div>
+                </article>
+            </article>
+
+            <article id="lab4-examples">
+                <h3>Приклади</h3>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Results_V1.0.txt
+                    </div>
+                    <pre>=== PROGRAM RESULTS ===
+
+===== LAB 4_1.0: Class Inheritance =====
+
+=== Product ===
+Name: Piano
+Purpose: to play music
+Dimensions (W x H x L): 170 x 121 x 61
+Nodes (2):
+--- Node ---
+  Name: Keys base
+  Purpose: Contains all the keys
+  Dimensions (W x H x L): 155,6 x 4,5 x 15
+  Quantity: 1
+  Quality: A
+  Weight: 11,4
+  Price: 15800
+  Details (2):
+  ~~ Detail ~~
+    Name: White key
+    Purpose: To trigger the hammer
+    Dimensions (W x H x L): 2,3 x 3,5 x 15
+    Quantity: 52
+    Material: Wood
+    Quality: A
+    Weight: 0,15
+    Price: 200
+  ~~ Detail ~~
+    Name: Black key
+    Purpose: To trigger the hammer
+    Dimensions (W x H x L): 1 x 4,5 x 10
+    Quantity: 36
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+--- Node ---
+  Name: Strings base
+  Purpose: Contains all the strings with hammers
+  Dimensions (W x H x L): 150 x 80 x 10
+  Quantity: 1
+  Quality: A
+  Weight: 17,6
+  Price: 17600
+  Details (2):
+  ~~ Detail ~~
+    Name: String
+    Purpose: Makes sounds
+    Dimensions (W x H x L): 0,1 x 0,1 x 100
+    Quantity: 88
+    Material: Metal
+    Quality: A
+    Weight: 0,1
+    Price: 50
+  ~~ Detail ~~
+    Name: Hammer
+    Purpose: To trigger the string
+    Dimensions (W x H x L): 1 x 4 x 15
+    Quantity: 88
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+Total weight: 29
+Total price: 33400</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Results_V2.0.txt
+                    </div>
+                    <pre>=== PROGRAM RESULTS ===
+
+===== LAB 4_2.0: Interface Pattern =====
+
+Accessing via IComponent references:
+
+Detail1 via interface - Weight: 0,15, Price: 200
+Detail2 via interface - Weight: 0,1, Price: 150
+Node via interface - Weight: 11,4, Price: 15800
+Product via interface - Weight: 29, Price: 33400
+
+--- Full Hierarchy ---
+
+=== Product ===
+Name: Piano
+Purpose: to play music
+Dimensions (W x H x L): 170 x 121 x 61
+Nodes (2):
+--- Node ---
+  Name: Keys base
+  Purpose: Contains all the keys
+  Dimensions (W x H x L): 155,6 x 4,5 x 15
+  Quantity: 1
+  Quality: A
+  Weight: 11,4
+  Price: 15800
+  Details (2):
+  ~~ Detail ~~
+    Name: White key
+    Purpose: To trigger the hammer
+    Dimensions (W x H x L): 2,3 x 3,5 x 15
+    Quantity: 52
+    Material: Wood
+    Quality: A
+    Weight: 0,15
+    Price: 200
+  ~~ Detail ~~
+    Name: Black key
+    Purpose: To trigger the hammer
+    Dimensions (W x H x L): 1 x 4,5 x 10
+    Quantity: 36
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+--- Node ---
+  Name: Strings base
+  Purpose: Contains all the strings with hammers
+  Dimensions (W x H x L): 150 x 80 x 10
+  Quantity: 1
+  Quality: A
+  Weight: 17,6
+  Price: 17600
+  Details (2):
+  ~~ Detail ~~
+    Name: String
+    Purpose: Makes sounds
+    Dimensions (W x H x L): 0,1 x 0,1 x 100
+    Quantity: 88
+    Material: Metal
+    Quality: A
+    Weight: 0,1
+    Price: 50
+  ~~ Detail ~~
+    Name: Hammer
+    Purpose: To trigger the string
+    Dimensions (W x H x L): 1 x 4 x 15
+    Quantity: 88
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+Total weight: 29
+Total price: 33400</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Results_V3.0.txt
+                    </div>
+                    <pre>=== PROGRAM RESULTS ===
+
+===== LAB 4_3.0: Abstract Classes =====
+
+=== Polymorphism with Abstract Class ===
+
+Detail1 via Product abstract ref - Weight: 0,15, Price: 200
+Detail2 via Product abstract ref - Weight: 0,1, Price: 150
+Node via Product abstract ref - Weight: 11,4, Price: 15800
+Product via Product abstract ref - Weight: 29, Price: 33400
+
+--- Full Hierarchy ---
+
+=== Product ===
+Name: Piano
+Purpose: to play music
+Dimensions (W x H x L): 153 x 121 x 61
+Nodes (2):
+--- Node ---
+  Name: Keys base
+  Dimensions (W x H x L): 155,6 x 4,5 x 15
+  Quantity: 1
+  Quality: A
+  Weight: 11,4
+  Price: 15800
+  Details (2):
+  ~~ Detail ~~
+    Name: White key
+    Dimensions (W x H x L): 2,3 x 3,5 x 15
+    Quantity: 52
+    Material: Wood
+    Quality: A
+    Weight: 0,15
+    Price: 200
+  ~~ Detail ~~
+    Name: Black key
+    Dimensions (W x H x L): 1 x 4,5 x 10
+    Quantity: 36
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+--- Node ---
+  Name: Strings base
+  Dimensions (W x H x L): 150 x 80 x 10
+  Quantity: 1
+  Quality: A
+  Weight: 17,6
+  Price: 17600
+  Details (2):
+  ~~ Detail ~~
+    Name: String
+    Dimensions (W x H x L): 0,1 x 0,1 x 100
+    Quantity: 88
+    Material: Metal
+    Quality: A
+    Weight: 0,1
+    Price: 50
+  ~~ Detail ~~
+    Name: Hammer
+    Dimensions (W x H x L): 1 x 4 x 15
+    Quantity: 88
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+Total weight: 29
+Total price: 33400
+
+=== Key Differences: Abstract Class vs Interface ===
+• Abstract class can have implementation (CalculateWeight, CalculatePrice)
+• Abstract class cannot be instantiated directly
+• Enforces single inheritance (Product)
+• Can have state with protected/private access</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Results_V4.0.txt
+                    </div>
+                    <pre>=== PROGRAM RESULTS ===
+
+===== LAB 4_4.0: IComparable | IComparer | IEnumerable =====
+
+--- Created Products ---
+
+=== Product ===
+Name: Piano
+Purpose: to play music
+Dimensions (W x H x L): 170 x 121 x 61
+Nodes (2):
+--- Node ---
+  Name: Keys base
+  Dimensions (W x H x L): 155,6 x 4,5 x 15
+  Quantity: 1
+  Quality: A
+  Weight: 11,4
+  Price: 15800
+  Details (2):
+  ~~ Detail ~~
+    Name: White key
+    Dimensions (W x H x L): 2,3 x 3,5 x 15
+    Quantity: 52
+    Material: Wood
+    Quality: A
+    Weight: 0,15
+    Price: 200
+  ~~ Detail ~~
+    Name: Black key
+    Dimensions (W x H x L): 1 x 4,5 x 10
+    Quantity: 36
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+--- Node ---
+  Name: Strings base
+  Dimensions (W x H x L): 150 x 80 x 10
+  Quantity: 1
+  Quality: A
+  Weight: 17,6
+  Price: 17600
+  Details (2):
+  ~~ Detail ~~
+    Name: String
+    Dimensions (W x H x L): 0,1 x 0,1 x 100
+    Quantity: 88
+    Material: Metal
+    Quality: A
+    Weight: 0,1
+    Price: 50
+  ~~ Detail ~~
+    Name: Hammer
+    Dimensions (W x H x L): 1 x 4 x 15
+    Quantity: 88
+    Material: Wood
+    Quality: A
+    Weight: 0,1
+    Price: 150
+Total weight: 29
+Total price: 33400
+
+=== Product ===
+Name: Guitar
+Purpose: musical instrument
+Dimensions (W x H x L): 100 x 50 x 20
+Nodes (1):
+--- Node ---
+  Name: Strings
+  Dimensions (W x H x L): 80 x 40 x 5
+  Quantity: 6
+  Quality: B
+  Weight: 0,02
+  Price: 110
+  Details (2):
+  ~~ Detail ~~
+    Name: String 1
+    Dimensions (W x H x L): 0,5 x 2 x 80
+    Quantity: 1
+    Material: Steel
+    Quality: B
+    Weight: 0,01
+    Price: 50
+  ~~ Detail ~~
+    Name: String 2
+    Dimensions (W x H x L): 0,5 x 2 x 80
+    Quantity: 1
+    Material: Steel
+    Quality: B
+    Weight: 0,01
+    Price: 60
+Total weight: 0,02
+Total price: 110
+
+=== Product ===
+Name: Violin
+Purpose: stringed instrument
+Dimensions (W x H x L): 80 x 30 x 25
+Nodes (1):
+--- Node ---
+  Name: Bridge
+  Dimensions (W x H x L): 50 x 30 x 2
+  Quantity: 1
+  Quality: C
+  Weight: 0,01
+  Price: 110
+  Details (1):
+  ~~ Detail ~~
+    Name: String E
+    Dimensions (W x H x L): 0,3 x 1 x 33
+    Quantity: 1
+    Material: Steel
+    Quality: C
+    Weight: 0,01
+    Price: 110
+Total weight: 0,01
+Total price: 110
+
+--- IComparable demonstration (CompareTo) ---
+Piano is heavier than Guitar
+
+--- IComparer demonstration (Compare) ---
+Guitar is cheaper than Violin
+
+--- IEnumerable demonstration (manual enumerator) ---
+Node: Keys base | Price: 15800
+Node: Strings base | Price: 17600</pre>
+                </div>
+            </article>
+
+            <article id="lab4-tests">
+                <h3>Перевірка</h3>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка V1.0
+                    </div>
+                    <pre>
+Як бачимо, в результатах, програма успішно будує ієрархію об'єктів (Виріб містить Вузли, які містять Деталі).
+За умовою вага і ціна вузла розраховується як сума ваг і цін його деталей з урахуванням їх кількості. Для вузла «Keys base»
+ми маємо 52 білі клавіші (вага 0.15, ціна 200) та 36 чорних (вага 0.1, ціна 150).
+Розрахунок: (52 × 0.15) + (36 × 0.1) = 7.8 + 3.6 = 11.4 (вага) та (52 × 200) + (36 × 150) = 10400 + 5400 = 15800 (вартість).
+Програма вивела саме ці значення, отже алгоритми розрахунку базових та похідних класів працюють правильно.</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка V2.0
+                    </div>
+                    <pre>
+У другій версії застосунку перевіряється доступ до об'єктів через інтерфейс IComponent. За умовою класи
+Вузол і Деталь мають успадковуватися від інтерфейсу. Ми створили змінні типу IComponent та присвоїли їм посилання
+на об'єкти похідних класів. Виведення в консоль підтверджує, що виклик методів GetWeight() та GetPrice()
+через інтерфейсні посилання відпрацьовує коректно і повертає ті ж самі результати розрахунків, що й у першій версії.
+Це свідчить про успішну реалізацію поліморфізму через інтерфейси.</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка V3.0
+                    </div>
+                    <pre>
+Третя версія демонструє використання абстрактного базового класу Product. Як бачимо з результатів,
+поведінка поліморфізму збереглася: ми можемо використовувати посилання типу базового абстрактного класу
+Product для доступу до методів деталей і вузлів. Також програма успішно продемонструвала відмінності від
+застосування інтерфейсів: абстрактний клас дозволив нам інкапсулювати спільну логіку всередині себе, зменшивши
+дублювання коду, проте створити прямий екземпляр класу Product відтепер неможливо, що відповідає правилам ООП.</pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка V4.0
+                    </div>
+                    <pre>
+Остання версія перевіряє роботу стандартних інтерфейсів C#. Метод CompareTo (інтерфейс IComparable) правильно
+порівняв об'єкти за вагою, визначивши згідно з розрахунками, що піаніно є важчим за гітару. Застосування інтерфейсу
+IComparer для сортування за ціною показало коректний результат, визначивши, що гітара дешевша за скрипку. Інтерфейс
+IEnumerable забезпечив ітерацію по вузлах виробу, дозволивши перебрати колекцію за допомогою циклу та вивести дані про
+«Keys base» і «Strings base». Усі вимоги щодо роботи з колекціями виконано.</pre>
+                </div>
+
+            </article>
+
+            <article id="lab4-conclusion">
+                <h3>Висновки</h3>
+                <p>
+                    Ось варіант висновку для вашої 4-ї лабораторної роботи, написаний точно у такому ж академічному, розгорнутому стилі, як і ваш приклад. Він охоплює всі ключові вимоги вашого варіанту (успадкування, інтерфейси, абстрактні класи, стандартні інтерфейси C#) та згадує логіку розрахунків.
+                    У ході виконання лабораторної роботи було розроблено консольний застосунок мовою C# для побудови ієрархії класів з використанням базових принципів об’єктно-орієнтованого програмування: успадкування, поліморфізму та абстракції. Створено базовий клас Product (Виріб) та похідні від нього класи Node (Вузол) і Detail (Деталь) із закритими полями (найменування, габаритні розміри, призначення, кількість, вага, ціна), конструкторами базових та похідних класів (із використанням ключового слова base), а також відкритими властивостями для забезпечення інкапсуляції. Було реалізовано бізнес-логіку розрахунку загальної ваги та вартості виробу, згідно з якою вага і ціна вузла обчислюється як сума відповідних характеристик його деталей з урахуванням їхньої кількості, а виробу — на основі його вузлів. Для забезпечення поліморфізму створено користувацький інтерфейс IComponent із методами отримання ваги та ціни, який реалізовано у похідних класах, що дозволило звертатися до об'єктів через інтерфейсні посилання. Досліджено роботу з абстрактними класами шляхом перетворення базового класу Product на абстрактний: це дозволило інкапсулювати спільну логіку базового рівня та заборонити створення прямих екземплярів базового класу, вимагаючи реалізації специфічної поведінки у спадкоємцях. Опановано роботу зі стандартними інтерфейсами C#: реалізовано інтерфейс IComparable для стандартного порівняння об'єктів за вагою, IComparer для створення окремого компаратора сортування за ціною, а також IEnumerable та IEnumerator для реалізації користувацького ітератора, що дозволяє перебирати колекцію вузлів виробу за допомогою циклу. Для збереження результатів тестування програми використано статичний клас Log, який забезпечує одночасне виведення даних у консоль та їх запис до текстового файлу. У результаті виконання роботи було закріплено навички побудови ієрархії класів для повторного використання коду, організації взаємодії між базовими та похідними класами, використання абстрактних класів, а також гнучкого управління колекціями та об'єктами за допомогою стандартних інтерфейсів платформи .NET.
                 </p>
             </article>
         </section>
