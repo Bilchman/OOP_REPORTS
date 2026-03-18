@@ -4962,7 +4962,7 @@ namespace Lab4
             double thisWeight = this.CalculateWeight();
             double otherWeight = other.CalculateWeight();
 
-            if (thisWeight < otherWeight) return -1;
+            if (thisWeight &lt; otherWeight) return -1;
             if (thisWeight > otherWeight) return 1;
             return 0;
         }
@@ -4979,13 +4979,13 @@ namespace Lab4
             double priceX = px.CalculatePrice();
             double priceY = py.CalculatePrice();
 
-            if (priceX < priceY) return -1;
+            if (priceX &lt; priceY) return -1;
             if (priceX > priceY) return 1;
 
             double qualityX = px.GetQualityScore();
             double qualityY = py.GetQualityScore();
 
-            if(qualityX < qualityY) return 1;
+            if(qualityX &lt; qualityY) return 1;
             if(qualityX > qualityY) return -1;
             return 0;
         }
@@ -5743,7 +5743,7 @@ namespace Lab5
             Log.WriteLine($"After unary '-' (Defective item): Quality = {dCopy.Quality}");
 
             Log.WriteLine($"Is detail3 == detail4 ?: {detail3 == detail4}");
-            Log.WriteLine($"Is detail3 < detail4 ?: {detail3 < detail4}");
+            Log.WriteLine($"Is detail3 &lt; detail4 ?: {detail3 &lt; detail4}");
 
             Log.WriteLine("\n--- Task 7: Indexer ---\n");
             DetailCollection dc = new DetailCollection(3);
@@ -6011,7 +6011,7 @@ namespace Lab5
 
         public static bool operator !=(Agregate a, Agregate b) => !(a == b);
         public static bool operator >(Agregate a, Agregate b) => a.Price > b.Price;
-        public static bool operator &lt;(Agregate a, Agregate b)=> a.Price < b.Price;
+        public static bool operator &lt;(Agregate a, Agregate b)=> a.Price &lt; b.Price;
 
         public override void Print()
         {
@@ -6174,7 +6174,7 @@ namespace Lab5
 
         public static bool operator !=(Node a, Node b) => !(a == b);
         public static bool operator >(Node a, Node b) => a.Price > b.Price;
-        public static bool operator &lt;(Node a, Node b)=> a.Price < b.Price;
+        public static bool operator &lt;(Node a, Node b)=> a.Price &lt; b.Price;
 
         public override void Print()
         {
@@ -6322,7 +6322,7 @@ namespace Lab5
 
         public static bool operator !=(Detail a, Detail b) => !(a == b);
         public static bool operator >(Detail a, Detail b) => a.Price > b.Price;
-        public static bool operator &lt;(Detail a, Detail b)=> a.Price < b.Price;
+        public static bool operator &lt;(Detail a, Detail b)=> a.Price &lt; b.Price;
 
         public override void Print()
         {
@@ -6377,7 +6377,7 @@ namespace Lab5
         public void PrintAll()
         {
             Log.WriteLine("--- Detail Collection ---");
-            for (int i = 0; i < _items.Length; i++)
+            for (int i = 0; i &lt; _items.Length; i++)
             {
                 if (_items[i] is not null)
                 {
@@ -6525,7 +6525,7 @@ After -- (Decrease quantity): Quantity = 36
 After + 150 (Increase price): Price = 300
 After unary '-' (Defective item): Quality = Defective
 Is detail3 == detail4 ?: False
-Is detail3 < detail4 ?: True
+Is detail3 &lt; detail4 ?: True
 
 --- Task 7: Indexer ---
 
@@ -6633,7 +6633,7 @@ Direct access using indexer: dc[1].Name = Black key, dc[1].Price = 150
                 </div>
             </article>
 
-            <article id="lab3-conclusion">
+            <article id="lab5-conclusion">
                 <h3>Висновки</h3>
                 <p>
                     У ході виконання лабораторної роботи було розроблено консольний застосунок мовою C# з використанням ієрархії класів. До базового класу Product та похідних класів Node і Detail було додано новий похідний клас Agregate. У кожному класі визначено закриті специфічні поля, а також перевантажено по три конструктори: за замовчуванням для ініціалізації полів пустими значеннями та нулями, конструктор з параметрами для ініціалізації початковими значеннями та конструктор копіювання об’єктів, у якому реалізовано глибоке копіювання вкладених списків.
