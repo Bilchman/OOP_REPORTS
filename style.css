@@ -125,3 +125,8 @@ article {
     border-radius:20px;
     margin: 0 auto;
 }
+
+ul, ol { /* або ol */
+    padding-left: 20px; /* Збільш відступ, щоб двозначне число помістилося */
+    list-style-position: outside;
+}
