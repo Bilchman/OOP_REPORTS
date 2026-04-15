@@ -74,13 +74,23 @@
             <li><a href="#lab5-tests">Перевірки</a></li>
             <li><a href="#lab5-conclusion">Висновки</a></li>
         </ul>
+
+        <!-- ЛР №6 -->
+        <div class="lab-title" onclick="openLab('lab6', this)">ЛР №6</div>
+        <ul class="submenu">
+            <li><a href="#lab6-meta">Мета</a></li>
+            <li><a href="#lab6-condition">Умова</a></li>
+            <li><a href="#lab6-analysis">Аналіз</a></li>
+            <li><a href="#lab6-diagram">Діаграма класів</a></li>
+            <li><a href="#lab6-code">Код</a></li>
+            <li><a href="#lab6-examples">Приклади</a></li>
+            <li><a href="#lab6-tests">Перевірки</a></li>
+            <li><a href="#lab6-conclusion">Висновки</a></li>
+        </ul>
     </div> 
 
     <div class="content">
 
-        <!-- <div class="author">
-            Автор: Нікіта Більчук
-    </div> -->
         <!-- ===== ЛР 1 ===== -->
         <section id="lab1" class="lab-section">
             <h1>Лабораторна робота №1<br></h1>
@@ -6645,6 +6655,3146 @@ Direct access using indexer: dc[1].Name = Black key, dc[1].Price = 150
                     Додатково було створено клас DetailCollection для зберігання масиву об’єктів типу Detail. Для цього класу було використано індексатори, що забезпечило ініціалізацію масиву, доступ до заданих за індексом об’єктів та виведення їхніх значень на консоль.
 
                     У результаті виконання роботи було закріплено навички побудови ієрархії класів, використання конструкторів копіювання, перевизначення віртуальних методів, перевантаження унарних і бінарних операторів, а також роботи з масивами об'єктів за допомогою індексаторів.
+                </p>
+            </article>
+        </section>
+
+        <!-- ===== ЛР 6 ===== -->
+        <section id="lab6" class="lab-section">
+            <h1>Лабораторна робота №6<br></h1>
+            <h2>
+                Взаємодії класів, делегати та обробка виняткових ситуацій
+                <br>Варіант №4<br>
+            </h2>
+
+            <article id="lab6-meta">
+                <h3>Мета</h3>
+                <ol>
+                    <li>
+                        Виконати лабораторну роботу, підсумувавши знання з усіх попередніх лабораторних робіт.
+                    </li>
+                    <li>
+                        Реалізувати взаємодії класів у вигляді асоціації, агрегації, композиції.
+                    </li>
+                    <li>
+                        Навчитись програмувати події та їх обробники.
+                    </li>
+                    <li>
+                        Навчитись визначати та обробляти виняткові ситуації.
+                    </li>
+                </ol>
+            </article>
+
+            <article id="lab6-condition">
+                <h3>Умова</h3>
+                <p>
+                    Створити проект для консольного застосунку мовою C# для роботи з класами, що зв’язані асоціацією, агрегацією та композицією.
+                </p>
+                <ol>
+                    <li>
+                        Включити в проект класи для моделювання роботи «розумного дзеркала» (https://ceramamarket.com/santehnica/dzerkala/rozyumne-dzerkalo-smart-mirror-800h600-touch-screen-23-6-weight-skin-detector), яке виконує функції  фотоапарата, передавача та приймача фото від друзів, відеозв’язку, підтримки Wi-Fi, bluetooth, детектора стану людини за її відображенням в дзеркалі (підвищена температура, тиск, пульс, поганий настрій, радість, сум людини), моделювання зачіски, визначення індексу маси тіла, ваги, співідношення жирової та м’язової тканин тіла тощо. Складові «розумного дзеркала» придумати самостійно. Кожний елемент розумного дзеркала і масив людей, які можуть користуватися дзеркалом, описати окремими класами в окремих файлах. Об’єкти класів, які є складовими дзеркала, оголосити в класі дзеркала.
+                    </li>
+                    <li>
+                        Включити в класи закриті поля, відкриті властивості (аксесори), відкриті методи, які моделюють принцип роботи «розумного дзеркала» (придумати самостійно відповідно до п.1 завдання), наприклад, автоматичне прогнозування самопочуття людини за її відображенням та розпізнавання емоцій людин (мобілізувати студентську фантазію).
+                    </li>
+                    <li>
+                        Розробити похідний від «розумного дзеркала» клас «розумний голосовий помічник» або інший розумний елемент дзеркала наприклад, доповнена реальність) та промоделювати його роботу.
+                    </li>
+                    <li>
+                        Реалізувати визначення та обробку виключних ситуацій, пов’язаних із помилками введення даних, запису та читання файлів, виходу масиву за його межі, із семантикою предметної області у вигляді обробки збоїв в роботі дзеркала (наприклад, моделювання закінчення заряду батареї розумного дзеркала, потрапляння людини у критичну ситуацію (раптовий інфаркт, інсульт, втрата свідомості, висока температура тіла через хворобу тощо).
+                    </li>
+                    <li>
+                        Визначити події та реалізувати обробники подій через делегати. Подія – це факт виконання якоїсь дії. Події, що відбуваються в процесі роботи розумного дзеркала, придумати самостійно (наприклад, критичні ситуації п. 4 завдання).
+                    </li>
+                </ol>
+            </article>
+
+            <article id="lab6-analysis">
+                <h3>Аналіз</h3>
+                <ol>
+                    <li>
+                        Для реалізації вимог завдання створимо основний клас SmartMirror та набір класів, які моделюють його складові частини: Camera, Network, Weather, Clock, BodyAnalyzer, StylingSim та HealthDetector. Кожен клас розмістимо в окремому файлі для дотримання принципів чистого коду та розподілу відповідальності.
+                    </li>
+                    <li>
+                        Реалізуємо відношення між класами:
+                        <ul>
+                            <li><b>Композиція:</b> об'єкти складових модулів (камера, мережа, годинник тощо) створюються безпосередньо в конструкторі базового дзеркала. Вони є невід'ємною частиною дзеркала та повністю залежать від його життєвого циклу (знищуються разом із ним).</li>
+                            <li><b>Агрегація:</b> у класі дзеркала створимо закрите поле у вигляді списку користувачів. Користувачі існують незалежно від дзеркала, а пристрій лише зберігає посилання на їхні профілі.</li>
+                            <li><b>Асоціація:</b> визначимо взаємодію, за якої методи певних модулів приймають об'єкти інших класів як параметри (наприклад, метод симуляції зачіски отримує об'єкт камери для збереження результату та об'єкт поточного користувача для персоналізації відображення).</li>
+                        </ul>
+                    </li>
+                    <li>
+                        У кожному класі визначимо закриті поля та відкриті властивості з перевірками коректності даних. Це забезпечить надійну інкапсуляцію стану об'єктів.
+                    </li>
+                    <li>
+                        Створимо модулі, які моделюють функції дзеркала:
+                        <ul>
+                            <li>Клас HealthDetector за допомогою випадкових чисел генерує фізіологічні показники людини (пульс, тиск, температуру), перевіряє симетрію обличчя, розпізнає емоції та надає розумні поради (наприклад, вмикає розслаблюючу музику при стресі або рекомендує сон).</li>
+                            <li>Клас StylingSim дозволяє приміряти віртуальні зачіски та аксесуари, виводячи їх на екран у вигляді стилізованого ASCII-арту.</li>
+                            <li>Клас Camera дозволяє зробити віртуальний знімок результату примірки і зберегти його у вигляді текстового файлу безпосередньо на Робочий стіл користувача з фіксацією дати та часу.</li>
+                            <li>Клас Weather формує реалістичний прогноз погоди на тиждень, враховуючи пору року, і дає підказки щодо вибору одягу.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Для реалізації збереження даних створимо методи для читання та запису списку користувачів у текстовий файл бази даних у форматі CSV. Для перетворення об'єктів у рядок та навпаки використаємо спеціальні методи всередині класу користувача.
+                    </li>
+                    <li>
+                        Для розмежування прав користувачів дзеркала запровадимо систему рівнів доступу через властивість AccessLevel у класі User. Визначимо логічні рівні: гостьовий доступ (рівень 0, де дані не зберігаються), звичайний користувач (рівень 1, де завантажується персональний профіль) та адміністратор (рівень 2). На базі цієї архітектури в класі SmartMirror розробимо безпечні методи керування базою даних — AdminAddNewUser та AdminRemoveUser. Ці методи перед виконанням дій з колекцією користувачів обов'язково перевірятимуть рівень доступу поточної авторизованої людини. Якщо звичайний користувач спробує видалити або додати профіль, система заблокує операцію та виведе повідомлення про відмову в доступі. Це забезпечить цілісність даних та захистить конфігураційний файл від несанкціонованого редагування.
+                    </li>
+                    <li>
+                        Для забезпечення гнучкості системи керування базою даних розробимо функціонал глибокого редагування існуючих профілів користувачів. Реалізація відбуватиметься за допомогою багаторівневого вкладеного циклічного меню. На першому рівні адміністратор обирає профіль для модифікації, на другому — конкретний параметр, а на третьому — вводить нове значення. Зміна стану об'єкта відбуватиметься напряму через відкриті властивості класу User, які забезпечують внутрішню інкапсуляцію та перевірку значень. Після кожної успішної зміни система автоматично викликатиме метод AdminSaveChanges(), що гарантує безперервне збереження оновлених даних у текстовому файлі.
+                    </li>
+                    <li>
+                        Розробимо похідний клас VoiceAssistant, який розширює можливості та успадковує базовий клас SmartMirror. Для реалізації алгоритму розпізнавання команд голосового помічника буде створено хеш-таблицю (колекцію Dictionary). Ключами у цій хеш-таблиці виступатимуть текстові ключові слова або фрази користувача, а значеннями — делегати типу Action. Ці делегати зберігатимуть посилання на відповідні методи розумного дзеркала, що виконуються без передачі параметрів. Під час обробки введеного речення помічник відсортує ключі за довжиною, знайде відповідний збіг та миттєво викличе прив'язаний делегат. У головному класі програми ми застосуємо принцип поліморфізму, зберігши об'єкт помічника у змінну типу базового дзеркала для виклику загальних функцій.
+                    </li>
+                    <li>
+                        Створимо власні класи виключень у окремому файлі, що відображають семантику предметної області: виключення критичного стану здоров'я людини, критично низького заряду батареї пристрою, спроби використання вимкненої камери та недоступності бездротової мережі.
+                    </li>
+                    <li>
+                        Реалізуємо багаторівневу обробку стандартних та власних виключних ситуацій:
+                        <ul>
+                            <li>Помилки роботи з файлами перехоплюватимуться під час запуску пристрою, ініціюючи автоматичне створення бази даних за замовчуванням у разі її пошкодження чи відсутності.</li>
+                            <li>Помилка виходу за межі масиву оброблятиметься у модулі погоди, якщо запит наблизиться до днів, на які прогноз ще не сформований.</li>
+                            <li>Логічні збої дзеркала генеруватимуть власні створені виключення, які акуратно оброблятимуться системою із виведенням зрозумілих повідомлень, уникаючи аварійного завершення програми.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Визначимо події та реалізуємо їх обробку через делегати. Створимо подію низького заряду батареї (спрацьовує, коли енергія падає до 10 відсотків) та подію критичної ситуації зі здоров'ям (спрацьовує при виявленні прямої загрози життю, як-от інсульт чи гіпертонічний криз). У головному класі програми створимо обробники цих подій, які імітуватимуть візуальне системне попередження та автоматичний виклик швидкої медичної допомоги із голосовим повідомленням для диспетчера.
+                    </li>
+                    <li>
+                        Побудуємо логіку життєвого циклу програми із зручним консольним інтерфейсом. Система починатиме роботу в режимі очікування, автоматично реагуватиме на появу людини перед датчиками, проводитиме ідентифікацію за зовнішністю та привітанням, після чого надаватиме доступ до багаторівневого меню функцій дзеркала та голосового помічника, працюючи доти, доки користувач не вирішить відійти або заряд батареї не вичерпається. Додатково можна примусово вимкнути дзеркало.
+                    </li>
+                </ol>
+            </article>
+
+            <article id="lab6-diagram">
+                <h3>Діаграма класів</h3>
+                <p>
+                    <img src="photos\Lab6\ClassDiagram.png" class="photo" style="max-width: 80%" />
+                </p>
+            </article>
+
+            <article id="lab6-code">
+                <h3>Код</h3>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Program.cs
+                    </div>
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+
+namespace Lab6
+{
+    class Program
+    {
+        static SmartMirror mirror = null!;
+        static VoiceAssistant assistant = null!;
+        static bool isRunning = true;
+        static bool isAwake = false;
+
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            Console.WriteLine("=== SMART MIRROR OS BOOTING ===\n");
+
+            assistant = new VoiceAssistant();
+            mirror = assistant; // Поліморфізм: дзеркало і помічник - це один фізичний пристрій
+
+            // Підписка на критичні події через інтерфейс дзеркала
+            mirror.OnBatteryLow += HandleBatteryWarning;
+            mirror.HealthModule.OnHealthEmergency += HandleAmbulanceCall;
+
+            // Створення користувачів перед роботою
+            InitializeUsers();
+
+            while (mirror.BatteryLevel > 0 && isRunning)
+            {
+                mirror.resetCurrentUser();
+                Console.WriteLine("\n[System] Mirror is in Standby Mode...");
+                Console.WriteLine("======================================");
+                mirror.ShowStandbyScreen();
+                Console.WriteLine("======================================");
+
+                Console.ReadKey(true);
+                Console.WriteLine("\n[Motion sensor] someone aproaches the mirror\n");
+
+                // Вибір користувача
+                SelectUserInFrontOfMirror();
+
+                if (mirror.CurrentUser != null)
+                {
+                    Console.WriteLine($"\n[System] Authentication successful. Welcome, {mirror.CurrentUser.Username}!");
+
+                    isAwake = true;
+                    ShowMainMenu();
+                }
+            }
+
+            Console.WriteLine("\n=== SMART MIRROR POWERED OFF ===");
+            Console.WriteLine("Press Enter to exit the application.");
+            Console.ReadLine();
+        }
+
+        // ================= МЕТОДИ ЛОГІКИ =================
+
+        static void InitializeUsers()
+        {
+            Console.WriteLine("[System] Pre-loading user profiles into database...");
+
+            User alice = new User("Alice", "Long", "Blonde", "Blue", 60.0, 1.65, "Hello", 1);
+            User bob = new User("Bob", "Short", "Brown", "Green", 80.0, 1.85, "Hi", 2);
+            User charlie = new User("Charlie", "Curly", "Black", "Brown", 75.0, 1.75, "Morning", 1);
+
+            mirror.AddNewUser(alice);
+            mirror.AddNewUser(bob);
+            mirror.AddNewUser(charlie);
+
+            Console.WriteLine("[System] Users loaded successfully.\n");
+        }
+
+        static void SelectUserInFrontOfMirror()
+        {
+            Console.WriteLine("======================================");
+            Console.WriteLine(" WHO IS STANDING IN FRONT OF MIRROR?  ");
+            Console.WriteLine("======================================");
+
+            List&lt;User> registeredUsers = mirror.Users;
+
+            for (int i = 0; i &lt; registeredUsers.Count; i++)
+            {
+                User user = registeredUsers[i];
+                Console.WriteLine($" {i + 1}. {user.Username} ({user.HairColor}, {user.HairCut} hair)");
+            }
+
+            int guestOption = registeredUsers.Count + 1;
+            int nobodyOption = registeredUsers.Count + 2;
+
+            Console.WriteLine($" {guestOption}. Unrecognized Person (Guest Mode)");
+            Console.WriteLine($" {nobodyOption}. No One is in Front of the Mirror");
+            Console.WriteLine(" 0. Turn Off the Mirror               ");
+            Console.WriteLine("======================================");
+            Console.Write("Choose an option: ");
+
+            string choiceStr = Console.ReadLine() ?? "";
+
+            User personInFront = null!;
+
+            if (choiceStr == "0")
+            {
+                Console.WriteLine("\n[System] Shutting down the mirror...");
+                isRunning = false;
+                return;
+            }
+
+            if (int.TryParse(choiceStr, out int choiceIndex))
+            {
+                if (choiceIndex >= 1 && choiceIndex &lt;= registeredUsers.Count)
+                {
+                    User realUser = registeredUsers[choiceIndex - 1];
+
+                    personInFront = new User("Temp", realUser.HairCut, realUser.HairColor, realUser.EyeColor, realUser.Weight, realUser.Height, "", 1);
+                }
+                else if (choiceIndex == guestOption)
+                {
+                    personInFront = new User("Temp", "Bald", "None", "Blue", 70.0, 1.70, "", 0);
+                }
+                else if (choiceIndex == nobodyOption)
+                {
+                    personInFront = null!;
+                }
+                else
+                {
+                    Console.WriteLine("[System] Invalid input.");
+                    personInFront = null!;
+                }
+            }
+            else
+            {
+                Console.WriteLine("[System] Invalid input format.");
+                personInFront = null!;
+            }
+
+            mirror.DefineUser(personInFront);
+        }
+
+        static void ShowMainMenu()
+        {
+            while (isAwake)
+            {
+                Console.WriteLine("\n=============================================");
+                Console.WriteLine($" SMART MIRROR MENU | Battery: {mirror.BatteryLevel,3}%        ");
+                Console.WriteLine("=============================================");
+                Console.WriteLine("  1. Show Time and Date                      ");
+                Console.WriteLine("  2. Show Weather Forecast                   ");
+                Console.WriteLine("  3. Run Health Diagnostic                   ");
+                Console.WriteLine("  4. Run Body Analysis                       ");
+                Console.WriteLine("  5. AR Hairstyle Simulator                  ");
+                Console.WriteLine("  6. Network Management                      ");
+                Console.WriteLine("  7. Launch Voice Assistant                  ");
+                Console.WriteLine("  8. User Management (Admin Only)            ");
+                Console.WriteLine("  0. Step Away From Mirror                   ");
+                Console.WriteLine("=============================================");
+                Console.Write("Select function: ");
+
+                string option = Console.ReadKey().KeyChar.ToString() ?? "";
+                Console.WriteLine("\n");
+
+                try
+                {
+                    ExecuteMenuOption(option);
+                }
+                catch (LowBatteryException exception)
+                {
+                    Console.WriteLine($"\n[CRITICAL ERROR] {exception.Message}");
+                    Console.WriteLine("[System] Forced Shutdown due to empty battery.");
+                    isAwake = false;
+                }
+                catch (CriticalHealthException exception)
+                {
+                    Console.WriteLine($"\n[EMERGENCY LOCK] {exception.Message}");
+                    Console.WriteLine("[System] Mirror locked in emergency mode.");
+                    bool emergency = true;
+                    while (emergency)
+                    {
+                        Console.WriteLine("\n[EMERGENCY MODE] Please wait for help to arrive...");
+                        Console.WriteLine("Press '0' to attempt to exit emergency mode (not recommended).");
+                        string emergencyOption = Console.ReadKey(true).KeyChar.ToString() ?? "";
+                        if (emergencyOption == "0")
+                        {
+                            Console.WriteLine("\n[System] Attempting to exit emergency mode...");
+                            emergency = false;
+                        }
+                    }
+                    isAwake = false;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\n[ERROR] An unexpected error occurred: {ex.Message}");
+                }
+            }
+        }
+
+        static void NetworkSubMenu()
+        {
+            bool inNetworkMenu = true;
+
+            while (inNetworkMenu)
+            {
+                Console.WriteLine("\n=============================================");
+                Console.WriteLine("           NETWORK MANAGEMENT MENU           ");
+                Console.WriteLine("=============================================");
+                Console.WriteLine($" Power Status : {(mirror.NetworkModule.TurnedOn ? "ON" : "OFF")}");
+                Console.WriteLine($" Wi-Fi Status : {(mirror.NetworkModule.IsWifiConnected ? "Connected" : "Disconnected")}");
+                Console.WriteLine($" Bluetooth    : {(mirror.NetworkModule.IsBluetoothPaired ? "Paired" : "Unpaired")}");
+                Console.WriteLine("---------------------------------------------");
+                Console.WriteLine("  1. Turn Network Module ON                  ");
+                Console.WriteLine("  2. Turn Network Module OFF                 ");
+                Console.WriteLine("  3. Connect to Wi-Fi                        ");
+                Console.WriteLine("  4. Disconnect Wi-Fi                        ");
+                Console.WriteLine("  5. Pair Bluetooth Device                   ");
+                Console.WriteLine("  6. Unpair Bluetooth Device                 ");
+                Console.WriteLine("  7. Transmit Data                           ");
+                Console.WriteLine("  8. Receive Photo from Friend               ");
+                Console.WriteLine("  0. Return to Main Menu                     ");
+                Console.WriteLine("=============================================");
+                Console.Write("Select network option: ");
+
+                string netOption = Console.ReadKey().KeyChar.ToString() ?? "";
+                Console.WriteLine("\n");
+
+                switch (netOption)
+                {
+                    case "1":
+                        mirror.NetworkModule.TurnOn();
+                        break;
+
+                    case "2":
+                        mirror.NetworkModule.TurnOff();
+                        break;
+
+                    case "3":
+                        mirror.NetworkModule.ConnectWiFi();
+                        break;
+
+                    case "4":
+                        mirror.NetworkModule.DisconnectWiFi();
+                        break;
+
+                    case "5":
+                        mirror.NetworkModule.PairBluetooth();
+                        break;
+
+                    case "6":
+                        mirror.NetworkModule.UnpairBluetooth();
+                        break;
+
+                    case "7":
+                        mirror.NetworkModule.TransmitData();
+                        break;
+
+                    case "8":
+                        mirror.NetworkModule.ReceivePhoto();
+                        break;
+
+                    case "0":
+                        inNetworkMenu = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("\n[System] Unknown command. Please enter a number from the menu.");
+                        break;
+                }
+            }
+        }
+
+        static void ExecuteMenuOption(string option)
+        {
+            switch (option)
+            {
+                case "1":
+                    Console.WriteLine("======================================");
+                    mirror.ShowCurrentTime();
+                    mirror.ConsumeBattery(1);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "2":
+                    Console.WriteLine("======================================");
+                    mirror.ShowWeatherForecast(0);
+                    mirror.ConsumeBattery(2);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "3":
+                    Console.WriteLine("======================================");
+                    mirror.HealthModule.AnalyzeUserState(mirror.CurrentUser, simulateEmergency: true);
+                    mirror.ConsumeBattery(5);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "4":
+                    Console.WriteLine("======================================");
+                    mirror.RunBodyAnalysis();
+                    mirror.ConsumeBattery(3);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "5":
+                    Console.WriteLine("======================================");
+                    mirror.TryNewHairstyle();
+                    mirror.ConsumeBattery(8);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "6":
+                    NetworkSubMenu();
+                    mirror.ConsumeBattery(2);
+                    break;
+
+                case "7":
+                    Console.WriteLine("======================================");
+                    assistant.TurnOnAssistant();
+                    mirror.ConsumeBattery(5);
+                    Console.WriteLine("======================================");
+                    break;
+
+                case "8":
+                    AdminManagementMenu();
+                    mirror.ConsumeBattery(3);
+                    break;
+
+                case "0":
+                    isAwake = false;
+                    break;
+
+                default:
+                    Console.WriteLine("\n[System] Unknown command. Please enter a number from the menu.");
+                    break;
+            }
+        }
+
+        static void AdminManagementMenu()
+        {
+            if (mirror.CurrentUser.AccessLevel &lt; 2)
+            {
+                Console.WriteLine("[Access Denied] You do not have administrator privileges to access this menu.");
+                return;
+            }
+
+            bool inAdminMenu = true;
+
+            while (inAdminMenu)
+            {
+                Console.WriteLine("\n=============================================");
+                Console.WriteLine("          USER MANAGEMENT MENU (ADMIN)       ");
+                Console.WriteLine("=============================================");
+                Console.WriteLine("  1. Show All Users                          ");
+                Console.WriteLine("  2. Add New User                            ");
+                Console.WriteLine("  3. Delete User                             ");
+                Console.WriteLine("  4. Edit User Profile                       ");
+                Console.WriteLine("  0. Return to Main Menu                     ");
+                Console.WriteLine("=============================================");
+                Console.Write("Select admin option: ");
+
+                string adminOption = Console.ReadKey().KeyChar.ToString() ?? "";
+                Console.WriteLine("\n");
+
+                switch (adminOption)
+                {
+                    case "1":
+                        Console.WriteLine("--- REGISTERED USERS ---");
+                        List&lt;string> userList = mirror.GetAllUsersList();
+                        foreach (string u in userList)
+                        {
+                            Console.WriteLine($"- {u}");
+                        }
+                        break;
+
+                    case "2":
+                        Console.WriteLine("--- ADD NEW USER ---");
+                        Console.Write("Enter Username: ");
+                        string name = Console.ReadLine() ?? "NewUser";
+                        Console.Write("Enter Haircut (Short/Medium/Long): ");
+                        string hairCut = Console.ReadLine() ?? "Unknown";
+                        Console.Write("Enter Hair Color: ");
+                        string hairColor = Console.ReadLine() ?? "Unknown";
+                        Console.Write("Enter Eye Color: ");
+                        string eyeColor = Console.ReadLine() ?? "Unknown";
+
+                        Console.Write("Enter Weight (kg): ");
+                        double weight = 70.0;
+                        double.TryParse(Console.ReadLine(), out weight);
+
+                        Console.Write("Enter Height (m): ");
+                        double height = 1.75;
+                        double.TryParse(Console.ReadLine(), out height);
+
+                        Console.Write("Enter secret Greeting Word: ");
+                        string greeting = Console.ReadLine() ?? "Hello";
+
+                        Console.Write("Enter Access Level (1 - Regular, 2 - Admin): ");
+                        int level = 1;
+                        int.TryParse(Console.ReadLine(), out level);
+                        level = level &lt; 1 ? 1 : level;
+
+                        User newUser = new User(name, hairCut, hairColor, eyeColor, weight, height, greeting, level);
+                        mirror.AdminAddNewUser(newUser);
+                        break;
+
+                    case "3":
+                        Console.WriteLine("--- DELETE USER ---");
+                        Console.Write("Enter the exact Username to delete: ");
+                        string nameToDelete = Console.ReadLine() ?? "";
+                        mirror.AdminRemoveUser(nameToDelete);
+                        break;
+
+                    case "4":
+                        EditUserMenu();
+                        break;
+
+                    case "0":
+                        inAdminMenu = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("[System] Unknown command.");
+                        break;
+                }
+            }
+        }
+
+        static void EditUserMenu()
+        {
+            bool inSelectUserMenu = true;
+
+            while (inSelectUserMenu)
+            {
+                Console.WriteLine("\n--- EDIT USER PROFILE ---");
+                Console.WriteLine("Enter the exact Username to edit (or type '0' to go back): ");
+                string targetName = Console.ReadLine() ?? "";
+
+                if (targetName == "0")
+                {
+                    inSelectUserMenu = false;
+                }
+                else
+                {
+                    User userToEdit = mirror.AdminGetUserByName(targetName);
+
+                    if (userToEdit == null)
+                    {
+                        Console.WriteLine($"[System Error] User '{targetName}' not found.");
+                    }
+                    else
+                    {
+                        bool inEditParamMenu = true;
+
+                        while (inEditParamMenu)
+                        {
+                            Console.WriteLine($"\n=== EDITING PROFILE: {userToEdit.Username} ===");
+                            Console.WriteLine($"  1. Haircut      (Current: {userToEdit.HairCut})");
+                            Console.WriteLine($"  2. Hair Color   (Current: {userToEdit.HairColor})");
+                            Console.WriteLine($"  3. Eye Color    (Current: {userToEdit.EyeColor})");
+                            Console.WriteLine($"  4. Weight       (Current: {userToEdit.Weight} kg)");
+                            Console.WriteLine($"  5. Height       (Current: {userToEdit.Height} m)");
+                            Console.WriteLine($"  6. Greeting     (Current: {userToEdit.GreetingWord})");
+                            Console.WriteLine($"  7. Access Level (Current: {userToEdit.AccessLevel})");
+                            Console.WriteLine("  0. Save and Quit");
+                            Console.WriteLine("======================================");
+                            Console.Write("Select parameter to change: ");
+
+                            string paramChoice = Console.ReadKey().KeyChar.ToString() ?? "";
+                            Console.WriteLine("\n");
+
+                            if (paramChoice == "0")
+                            {
+                                inEditParamMenu = false;
+                                inSelectUserMenu = false;
+                            }
+                            else
+                            {
+                                Console.Write("Enter new value: ");
+                                string newValue = Console.ReadLine() ?? "";
+
+                                try
+                                {
+                                    switch (paramChoice)
+                                    {
+                                        case "1": userToEdit.HairCut = newValue; break;
+                                        case "2": userToEdit.HairColor = newValue; break;
+                                        case "3": userToEdit.EyeColor = newValue; break;
+                                        case "4":
+                                            if (double.TryParse(newValue, out double w)) userToEdit.Weight = w;
+                                            else Console.WriteLine("[Input Error] Invalid weight format.");
+                                            break;
+                                        case "5":
+                                            if (double.TryParse(newValue, out double h)) userToEdit.Height = h;
+                                            else Console.WriteLine("[Input Error] Invalid height format.");
+                                            break;
+                                        case "6": userToEdit.GreetingWord = newValue; break;
+                                        case "7":
+                                            if (int.TryParse(newValue, out int lvl)) userToEdit.AccessLevel = lvl;
+                                            else Console.WriteLine("[Input Error] Invalid access level format.");
+                                            break;
+                                        default:
+                                            Console.WriteLine("[System] Unknown parameter.");
+                                            continue;
+                                    }
+
+                                    mirror.AdminSaveChanges();
+                                }
+                                catch (Exception exception)
+                                {
+                                    Console.WriteLine($"[Error] Could not update parameter: {exception.Message}");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // ================= ОБРОБНИКИ ПОДІЙ =================
+
+        static void HandleBatteryWarning(int currentLevel)
+        {
+            Console.WriteLine($"\n[SYSTEM ALERT] Battery is critically low: {currentLevel}%! Please charge.");
+        }
+
+        static void HandleAmbulanceCall(string alertMessage, string username)
+        {
+            Console.WriteLine($"\n[MEDICAL EMERGENCY]");
+            Console.WriteLine($"[System] Calling Ambulance (103)...");
+            Console.WriteLine($"[Voice Assistant] \"Dispatcher, we have a critical situation: {alertMessage} for {username}.\"");
+        }
+    }
+}
+</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        SmartMirror.cs
+                    </div>
+                    <pre><code>
+                        using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Lab6
+{
+    public delegate void BatteryStatusHandler(int currentLevel);
+
+    class SmartMirror
+    {
+        private const string UsersFilePath = "users_db.txt";
+        public event BatteryStatusHandler OnBatteryLow = null!;
+
+        // Складові частини
+        private HealthDetector _healthModule;
+        private Camera _camera;
+        private NetworkModule _networkModule;
+        private WeatherModule _weatherModule;
+        private Clock _clock;
+        private BodyAnalyzer _bodyAnalyzer;
+        private StylingSimulator _stylingSimulator;
+
+        private List&lt;User> _users;
+        private User _currentUser;
+        private int _batteryLevel;
+
+        public SmartMirror()
+        {
+            Camera = new Camera();
+            NetworkModule = new NetworkModule();
+            HealthModule = new HealthDetector();
+            WeatherModule = new WeatherModule();
+            Clock = new Clock();
+            BodyAnalyzer = new BodyAnalyzer();
+            StylingSimulator = new StylingSimulator();
+
+            Users = new List&lt;User>();
+            CurrentUser = null!;
+            BatteryLevel = 80;
+
+            LoadUsersFromFile();
+        }
+
+        public List&lt;User> Users
+        {
+            get => _users;
+            private set
+            {
+                _users = value;
+            }
+        }
+
+        public User CurrentUser
+        {
+            get => _currentUser;
+            private set
+            {
+                _currentUser = value;
+            }
+        }
+
+        public HealthDetector HealthModule
+        {
+            get => _healthModule;
+            private set
+            {
+               _healthModule = value;
+            }
+        }
+        public Camera Camera
+        {
+            get => _camera;
+            private set
+            {
+                _camera = value;
+            }
+        }
+
+        public NetworkModule NetworkModule
+        {
+            get => _networkModule;
+            private set
+            {
+                _networkModule = value;
+            }
+        }
+
+        public WeatherModule WeatherModule
+        {
+            get => _weatherModule;
+            private set
+            {
+                _weatherModule = value;
+            }
+        }
+
+        public Clock Clock
+        {
+            get => _clock;
+            private set
+            {
+                _clock = value;
+            }
+        }
+
+        public BodyAnalyzer BodyAnalyzer
+        {
+            get => _bodyAnalyzer;
+            private set
+            {
+                _bodyAnalyzer = value;
+            }
+        }
+        
+        public StylingSimulator StylingSimulator
+        {
+            get => _stylingSimulator;
+            private set
+            {
+                _stylingSimulator = value;
+            }
+        }
+
+        public int BatteryLevel
+        {
+            get => _batteryLevel;
+            private set
+            {
+                _batteryLevel = value &lt; 0 ? 0 : value;
+                _batteryLevel = value > 100 ? 100 : value;
+            }
+        }
+
+        private void LoadUsersFromFile()
+        {
+            Console.WriteLine("[System] Attempting to load user database...");
+            try
+            {
+                if (!File.Exists(UsersFilePath))
+                    throw new FileNotFoundException($"Database file '{UsersFilePath}' not found.");
+
+                string[] lines = File.ReadAllLines(UsersFilePath);
+                foreach (string line in lines)
+                {
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        Users.Add(User.FromCsvString(line));
+                    }
+                }
+                Console.WriteLine($"[System] Successfully loaded {Users.Count} user(s).");
+            }
+            catch (FileNotFoundException exception)
+            {
+                Console.WriteLine($"[I/O Error] {exception.Message}");
+                Console.WriteLine("[System] Creating a new database with Admin profile.");
+                User defaultAdmin = new User("Admin", "Medium", "Brown", "Blue", 50.0, 1.60, "Hi", 2);
+                Users.Add(defaultAdmin);
+                SaveAllUsersToFile();
+            }
+            catch (FormatException exception)
+            {
+                Console.WriteLine($"[Data Error] File contains corrupted data: {exception.Message}");
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine($"[I/O Error] Could not read file: {exception.Message}");
+            }
+        }
+
+        private void SaveAllUsersToFile()
+        {
+            try
+            {
+                List&lt;string> lines = new List&lt;string>();
+                foreach (User user in Users)
+                {
+                    lines.Add(user.ToCsvString());
+                }
+                File.WriteAllLines(UsersFilePath, lines);
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine($"[I/O Error] Failed to save user data: {exception.Message}");
+            }
+        }
+
+        public void AddNewUser(User newUser)
+        {
+            if (newUser != null && !Users.Any(u => u.Username.Equals(newUser.Username, StringComparison.OrdinalIgnoreCase)))
+            {
+                Users.Add(newUser);
+                SaveAllUsersToFile();
+                Console.WriteLine($"[System] User {newUser.Username} successfully saved to file.");
+            }
+        }
+
+        public List&lt;string> GetAllUsersList()
+        {
+            List&lt;string> userNames = new List&lt;string>();
+            foreach (User u in Users)
+            {
+                userNames.Add($"{u.Username} (Access Level: {u.AccessLevel})");
+            }
+            return userNames;
+        }
+
+        public User AdminGetUserByName(string username)
+        {
+            if (CurrentUser == null || CurrentUser.AccessLevel &lt; 2)
+            {
+                Console.WriteLine("[Access Denied] Only Administrators can view profile details.");
+                return null!;
+            }
+
+            return Users.FirstOrDefault(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase))!;
+        }
+
+        public void AdminSaveChanges()
+        {
+            if (CurrentUser != null && CurrentUser.AccessLevel >= 2)
+            {
+                SaveAllUsersToFile();
+                Console.WriteLine("[System] Profile changes successfully saved to the database.");
+            }
+        }
+
+        public void AdminAddNewUser(User newUser)
+        {
+            if (CurrentUser == null || CurrentUser.AccessLevel &lt; 2)
+            {
+                Console.WriteLine("[Access Denied] Only Administrators can add new users to the database.");
+                return;
+            }
+            AddNewUser(newUser);
+        }
+
+        public void AdminRemoveUser(string usernameToRemove)
+        {
+            if (CurrentUser == null || CurrentUser.AccessLevel &lt; 2)
+            {
+                Console.WriteLine("[Access Denied] Only Administrators can remove users from the database.");
+                return;
+            }
+
+            if (usernameToRemove.Equals(CurrentUser.Username, StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine("[System Error] You cannot delete your own profile while logged in.");
+                return;
+            }
+
+            User userToDelete = Users.FirstOrDefault(u => u.Username.Equals(usernameToRemove, StringComparison.OrdinalIgnoreCase))!;
+
+            if (userToDelete != null)
+            {
+                Users.Remove(userToDelete);
+                SaveAllUsersToFile();
+                Console.WriteLine($"[System] User '{userToDelete.Username}' has been successfully removed from the database.");
+            }
+            else
+            {
+                Console.WriteLine($"[System Error] User '{usernameToRemove}' not found in the database.");
+            }
+        }
+
+        public void DefineUser(User userInFrontOfMirror)
+        {
+            if (userInFrontOfMirror == null)
+            {
+                CurrentUser = null!;
+                return;
+            }
+
+            Console.WriteLine("\n[System] Scanning reflection...");
+
+            User recognizedUser = Users.FirstOrDefault(u => u.HairCut.Equals(userInFrontOfMirror.HairCut, StringComparison.OrdinalIgnoreCase) && 
+                                                            u.HairColor.Equals(userInFrontOfMirror.HairColor, StringComparison.OrdinalIgnoreCase) && 
+                                                            u.EyeColor.Equals(userInFrontOfMirror.EyeColor, StringComparison.OrdinalIgnoreCase) && 
+                                                            u.Weight == userInFrontOfMirror.Weight && 
+                                                            u.Height == userInFrontOfMirror.Height)!;
+
+            if (recognizedUser != null)
+            {
+                Console.WriteLine($"[System] Profile match: {recognizedUser.Username}.");
+                if (ValidateUser(recognizedUser))
+                {
+                    CurrentUser = recognizedUser;
+                    return;
+                }
+            }
+
+            Console.WriteLine("[System] Appearance not recognized. What is your name?");
+            Console.Write("Name: ");
+            string inputName = Console.ReadLine()!;
+
+            User selectedUser = Users.FirstOrDefault(u => u.Username.Equals(inputName, StringComparison.OrdinalIgnoreCase))!;
+
+            if (selectedUser != null && ValidateUser(selectedUser))
+            {
+                CurrentUser = selectedUser;
+            }
+            else
+            {
+                StartGuestSession(string.IsNullOrWhiteSpace(inputName) ? "Guest" : inputName);
+            }
+        }
+
+        private void StartGuestSession(string name)
+        {
+            CurrentUser = new User(name, "Unknown", "Unknown", "Unknown", 0, 0, "", 1);
+            Console.WriteLine($"[Guest Mode] Session started. Data will not be saved.");
+        }
+
+        private bool ValidateUser(User user)
+        {
+            Console.WriteLine("\n======================================");
+            Console.Write($"Glad to see you {user.Username}, say your greeting word: ");
+            bool isCorrect = Console.ReadLine()!.Equals(user.GreetingWord, StringComparison.OrdinalIgnoreCase);
+            Console.WriteLine("======================================");
+            return isCorrect;
+        }
+
+        public void resetCurrentUser() => CurrentUser = null!;
+
+        public void ConsumeBattery(int amount)
+        {
+            BatteryLevel -= amount;
+            if (BatteryLevel &lt;= 10 && BatteryLevel > 0)
+                OnBatteryLow?.Invoke(BatteryLevel);
+            else if (BatteryLevel &lt;= 0)
+                throw new LowBatteryException("CRITICAL: Battery depleted.");
+        }
+
+        // модулі дзеркала
+
+        public void ShowStandbyScreen()
+        {
+            Clock.ShowCurrentTime();
+            WeatherModule.ShowForecast(0);
+        }
+
+        public void ShowCurrentTime()
+        {
+            Clock.ShowCurrentTime();
+        }
+
+        public void ShowWeatherForecast(int day)
+        {
+            WeatherModule.ShowForecast(day);
+        }
+
+        public void TurnOnNetwork()
+        {
+            NetworkModule.TurnOn();
+            NetworkModule.ConnectWiFi("Home_Smart_Network");
+        }
+
+        public void TurnOffNetwork()
+        {
+            NetworkModule.TurnOff();
+        }
+
+        public void RunBodyAnalysis()
+        {
+            BodyAnalyzer.CalculateBMI(CurrentUser);
+            BodyAnalyzer.EstimateBodyComposition(CurrentUser);
+        }
+
+        public void TryNewHairstyle()
+        {
+            Camera.TurnOn();
+            StylingSimulator.SimulateHairstyle(Camera, CurrentUser);
+            Camera.TurnOff();
+        }
+    }
+}
+                        </code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        VoiceAssistant.cs
+                    </div>
+                    <pre><code>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Lab6
+{
+    class VoiceAssistant : SmartMirror
+    {
+        private bool _isAwake;
+        private Dictionary&lt;string, Action> _commandDictionary;
+
+        public VoiceAssistant() : base()
+        {
+            IsAwake = false;
+            CommandDictionary = MapKeyWords();
+        }
+
+        public bool IsAwake { get => _isAwake; private set => _isAwake = value; }
+        public Dictionary&lt;string, Action> CommandDictionary { get => _commandDictionary; private set => _commandDictionary = value; }
+
+        private Dictionary&lt;string, Action> MapKeyWords()
+        {
+            Dictionary&lt;string, Action> dictionary = new Dictionary&lt;string, Action>();
+
+            Action turnOff = () =>
+            {
+                IsAwake = false;
+                Console.WriteLine("\n[Jarvis]: Voice control system disabled. Entering sleep mode. See you later!");
+            };
+
+            Action connectNetwork = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Connecting to the home Wi-Fi network. Please wait...");
+                TurnOnNetwork();
+            };
+
+            Action disconnectNetwork = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Disconnecting the mirror from the home network.");
+                TurnOffNetwork();
+            };
+
+            Action tryHairstyle = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Activating the smart camera for new hairstyle simulation. Please look straight into the mirror.");
+                TryNewHairstyle();
+            };
+
+            Action analyzeBody = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Initiating your body analysis module. Calculating Body Mass Index...");
+                RunBodyAnalysis();
+            };
+
+            Action showTime = () =>
+            {
+                Console.WriteLine($"\n[Jarvis]: The current time is {DateTime.Now:HH:mm}, and today's date is {DateTime.Now:dd.MM.yyyy}.");
+            };
+
+            Action showForecast = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Fetching today's weather forecast for your location...");
+                ShowWeatherForecast(0);
+            };
+
+            Action healthDiagnostic = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: Running a quick health diagnostic based on your recent data...");
+                HealthModule.AnalyzeUserState(CurrentUser);
+            };
+
+            Action greeting = () =>
+            {
+                Console.WriteLine($"\n[Jarvis]: Hello, {CurrentUser.Username}! How can I assist you today?");
+            };
+
+            Action thanks = () =>
+            {
+                Console.WriteLine("\n[Jarvis]: You're welcome! I'm here to help anytime.");
+            };
+
+            string[] networkOffWords = { "turn wifi off", "wifi off", "disconnect wifi", "network off", "turn off internet", "turn off wifi" };
+            foreach (string word in networkOffWords) dictionary[word] = disconnectNetwork;
+
+            string[] networkOnWords = { "turn wifi on", "wifi on", "wifi", "network", "internet", "connect" };
+            foreach (string word in networkOnWords) dictionary[word] = connectNetwork;
+
+            string[] offWords = { "sleep", "bye", "exit", "shutdown", "turn off" };
+            foreach (string word in offWords) dictionary[word] = turnOff;
+
+            string[] hairWords = { "hair", "style", "hairstyle", "haircut" };
+            foreach (string word in hairWords) dictionary[word] = tryHairstyle;
+
+            string[] timeWords = { "hour", "time", "what day", "what year", "today", "clock" };
+            foreach (string word in timeWords) dictionary[word] = showTime;
+
+            string[] weatherWords = { "weather", "rain", "sun", "sky", "forecast", "clouds", "temp outside", "temperature outside", "dress" };
+            foreach (string word in weatherWords) dictionary[word] = showForecast;
+
+            string[] bodyWords = { "body", "bmi", "weight", "overweithed", "fat", "skinny" };
+            foreach (string word in bodyWords) dictionary[word] = analyzeBody;
+
+            string[] healthWords = { "health", "check me", "scan me", "dizzy", "feel bad", "feeling bad", "fever", "exhausted", "stress", "headake", "check my", "temp", "temperature", "ake", "hurt" };
+            foreach (string word in healthWords) dictionary[word] = healthDiagnostic;
+
+            string[] greetingWords = { "hello", "hi", "hey", "good morning", "good afternoon", "good evening" };
+            foreach (string word in greetingWords) dictionary[word] = greeting;
+
+            string[] thanksWords = { "thank you", "thanks", "appreciate it", "grateful" };
+            foreach (string word in thanksWords) dictionary[word] = thanks;
+
+            return dictionary; 
+        }
+
+        public void TurnOnAssistant()
+        {
+            IsAwake = true;
+            Console.WriteLine($"[Jarvis]: My name is Jarvis. Glad to see you, {CurrentUser.Username}!");
+            StartDialogLoop();
+        }
+
+        private void StartDialogLoop()
+        {
+            Console.WriteLine("[Jarvis]: How can I help you?");
+
+            List&lt;string> sortedKeys = CommandDictionary.Keys.OrderByDescending(k => k.Length).ToList();
+
+            while (IsAwake)
+            {
+                Console.Write($"\n[{CurrentUser.Username}]: ");
+                string input = Console.ReadLine()?.ToLower() ?? "";
+
+                bool commandFound = false;
+
+                foreach (string key in sortedKeys)
+                {
+                    if (input.Contains(key))
+                    {
+                        CommandDictionary[key].Invoke();
+                        commandFound = true;
+                        break;
+                    }
+                }
+
+                if (!commandFound)
+                {
+                    Console.WriteLine("\n[Jarvis]: I'm sorry, I didn't quite catch that. Try asking me something else.");
+                }
+            }
+        }
+    }
+}
+</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        User.cs
+                    </div>
+                    <pre><code>
+using System;
+using System.Globalization;
+
+namespace Lab6
+{
+    class User
+    {
+        private string _username;
+        private string _hairCut;
+        private string _hairColor;
+        private string _eyeColor;
+        private double _weight;
+        private double _height;
+        private string _greetingWord;
+        private int _accessLevel;
+
+        public User(string username, string hairCut, string hairColor, string eyeColor, double weight, double height, string greetingWord, int accessLevel)
+        {
+            Username = username;
+            HairCut = hairCut;
+            HairColor = hairColor;
+            EyeColor = eyeColor;
+            Weight = weight;
+            Height = height;
+            GreetingWord = greetingWord;
+            AccessLevel = accessLevel;
+        }
+
+        public string Username { get => _username; set => _username = value; }
+        public string HairCut { get => _hairCut; set => _hairCut = value; }
+        public string HairColor { get => _hairColor; set => _hairColor = value; }
+        public string EyeColor { get => _eyeColor; set => _eyeColor = value; }
+        public double Weight { get => _weight; set => _weight = value &lt; 0 ? 0 : value; }
+        public double Height { get => _height; set => _height = value &lt; 0 ? 0 : value; }
+        public string GreetingWord { get => _greetingWord; set => _greetingWord = value; }
+        public int AccessLevel { get => _accessLevel; set => _accessLevel = value &lt; 0 || value > 2 ? 0 : value; }
+
+        public string ToCsvString()
+        {
+            return $"{Username},{HairCut},{HairColor},{EyeColor},{Weight.ToString(CultureInfo.InvariantCulture)},{Height.ToString(CultureInfo.InvariantCulture)},{GreetingWord},{AccessLevel}";
+        }
+
+        public static User FromCsvString(string csvLine)
+        {
+            string[] parts = csvLine.Split(',');
+            if (parts.Length != 8)
+                throw new FormatException("Invalid user data format in file.");
+
+            return new User(
+                username: parts[0],
+                hairCut: parts[1],
+                hairColor: parts[2],
+                eyeColor: parts[3],
+                weight: double.Parse(parts[4], CultureInfo.InvariantCulture),
+                height: double.Parse(parts[5], CultureInfo.InvariantCulture),
+                greetingWord: parts[6],
+                accessLevel: int.Parse(parts[7])
+            );
+        }
+    }
+}
+</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        BodyAnalyzer.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    class BodyAnalyzer
+    {
+        public void CalculateBMI(User user)
+        {
+            double weightKg = user.Weight;
+            double heightM = user.Height;
+
+            if (heightM &lt;= 0)
+                return;
+
+            // Якщо зріст ввели в сантиметрах, переводимо в метри
+            if (heightM > 3.0)
+                heightM /= 100;
+
+            double bmi = weightKg / (heightM * heightM);
+            Console.WriteLine($"[Body Analyzer] Body Mass Index (BMI): {Math.Round(bmi, 1)}");
+
+            if (bmi &lt; 18.5)
+                Console.WriteLine(" - Status: Underweight");
+            else if (bmi >= 18.5 && bmi &lt; 24.9)
+                Console.WriteLine(" - Status: Normal weight");
+            else if (bmi >= 25 && bmi &lt; 29.9)
+                Console.WriteLine(" - Status: Overweight");
+            else
+                Console.WriteLine(" - Status: Obesity");
+        }
+
+        public void EstimateBodyComposition(User user)
+        {
+            double weightKg = user.Weight;
+            double heightM = user.Height;
+
+            double fatPercentage = 20.0 + (weightKg / (heightM * 100)) * 5;
+            double musclePercentage = 100 - fatPercentage - 10;
+
+            Console.WriteLine($"[Body Analyzer] Estimated Fat Tissue: {Math.Round(fatPercentage, 1)}%");
+            Console.WriteLine($"[Body Analyzer] Estimated Muscle Tissue: {Math.Round(musclePercentage, 1)}%");
+        }
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Camera.cs
+                    </div>
+                    <pre><code>
+using System;
+using System.IO;
+
+namespace Lab6
+{
+    class Camera
+    {
+        private bool _isActive;
+
+        public Camera()
+        {
+            _isActive = false;
+        }
+
+        public bool IsActive { get => _isActive; private set => _isActive = value; }
+
+        public void TurnOn()
+        {
+            IsActive = true;
+            Console.WriteLine("[Camera] Camera turned ON.");
+        }
+        public void TurnOff()
+        {
+            IsActive = false;
+            Console.WriteLine("[Camera] Camera turned OFF.");
+        }
+
+        public void TakePhoto(string artContent, string username)
+        {
+            try
+            {
+                if (!IsActive)
+                {
+                    throw new CameraNotFoundException("Camera is off. Cannot take photo.");
+                }
+
+                Console.WriteLine("[Camera] *Flash!* Capturing image...");
+            
+                // Отримуємо шлях до Робочого столу
+                string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                string timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+                string fileName = $"SmartMirror_Photo_{timestamp}.txt";
+
+                string fullPath = Path.Combine(desktopPath, fileName);
+
+                string fileContent =
+                    "===========================\n" +
+                    $" SMART MIRROR SNAPSHOT\n" +
+                    $" User: {username}\n" +
+                    $" Date: {DateTime.Now}\n" +
+                    "===========================\n\n" +
+                    artContent + "\n\n" +
+                    "===========================\n";
+
+                File.WriteAllText(fullPath, fileContent);
+
+                Console.WriteLine($"[Camera Success] Photo saved to Desktop: {fileName}");
+            }
+            catch (CameraNotFoundException exception)
+            {
+                Console.WriteLine($"[Camera Error] {exception.Message}");
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"[Camera Error] Failed to save photo: {exception.Message}");
+            }
+        }
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Clock.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    class Clock
+    {
+        public void ShowCurrentTime() => Console.WriteLine($"[Clock] {DateTime.Now.ToString("f")}");
+        public DateTime GetCurrentDateTime() => DateTime.Now;
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        HealthDetector.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    public delegate void HealthEmergencyHandler(string alertMessage, string username);
+
+    class HealthDetector
+    {
+        private Random _seed;
+        public event HealthEmergencyHandler OnHealthEmergency = null!;
+
+        public HealthDetector()
+        {
+            Seed = new Random();
+        }
+
+        public Random Seed
+        {
+            get => _seed;
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException(nameof(Seed), "Random seed cannot be null.");
+                _seed = value;
+            }
+        }
+
+        public void AnalyzeUserState(User user, bool simulateEmergency = false)
+        {
+            Console.WriteLine($"[Health Detector] Scanning face and vitals for {user.Username}...");
+
+            double temp = ScanTemp;
+            int pulse = ScanPulse;
+            int sysPressure = ScanSysPressure;
+            int diaPressure = ScanDiaPressure;
+            bool facialAsymmetry = ScanFacialAsymmetry();
+            string mood = ScanMood();
+
+            // Моделювання критичних ситуацій
+            if (simulateEmergency)
+            {
+                int emergencyType = Seed.Next(1, 5); // Випадково обираємо 1 з 4 сценаріїв
+
+                switch (emergencyType)
+                {
+                    case 1: // Серцевий напад / Тахікардія
+                        pulse = Seed.Next(150, 190);
+                        sysPressure = Seed.Next(180, 220);
+                        break;
+                    case 2: // Критична температура (Лихоманка)
+                        temp = Math.Round(39.6 + (Seed.NextDouble() * 1.5), 1);
+                        pulse = Seed.Next(100, 130);
+                        break;
+                    case 3: // Ознаки інсульту
+                        sysPressure = Seed.Next(170, 200);
+                        facialAsymmetry = true;
+                        break;
+                    case 4: // Втрата свідомості / Гіпотонія
+                        pulse = Seed.Next(35, 50);
+                        sysPressure = Seed.Next(70, 85);
+                        diaPressure = Seed.Next(40, 50);
+                        break;
+                }
+            }
+
+            Console.WriteLine($" - Body Temp: {temp}°C");
+            Console.WriteLine($" - Pulse: {pulse} bpm");
+            Console.WriteLine($" - Blood Pressure: {sysPressure}/{diaPressure} mmHg");
+            Console.WriteLine($" - Emotion/Mood: {mood}");
+            if (facialAsymmetry)
+                Console.WriteLine($" - Facial Symmetry: [WARNING] Asymmetry Detected!");
+
+            // 1. Перевірка на критичні для життя стани
+            string alertMessage = "";
+
+            if (facialAsymmetry)
+                alertMessage = "STROKE SYMPTOMS DETECTED (Facial Asymmetry)!";
+            else if (temp > 39.5)
+                alertMessage = "CRITICAL HYPERTHERMIA (Fever > 39.5°C)!";
+            else if (pulse > 140 || sysPressure > 180)
+                alertMessage = "HEART ATTACK RISK / HYPERTENSIVE CRISIS!";
+            else if (pulse &lt; 45 || sysPressure &lt; 85)
+                alertMessage = "SEVERE HYPOTENSION (Risk of Fainting)!";
+
+            if (!string.IsNullOrEmpty(alertMessage))
+            {
+                OnHealthEmergency?.Invoke(alertMessage, user.Username);
+                throw new CriticalHealthException($"Health critical failure for: {user.Username}. Cause: {alertMessage}");
+            }
+
+            // 2. Якщо стан не критичний, даємо розумні поради на основі настрою та легких відхилень
+            Console.WriteLine("[Health Detector] Vitals are within acceptable limits.");
+
+            if (temp > 37.2 && temp &lt;= 39.5)
+            {
+                Console.WriteLine("[Smart Suggestion] You have a slight fever. Drink warm fluids and rest.");
+            }
+
+            switch (mood)
+            {
+                case "Tired":
+                    Console.WriteLine("[Smart Suggestion] You look exhausted. Dimming mirror lights. Recommend sleeping early.");
+                    break;
+                case "Stressed":
+                    Console.WriteLine("[Smart Suggestion] Elevated stress detected. Playing relaxing ambient music...");
+                    break;
+                case "Sad":
+                    Console.WriteLine("[Smart Suggestion] Showing your favorite motivational quotes on the mirror display.");
+                    break;
+                case "Happy":
+                    Console.WriteLine("[Smart Suggestion] You look great today! Keep smiling.");
+                    break;
+            }
+        }
+
+        private double ScanTemp => Math.Round(36.2 + (Seed.NextDouble() * 1.0), 1);
+        private int ScanPulse => Seed.Next(60, 100);
+        private int ScanSysPressure => Seed.Next(110, 130);
+        private int ScanDiaPressure => Seed.Next(70, 85);
+        private bool ScanFacialAsymmetry()
+        {
+            Seed.Next(0, 100);
+            if (Seed.Next(0, 100) &lt; 1)
+                return true;
+            return false;
+        }
+        private string ScanMood()
+        {
+            int moodValue = Seed.Next(1, 6);
+            return moodValue switch
+            {
+                1 => "Happy",
+                2 => "Sad",
+                3 => "Tired",
+                4 => "Stressed",
+                _ => "Neutral"
+            };
+        }
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Network.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    class NetworkModule
+    {
+        private bool _turnedOn;
+        private bool _isWifiConnected;
+        private bool _isBluetoothPaired;
+
+        public NetworkModule()
+        {
+            TurnedOn = false;
+            IsWifiConnected = false;
+            IsBluetoothPaired = false;
+        }
+
+        public bool TurnedOn { get => _turnedOn; private set => _turnedOn = value; }
+        public bool IsWifiConnected { get => _isWifiConnected; set => _isWifiConnected = value; }
+        public bool IsBluetoothPaired { get => _isBluetoothPaired; set => _isBluetoothPaired = value; }
+
+        // --- УПРАВЛІННЯ ЖИВЛЕННЯМ МОДУЛЯ ---
+
+        public void TurnOn()
+        {
+            if (!TurnedOn)
+            {
+                TurnedOn = true;
+                Console.WriteLine("[Network] Network module turned ON.");
+            }
+            else
+            {
+                Console.WriteLine("[Network] Network module is already ON.");
+            }
+        }
+
+        public void TurnOff()
+        {
+            if (TurnedOn)
+            {
+                TurnedOn = false;
+                IsWifiConnected = false;
+                IsBluetoothPaired = false;
+                Console.WriteLine("[Network] Network module turned OFF.");
+            }
+            else
+            {
+                Console.WriteLine("[Network] Network module is already OFF.");
+            }
+        }
+
+        // --- РОБОТА З WI-FI ---
+
+        public void ConnectWiFi(string ssid = null!)
+        {
+            try
+            {
+                if (!TurnedOn)
+                {
+                    throw new NetworkUnavailableException("Cannot connect to Wi-Fi. Module is OFF.");
+                }
+
+                if (ssid == null)
+                {
+                    Console.Write("[Network] Enter Wi-Fi network name (press Enter for 'Home_Smart_Network'): ");
+                    ssid = Console.ReadLine() ?? "";
+                    if (string.IsNullOrWhiteSpace(ssid))
+                        ssid = "Home_Smart_Network";
+                }
+
+                IsWifiConnected = true;
+                Console.WriteLine($"[Network] Connected to Wi-Fi: {ssid}");
+            }
+            catch (NetworkUnavailableException exception)
+            {
+                Console.WriteLine($"[Network] Error: {exception.Message}");
+            }
+        }
+
+        public void DisconnectWiFi()
+        {
+            if (IsWifiConnected)
+            {
+                IsWifiConnected = false;
+                Console.WriteLine("[Network] Disconnected from Wi-Fi.");
+            }
+            else
+            {
+                Console.WriteLine("[Network] Wi-Fi is already disconnected.");
+            }
+        }
+
+        // --- РОБОТА З BLUETOOTH ---
+
+        public void PairBluetooth(string deviceName = null!)
+        {
+            try
+            {
+                if (!TurnedOn)
+                {
+                    throw new NetworkUnavailableException("Cannot pair Bluetooth. Module is OFF.");
+                }
+
+                if (deviceName == null)
+                {
+                    Console.Write("[Network] Enter Bluetooth device name (press Enter for 'Smartphone'): ");
+                    deviceName = Console.ReadLine() ?? "";
+                    if (string.IsNullOrWhiteSpace(deviceName))
+                        deviceName = "Smartphone";
+                }
+
+                IsBluetoothPaired = true;
+                Console.WriteLine($"[Network] Bluetooth paired with {deviceName}");
+            }
+            catch (NetworkUnavailableException exception)
+            {
+                Console.WriteLine($"[Network] Error: {exception.Message}");
+            }
+        }
+
+        public void UnpairBluetooth()
+        {
+            if (IsBluetoothPaired)
+            {
+                IsBluetoothPaired = false;
+                Console.WriteLine("[Network] Bluetooth unpaired.");
+            }
+            else
+            {
+                Console.WriteLine("[Network] Bluetooth is not paired with any device.");
+            }
+        }
+
+        // --- ПЕРЕДАЧА ДАНИХ ---
+
+        public void TransmitData(string data = null!)
+        {
+            try
+            {
+                if (!TurnedOn)
+                {
+                    throw new NetworkUnavailableException("Cannot transmit data. Module is OFF.");
+                }
+
+                if (data == null)
+                {
+                    Console.Write("[Network] Enter text data to transmit: ");
+                    data = Console.ReadLine() ?? "";
+                    if (string.IsNullOrWhiteSpace(data))
+                        data = "some important data...";
+                }
+
+                if (IsWifiConnected || IsBluetoothPaired)
+                    Console.WriteLine($"[Network] Transmitting: {data}");
+                else
+                    throw new NetworkUnavailableException("No active connection to transmit data.");
+            }
+            catch (NetworkUnavailableException exception)
+            {
+                Console.WriteLine($"[Network] Error: {exception.Message}");
+            }
+        }
+
+        public void ReceivePhoto(string friendName = null!)
+        {
+            try
+            {
+                if (!TurnedOn)
+                {
+                    throw new NetworkUnavailableException("Cannot receive data. Module is OFF.");
+                }
+
+                if (friendName == null)
+                {
+                    Console.Write("[Network] Enter friend's name: ");
+                    friendName = Console.ReadLine() ?? "";
+                    if (string.IsNullOrWhiteSpace(friendName))
+                        friendName = "Best Friend";
+                }
+
+                if (IsWifiConnected)
+                {
+                    Console.WriteLine($"[Network] Received a new photo from {friendName}. Displaying on mirror...\n");
+                    DrawBaseFace();
+                }
+                else
+                    throw new NetworkUnavailableException("No Wi-Fi connection to receive photo.");
+            }
+            catch (NetworkUnavailableException exception)
+            {
+                Console.WriteLine($"[Network] Error: {exception.Message}");
+            }
+        }
+
+        private void DrawBaseFace()
+        {
+            Console.WriteLine("       .-------.       ");
+            Console.WriteLine("     /           \\     ");
+            Console.WriteLine("    |    ^   ^    |    ");
+            Console.WriteLine("    |      v      |    ");
+            Console.WriteLine("     \\   \\___/   /     ");
+            Console.WriteLine("       `-------`       ");
+        }
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        StylingSim.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    class StylingSimulator
+    {
+        public void SimulateHairstyle(Camera camera, User user)
+        {
+            try
+            {
+                if (!camera.IsActive)
+                    throw new CameraNotFoundException("Camera is off. Cannot take photo.");
+
+
+                bool exit = false;
+
+                Console.WriteLine($"[Styling Simulator] Starting AR overlay for {user.Username}...");
+
+                while (!exit)
+                {
+                    Console.WriteLine("[Styling Simulator] Please select a virtual style to try on:");
+                    Console.WriteLine("======================================");
+                    Console.WriteLine(" 1. Stylish Short Hair");
+                    Console.WriteLine(" 2. Long Wavy Hair");
+                    Console.WriteLine(" 3. Voluminous Curls");
+                    Console.WriteLine(" 4. Punk Mohawk");
+                    Console.WriteLine(" 5. Elegant Top Hat");
+                    Console.WriteLine(" 6. Cool Sunglasses");
+                    Console.WriteLine(" 7. Cowboy Hat");
+                    Console.WriteLine(" 0. Exit styling mode");
+                    Console.WriteLine("======================================");
+                    Console.Write("Your choice: ");
+
+                    string choice = Console.ReadKey().KeyChar.ToString()!;
+
+                    if (choice == "0")
+                    {
+                        Console.WriteLine("\n\n[Styling Simulator] Exiting AR mode.");
+                        exit = true;
+                        return;
+                    }
+
+                    Console.WriteLine("\n\n[AR Display] Rendering projection...\n");
+
+                    string currentArt = "";
+
+                    switch (choice)
+                    {
+                        case "1": currentArt = GetShortHair(); break;
+                        case "2": currentArt = GetLongHair(); break;
+                        case "3": currentArt = GetCurls(); break;
+                        case "4": currentArt = GetMohawk(); break;
+                        case "5": currentArt = GetTopHat(); break;
+                        case "6": currentArt = GetSunglasses(); break;
+                        case "7": currentArt = GetCowboyHat(); break;
+                        default: Console.WriteLine("[System Error] Unknown selection."); break;
+                    }
+
+                    Console.WriteLine(currentArt);
+
+                    Console.Write("\n[System] Do you want to save this photo? (y/n): ");
+                    string saveChoice = Console.ReadKey().KeyChar.ToString();
+                    if (saveChoice.ToLower() == "y")
+                        camera.TakePhoto(currentArt, user.Username);
+
+                    Console.WriteLine("\n------------------------------------------------");
+                } 
+            }
+            catch (CameraNotFoundException exception)
+            {
+                Console.WriteLine($"[Camera Error] {exception.Message}");
+            }
+        }
+
+        // ASCII АРТИ
+
+        private string GetBaseFace()
+        {
+            return string.Join("\n", new[] {
+                "       .-------.       ",
+                "     /           \\     ",
+                "    |    ^   ^    |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetShortHair()
+        {
+            return string.Join("\n", new[] {
+                "       /////////       ",
+                "     //         \\\\     ",
+                "    |    ^   ^    |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetLongHair()
+        {
+            return string.Join("\n", new[] {
+                "      ( (     ) )      ",
+                "    (   .-----.   )    ",
+                "   (  /         \\  )   ",
+                "   | |   ^   ^   | |   ",
+                "   ( |     v     | )   ",
+                "    )|   \\___/   |(    ",
+                "   (  \\         /  )   ",
+                "        `-----`        "
+            });
+        }
+
+        private string GetCurls()
+        {
+            return string.Join("\n", new[] {
+                "      @@@@@@@@@@@      ",
+                "    @@@@@@@@@@@@@@@    ",
+                "   @@@  .-----.  @@@   ",
+                "   @@ /         \\ @@   ",
+                "   @ |   ^   ^   | @   ",
+                "   @ |     v     | @   ",
+                "      \\  \\___/  /      ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetMohawk()
+        {
+            return string.Join("\n", new[] {
+                "          |||          ",
+                "         |||||         ",
+                "        |||||||        ",
+                "       .-------.       ",
+                "     /           \\     ",
+                "    |    ^   ^    |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetTopHat()
+        {
+            return string.Join("\n", new[] {
+                "          ___          ",
+                "        _|___|_        ",
+                "       |       |       ",
+                "      ===========      ",
+                "     /           \\     ",
+                "    |    ^   ^    |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetSunglasses()
+        {
+            return string.Join("\n", new[] {
+                "       .-------.       ",
+                "     /           \\     ",
+                "    |  [===_===]  |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+
+        private string GetCowboyHat()
+        {
+            return string.Join("\n", new[] {
+                "        _______        ",
+                "       /       \\       ",
+                "   ___|_________|___   ",
+                "  /_________________\\  ",
+                "     /           \\     ",
+                "    |    ^   ^    |    ",
+                "    |      v      |    ",
+                "     \\   \\___/   /     ",
+                "       `-------`       "
+            });
+        }
+    }
+}
+</code></pre>
+                </div>
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Weather.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    class WeatherModule
+    {
+        private Random random;
+
+        // Масиви для збереження прогнозу на 5 днів
+        private int[] weeklyTemperatures = new int[5];
+        private string[] weeklyConditions = new string[5];
+
+        public WeatherModule()
+        {
+            random = new Random();
+        }
+
+        private void GenerateRealisticWeeklyForecast()
+        {
+            // Визначаємо "сезон" для цього запуску
+            int baseTemp = random.Next(-15, 33);
+
+            for (int i = 0; i &lt; 5; i++)
+            {
+                // Температура може коливатися на +- 4 градуси від базової кожного дня
+                int temp = baseTemp + random.Next(-4, 5);
+                weeklyTemperatures[i] = temp;
+
+                if (temp &lt;= 0)
+                {
+                    // Зима / Мороз
+                    string[] coldConditions = { "Sunny", "Cloudy", "Snowy", "Blizzard" };
+                    weeklyConditions[i] = coldConditions[random.Next(coldConditions.Length)];
+                }
+                else if (temp > 0 && temp &lt;= 12)
+                {
+                    // Холодна осінь / весна
+                    string[] chillyConditions = { "Sunny", "Cloudy", "Rainy", "Windy" };
+                    weeklyConditions[i] = chillyConditions[random.Next(chillyConditions.Length)];
+                }
+                else if (temp > 12 && temp &lt;= 25)
+                {
+                    // Тепла погода
+                    string[] warmConditions = { "Sunny", "Partly Cloudy", "Light Rain", "Windy" };
+                    weeklyConditions[i] = warmConditions[random.Next(warmConditions.Length)];
+                }
+                else
+                {
+                    // Спека (Можливі літні грози)
+                    string[] hotConditions = { "Sunny", "Hot & Clear", "Partly Cloudy", "Thunderstorm" };
+                    weeklyConditions[i] = hotConditions[random.Next(hotConditions.Length)];
+                }
+            }
+        }
+
+        public void ShowForecast(int dayOffset)
+        {
+            GenerateRealisticWeeklyForecast();
+
+            try
+            {
+                int temp = weeklyTemperatures[dayOffset];
+                string condition = weeklyConditions[dayOffset];
+
+                string dayLabel = dayOffset == 0 ? "today" : $"day +{dayOffset}";
+                Console.WriteLine($"[Weather] Forecast for {dayLabel}: {condition}, {temp}°C");
+
+                // Виводимо підказки ТІЛЬКИ для сьогоднішнього дня
+                if (dayOffset == 0)
+                {
+                    if (condition == "Rain" || condition == "Thunderstorm")
+                    {
+                        Console.WriteLine("[Weather] Suggestion: Don't forget to take an umbrella!");
+                    }
+                    else if (condition == "Snow" || condition == "Blizzard")
+                    {
+                        Console.WriteLine("[Weather] Suggestion: Wear warm boots, it's snowy outside!");
+                    }
+
+                    if (temp &lt; 0)
+                    {
+                        Console.WriteLine("[Weather] Suggestion: Dress warmly, it's freezing!");
+                    }
+                    else if (temp > 25 && (condition == "Sunny" || condition == "Hot"))
+                    {
+                        Console.WriteLine("[Weather] Suggestion: High UV index. Put on sunscreen and wear a hat!");
+                    }
+                }
+            }
+            catch (IndexOutOfRangeException exception)
+            {
+                Console.WriteLine($"[Weather Error] Cannot load forecast for day +{dayOffset}. {exception.Message}");
+                Console.WriteLine("[Weather] Only 5-day forecast is available.");
+            }
+        }
+    }
+}
+</code></pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Exceptions.cs
+                    </div>
+                    <pre><code>
+using System;
+
+namespace Lab6
+{
+    // Виключення: Критичний стан здоров'я людини
+    public class CriticalHealthException : Exception
+    {
+        public CriticalHealthException(string message) : base(message) { }
+    }
+
+    // Виключення: Дзеркало розрядилось
+    public class LowBatteryException : Exception
+    {
+        public LowBatteryException(string message) : base(message) { }
+    }
+
+    // Виключення: Камера вимкнена
+    public class CameraNotFoundException : Exception
+    {
+        public CameraNotFoundException(string message) : base(message) { }
+    }
+
+    // Виключення: Відсутність мережевого з'єднання
+    public class NetworkUnavailableException : Exception
+    {
+        public NetworkUnavailableException(string message) : base(message) { }
+    }
+}
+</code></pre>
+                </div>
+            </article>
+
+            <article id="lab6-examples" class="code-block">
+                <h3>Приклади</h3>
+                <div class="code-header" onclick="toggleCode(this)">
+                    Console Output
+                </div>
+                <pre>
+=== SMART MIRROR OS BOOTING ===
+
+[System] Attempting to load user database...
+[I/O Error] Database file 'users_db.txt' not found.
+[System] Creating a new database with Admin profile.
+[System] Pre-loading user profiles into database...
+[System] User Alice successfully saved to file.
+[System] User Bob successfully saved to file.
+[System] User Charlie successfully saved to file.
+[System] Users loaded successfully.
+
+
+[System] Mirror is in Standby Mode...
+======================================
+[Clock] 14 квітня 2026 р. 22:47
+[Weather] Forecast for today: Partly Cloudy, 27°C
+======================================
+
+[Motion sensor] someone aproaches the mirror
+
+======================================
+ WHO IS STANDING IN FRONT OF MIRROR?
+======================================
+ 1. Admin (Brown, Medium hair)
+ 2. Alice (Blonde, Long hair)
+ 3. Bob (Brown, Short hair)
+ 4. Charlie (Black, Curly hair)
+ 5. Unrecognized Person (Guest Mode)
+ 6. No One is in Front of the Mirror
+ 0. Turn Off the Mirror
+======================================
+Choose an option: 3
+
+[System] Scanning reflection...
+[System] Profile match: Bob.
+
+======================================
+Glad to see you Bob, say your greeting word: Hi
+======================================
+
+[System] Authentication successful. Welcome, Bob!
+
+=============================================
+ SMART MIRROR MENU | Battery:  80%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 1
+
+======================================
+[Clock] 14 квітня 2026 р. 22:48
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  79%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 2
+
+======================================
+[Weather] Forecast for today: Hot & Clear, 30°C
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  77%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 23,4
+ - Status: Normal weight
+[Body Analyzer] Estimated Fat Tissue: 22,2%
+[Body Analyzer] Estimated Muscle Tissue: 67,8%
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  74%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 5
+
+======================================
+[Camera] Camera turned ON.
+[Styling Simulator] Starting AR overlay for Bob...
+[Styling Simulator] Please select a virtual style to try on:
+======================================
+ 1. Stylish Short Hair
+ 2. Long Wavy Hair
+ 3. Voluminous Curls
+ 4. Punk Mohawk
+ 5. Elegant Top Hat
+ 6. Cool Sunglasses
+ 7. Cowboy Hat
+ 0. Exit styling mode
+======================================
+Your choice: 7
+
+[AR Display] Rendering projection...
+
+        _______
+       /       \
+   ___|_________|___
+  /_________________\
+     /           \
+    |    ^   ^    |
+    |      v      |
+     \   \___/   /
+       `-------`
+
+[System] Do you want to save this photo? (y/n): y[Camera] *Flash!* Capturing image...
+[Camera Success] Photo saved to Desktop: SmartMirror_Photo_2026-04-14_22-48-30.txt
+
+------------------------------------------------
+[Styling Simulator] Please select a virtual style to try on:
+======================================
+ 1. Stylish Short Hair
+ 2. Long Wavy Hair
+ 3. Voluminous Curls
+ 4. Punk Mohawk
+ 5. Elegant Top Hat
+ 6. Cool Sunglasses
+ 7. Cowboy Hat
+ 0. Exit styling mode
+======================================
+Your choice: 0
+
+[Styling Simulator] Exiting AR mode.
+[Camera] Camera turned OFF.
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  66%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 6
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : OFF
+ Wi-Fi Status : Disconnected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 3
+
+[Network] Error: Cannot connect to Wi-Fi. Module is OFF.
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : OFF
+ Wi-Fi Status : Disconnected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 8
+
+[Network] Error: Cannot receive data. Module is OFF.
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : OFF
+ Wi-Fi Status : Disconnected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 1
+
+[Network] Network module turned ON.
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : ON
+ Wi-Fi Status : Disconnected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 3
+
+[Network] Enter Wi-Fi network name (press Enter for 'Home_Smart_Network'):
+[Network] Connected to Wi-Fi: Home_Smart_Network
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : ON
+ Wi-Fi Status : Connected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 8
+
+[Network] Enter friend's name: friend
+[Network] Received a new photo from friend. Displaying on mirror...
+
+       .-------.
+     /           \
+    |    ^   ^    |
+    |      v      |
+     \   \___/   /
+       `-------`
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : ON
+ Wi-Fi Status : Connected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 2
+
+[Network] Network module turned OFF.
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : OFF
+ Wi-Fi Status : Disconnected
+ Bluetooth    : Unpaired
+---------------------------------------------
+  1. Turn Network Module ON
+  2. Turn Network Module OFF
+  3. Connect to Wi-Fi
+  4. Disconnect Wi-Fi
+  5. Pair Bluetooth Device
+  6. Unpair Bluetooth Device
+  7. Transmit Data
+  8. Receive Photo from Friend
+  0. Return to Main Menu
+=============================================
+Select network option: 0
+
+=============================================
+ SMART MIRROR MENU | Battery:  64%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 7
+
+======================================
+[Jarvis]: My name is Jarvis. Glad to see you, Bob!
+[Jarvis]: How can I help you?
+
+[Bob]: What is the weather today
+
+[Jarvis]: Fetching today's weather forecast for your location...
+[Weather] Forecast for today: Partly Cloudy, 14°C
+
+[Bob]: thanks
+
+[Jarvis]: You're welcome! I'm here to help anytime.
+
+[Bob]: I feel a bit dizzy, can you check me
+
+[Jarvis]: Running a quick health diagnostic based on your recent data...
+
+[Health Detector] Scanning face and vitals for Bob...
+ - Body Temp: 36,4°C
+ - Pulse: 81 bpm
+ - Blood Pressure: 113/79 mmHg
+ - Emotion/Mood: Tired
+[Health Detector] Vitals are within acceptable limits.
+[Smart Suggestion] You look exhausted. Dimming mirror lights. Recommend sleeping early.
+
+[Bob]: I will, bye
+
+[Jarvis]: Voice control system disabled. Entering sleep mode. See you later!
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  59%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 8
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 1
+
+--- REGISTERED USERS ---
+- Admin (Access Level: 2)
+- Alice (Access Level: 1)
+- Bob (Access Level: 2)
+- Charlie (Access Level: 1)
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 3
+
+--- DELETE USER ---
+Enter the exact Username to delete: charlie
+[System] User 'Charlie' has been successfully removed from the database.
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 1
+
+--- REGISTERED USERS ---
+- Admin (Access Level: 2)
+- Alice (Access Level: 1)
+- Bob (Access Level: 2)
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 4
+
+
+--- EDIT USER PROFILE ---
+Enter the exact Username to edit (or type '0' to go back):
+alice
+
+=== EDITING PROFILE: Alice ===
+  1. Haircut      (Current: Long)
+  2. Hair Color   (Current: Blonde)
+  3. Eye Color    (Current: Blue)
+  4. Weight       (Current: 60 kg)
+  5. Height       (Current: 1,65 m)
+  6. Greeting     (Current: Hello)
+  7. Access Level (Current: 1)
+  0. Save and Quit
+======================================
+Select parameter to change: 7
+
+Enter new value: 2
+[System] Profile changes successfully saved to the database.
+
+=== EDITING PROFILE: Alice ===
+  1. Haircut      (Current: Long)
+  2. Hair Color   (Current: Blonde)
+  3. Eye Color    (Current: Blue)
+  4. Weight       (Current: 60 kg)
+  5. Height       (Current: 1,65 m)
+  6. Greeting     (Current: Hello)
+  7. Access Level (Current: 2)
+  0. Save and Quit
+======================================
+Select parameter to change: 0
+
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 1
+
+--- REGISTERED USERS ---
+- Admin (Access Level: 2)
+- Alice (Access Level: 2)
+- Bob (Access Level: 2)
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 2
+
+--- ADD NEW USER ---
+Enter Username: x
+Enter Haircut (Short/Medium/Long): x
+Enter Hair Color: x
+Enter Eye Color: x
+Enter Weight (kg): x
+Enter Height (m): x
+Enter secret Greeting Word: x
+Enter Access Level (1 - Regular, 2 - Admin): x
+[System] User x successfully saved to file.
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 1
+
+--- REGISTERED USERS ---
+- Admin (Access Level: 2)
+- Alice (Access Level: 2)
+- Bob (Access Level: 2)
+- x (Access Level: 1)
+
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+  1. Show All Users
+  2. Add New User
+  3. Delete User
+  4. Edit User Profile
+  0. Return to Main Menu
+=============================================
+Select admin option: 0
+
+=============================================
+ SMART MIRROR MENU | Battery:  56%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 0
+
+
+[System] Mirror is in Standby Mode...
+======================================
+[Clock] 14 квітня 2026 р. 22:52
+[Weather] Forecast for today: Rainy, 11°C
+======================================
+
+[Motion sensor] someone aproaches the mirror
+
+======================================
+ WHO IS STANDING IN FRONT OF MIRROR?
+======================================
+ 1. Admin (Brown, Medium hair)
+ 2. Alice (Blonde, Long hair)
+ 3. Bob (Brown, Short hair)
+ 4. x (x, x hair)
+ 5. Unrecognized Person (Guest Mode)
+ 6. No One is in Front of the Mirror
+ 0. Turn Off the Mirror
+======================================
+Choose an option: 5
+
+[System] Scanning reflection...
+[System] Appearance not recognized. What is your name?
+Name: Nikita
+[Guest Mode] Session started. Data will not be saved.
+
+[System] Authentication successful. Welcome, Nikita!
+
+=============================================
+ SMART MIRROR MENU | Battery:  56%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 8
+
+======================================
+[Access Denied] You do not have administrator privileges to access this menu.
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:  53%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 3
+
+======================================
+[Health Detector] Scanning face and vitals for Nikita...
+ - Body Temp: 40,9°C
+ - Pulse: 118 bpm
+ - Blood Pressure: 117/83 mmHg
+ - Emotion/Mood: Tired
+
+[MEDICAL EMERGENCY]
+[System] Calling Ambulance (103)...
+[Voice Assistant] "Dispatcher, we have a critical situation: CRITICAL HYPERTHERMIA (Fever > 39.5°C)! for Nikita."
+
+[EMERGENCY LOCK] Health critical failure for: Nikita. Cause: CRITICAL HYPERTHERMIA (Fever > 39.5°C)!
+[System] Mirror locked in emergency mode.
+
+[EMERGENCY MODE] Please wait for help to arrive...
+Press '0' to attempt to exit emergency mode (not recommended).
+
+[System] Attempting to exit emergency mode...
+
+[System] Mirror is in Standby Mode...
+======================================
+[Clock] 14 квітня 2026 р. 22:53
+[Weather] Forecast for today: Windy, 17°C
+======================================
+
+[Motion sensor] someone aproaches the mirror
+
+======================================
+ WHO IS STANDING IN FRONT OF MIRROR?
+======================================
+ 1. Admin (Brown, Medium hair)
+ 2. Alice (Blonde, Long hair)
+ 3. Bob (Brown, Short hair)
+ 4. x (x, x hair)
+ 5. Unrecognized Person (Guest Mode)
+ 6. No One is in Front of the Mirror
+ 0. Turn Off the Mirror
+======================================
+Choose an option: 2
+
+[System] Scanning reflection...
+[System] Profile match: Alice.
+
+======================================
+Glad to see you Alice, say your greeting word: Hello
+======================================
+
+[System] Authentication successful. Welcome, Alice!
+
+=============================================
+ SMART MIRROR MENU | Battery:  53%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 22
+ - Status: Normal weight
+[Body Analyzer] Estimated Fat Tissue: 21,8%
+[Body Analyzer] Estimated Muscle Tissue: 68,2%
+======================================
+
+...
+[SYSTEM ALERT] Battery is critically low: 5%! Please charge.
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:   5%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 22
+ - Status: Normal weight
+[Body Analyzer] Estimated Fat Tissue: 21,8%
+[Body Analyzer] Estimated Muscle Tissue: 68,2%
+
+[SYSTEM ALERT] Battery is critically low: 2%! Please charge.
+======================================
+
+=============================================
+ SMART MIRROR MENU | Battery:   2%
+=============================================
+  1. Show Time and Date
+  2. Show Weather Forecast
+  3. Run Health Diagnostic
+  4. Run Body Analysis
+  5. AR Hairstyle Simulator
+  6. Network Management
+  7. Launch Voice Assistant
+  8. User Management (Admin Only)
+  0. Step Away From Mirror
+=============================================
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 22
+ - Status: Normal weight
+[Body Analyzer] Estimated Fat Tissue: 21,8%
+[Body Analyzer] Estimated Muscle Tissue: 68,2%
+
+[CRITICAL ERROR] CRITICAL: Battery depleted.
+[System] Forced Shutdown due to empty battery.
+
+=== SMART MIRROR POWERED OFF ===
+Press Enter to exit the application.
+</pre>
+            </article>
+
+            <article id="lab6-tests">
+                <h3>Перевірка</h3>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка роботи з файлами та ініціалізації бази даних
+                    </div>
+                    <pre>
+=== SMART MIRROR OS BOOTING ===
+
+[System] Attempting to load user database...
+[I/O Error] Database file 'users_db.txt' not found.
+[System] Creating a new database with Admin profile.
+[System] Pre-loading user profiles into database...
+[System] User Alice successfully saved to file.
+[System] User Bob successfully saved to file.
+[System] User Charlie successfully saved to file.
+[System] Users loaded successfully.
+
+<b>Аналіз:</b> Під час першого запуску програма намагається зчитати дані користувачів.
+        Оскільки файл відсутній, генерується та успішно перехоплюється виключення FileNotFoundException.
+        Програма не завершує роботу аварійно, а створює профіль адміністратора за замовчуванням,
+        генерує новий текстовий файл бази даних та успішно записує туди профілі ініціалізованих користувачів.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка ідентифікації, роботи модулів та композиції
+                    </div>
+                    <pre>
+======================================
+ WHO IS STANDING IN FRONT OF MIRROR?
+======================================
+ 1. Admin (Brown, Medium hair)
+ 2. Alice (Blonde, Long hair)
+ 3. Bob (Brown, Short hair)
+...
+Choose an option: 3
+
+[System] Scanning reflection...
+[System] Profile match: Bob.
+
+======================================
+Glad to see you Bob, say your greeting word: Hi
+======================================
+
+[System] Authentication successful. Welcome, Bob!
+...
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 23,4
+ - Status: Normal weight
+[Body Analyzer] Estimated Fat Tissue: 22,2%
+[Body Analyzer] Estimated Muscle Tissue: 67,8%
+======================================
+
+<b>Аналіз:</b> Програма успішно формує динамічне меню на основі зчитаних з файлу об'єктів.
+        Після вибору користувача система перевіряє фізичні параметри та запитує секретне слово.
+        Наведені результати розрахунку ІМТ та тканин тіла модулем BodyAnalyzer підтверджують коректну роботу
+        методів, які отримують об'єкт авторизованого користувача та зчитують його властивості (вагу та зріст).
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка інкапсуляції стану та власних виключень (Мережевий модуль)
+                    </div>
+                    <pre>
+Select network option: 3
+
+[Network] Error: Cannot connect to Wi-Fi. Module is OFF.
+
+=============================================
+           NETWORK MANAGEMENT MENU
+=============================================
+ Power Status : OFF
+...
+Select network option: 1
+
+[Network] Network module turned ON.
+...
+Select network option: 3
+
+[Network] Enter Wi-Fi network name (press Enter for 'Home_Smart_Network'):
+[Network] Connected to Wi-Fi: Home_Smart_Network
+
+<b>Аналіз:</b> Як бачимо, при спробі підключитися до Wi-Fi при вимкненому модулі, метод генерує власне виключення
+        NetworkUnavailableException. Виключення успішно перехоплюється блоком try-catch всередині класу NetworkModule,
+        виводячи повідомлення про помилку. Після увімкнення живлення модуля (зміна закритого поля через метод TurnOn),
+        підключення відбувається успішно. Це демонструє правильну інкапсуляцію стану об'єкта.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка словника делегатів (Голосовий помічник)
+                    </div>
+                    <pre>
+[Jarvis]: How can I help you?
+
+[Bob]: What is the weather today
+
+[Jarvis]: Fetching today's weather forecast for your location...
+[Weather] Forecast for today: Partly Cloudy, 14°C
+
+[Bob]: I feel a bit dizzy, can you check me
+
+[Jarvis]: Running a quick health diagnostic based on your recent data...
+
+[Health Detector] Scanning face and vitals for Bob...
+ - Body Temp: 36,4°C
+ - Pulse: 81 bpm
+ - Blood Pressure: 113/79 mmHg
+ - Emotion/Mood: Tired
+[Health Detector] Vitals are within acceptable limits.
+[Smart Suggestion] You look exhausted. Dimming mirror lights. Recommend sleeping early.
+
+<b>Аналіз:</b> Похідний клас VoiceAssistant успішно розпізнає ключові слова ("weather", "check me") у введених
+        користувачем реченнях. Завдяки використанню словника Dictionary, ключі зіставляються з делегатами типу Action,
+        які, у свою чергу, викликають відповідні методи базового класу SmartMirror. Модуль здоров'я також
+        успішно визначає втому і виводить відповідну розумну пораду.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка керування користувачами та рівнів доступу
+                    </div>
+                    <pre>
+=============================================
+          USER MANAGEMENT MENU (ADMIN)
+=============================================
+...
+Select admin option: 3
+
+--- DELETE USER ---
+Enter the exact Username to delete: charlie
+[System] User 'Charlie' has been successfully removed from the database.
+
+Select admin option: 4
+
+--- EDIT USER PROFILE ---
+Enter the exact Username to edit (or type '0' to go back):
+alice
+
+=== EDITING PROFILE: Alice ===
+...
+  7. Access Level (Current: 1)
+  0. Save and Quit
+======================================
+Select parameter to change: 7
+
+Enter new value: 2
+[System] Profile changes successfully saved to the database.
+
+<b>Аналіз:</b> Авторизувавшись як Bob (який має AccessLevel = 2), користувач отримує доступ до адміністрування.
+        Видалення об'єкта "Charlie" з колекції проходить успішно. Глибоке редагування профілю через вкладені цикли
+        працює коректно: рівень доступу користувача "Alice" змінено з 1 на 2, і зміни одразу збережено у файл.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка гостьового режиму та обробки критичних подій здоров'я
+                    </div>
+                    <pre>
+Choose an option: 5
+
+[System] Scanning reflection...
+[System] Appearance not recognized. What is your name?
+Name: Nikita
+[Guest Mode] Session started. Data will not be saved.
+
+[System] Authentication successful. Welcome, Nikita!
+...
+Select function: 8
+
+======================================
+[Access Denied] You do not have administrator privileges to access this menu.
+======================================
+...
+Select function: 3
+
+======================================
+[Health Detector] Scanning face and vitals for Nikita...
+ - Body Temp: 40,9°C
+ - Pulse: 118 bpm
+ - Blood Pressure: 117/83 mmHg
+ - Emotion/Mood: Tired
+
+[MEDICAL EMERGENCY]
+[System] Calling Ambulance (103)...
+[Voice Assistant] "Dispatcher, we have a critical situation: CRITICAL HYPERTHERMIA (Fever > 39.5°C)! for Nikita."
+
+[EMERGENCY LOCK] Health critical failure for: Nikita. Cause: CRITICAL HYPERTHERMIA (Fever > 39.5°C)!
+[System] Mirror locked in emergency mode.
+
+<b>Аналіз:</b> Гостьовий користувач отримує рівень доступу 0, через що система справедливо відмовляє йому
+        у доступі до панелі адміністратора (опція 8). Під час медичного сканування згенерувалась критично висока
+        температура (40,9°C). Це викликало подію OnHealthEmergency, яка успішно відпрацювала через прив'язаний делегат
+        HandleAmbulanceCall (дзвінок у 103). Після цього згенеровано виключення CriticalHealthException, яке перехоплено
+        головним циклом, внаслідок чого дзеркало заблокувалось у режимі небезпеки.
+</pre>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+                        Перевірка подій розрядки акумулятора та завершення роботи
+                    </div>
+                    <pre>
+...
+[SYSTEM ALERT] Battery is critically low: 5%! Please charge.
+======================================
+...
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 22
+...
+[SYSTEM ALERT] Battery is critically low: 2%! Please charge.
+======================================
+...
+Select function: 4
+
+======================================
+[Body Analyzer] Body Mass Index (BMI): 22
+...
+[CRITICAL ERROR] CRITICAL: Battery depleted.
+[System] Forced Shutdown due to empty battery.
+
+=== SMART MIRROR POWERED OFF ===
+Press Enter to exit the application.
+
+<b>Аналіз:</b> При падінні рівня заряду нижче 10% дзеркало стабільно викликає подію OnBatteryLow,
+        що призводить до виведення системного попередження. Коли залишок заряду вичерпується (досягає 0%),
+        метод ConsumeBattery генерує власне виключення LowBatteryException. Головний цикл програми перехоплює
+        його та безпечно зупиняє виконання (isRunning = false), імітуючи вимкнення пристрою без системних крашів.
+</pre>
+                </div>
+
+            </article>
+
+            <article id="lab6-conclusion">
+                <h3>Висновки</h3>
+                <p>
+                    <article id="lab6-conclusion">
+                        <h3>Висновки</h3>
+                        <p>
+                            У ході виконання лабораторної роботи було розроблено консольний застосунок мовою C# для моделювання роботи «розумного дзеркала».
+                            <br><br>
+                            Під час проектування архітектури системи було успішно застосовано три типи відношень між класами: композицію (модулі Camera, NetworkModule, WeatherModule та ін. жорстко прив'язані до життєвого циклу дзеркала), агрегацію (дзеркало містить посилання на незалежні об'єкти користувачів User у вигляді списку) та асоціацію (передача об'єктів як параметрів у методи, наприклад, камери в симулятор зачісок для збереження знімку).
+                            <br><br>
+                            Було реалізовано похідний клас VoiceAssistant, який успадковує функціонал базового SmartMirror. Це дозволило розширити можливості системи розпізнаванням голосових команд. Для зіставлення ключових слів із діями було використано словник (Dictionary), де ключами виступали текстові команди, а значеннями — делегати типу Action. Використання принципу поліморфізму дозволило звертатися до методів помічника через посилання на базовий клас дзеркала.
+                            <br><br>
+                            У проекті реалізовано надійну систему обробки виключних ситуацій. Були створені власні класи виняткові ситуації, що відображають семантику предметної області (CriticalHealthException, LowBatteryException, NetworkUnavailableException). Програма успішно перехоплює помилки читання файлів, помилки виходу за межі масиву та логічні збої, запобігаючи аварійному завершенню застосунку та імітуючи коректну реакцію пристрою.
+                            <br><br>
+                            Важливим етапом роботи стало використання делегатів та подій. Було реалізовано дві ключові події: OnBatteryLow, для попередження про низький заряд, та OnHealthEmergency, для реакції на критичні фізіологічні показники людини. Обробники цих подій успішно імітували системні сповіщення та виклик медичної допомоги.
+                            <br><br>
+                            Для збереження конфігурації профілів користувачів реалізовано роботу з текстовими файлами у форматі CSV. Застосовано систему рівнів доступу, завдяки якій впроваджено функціонал адміністратора, що має змогу додавати, редагувати та видаляти користувачів із безпечним перезаписом бази даних.
+                            <br><br>
+                            У результаті виконання роботи було закріплено навички побудови складної взаємодії між класами, використання успадкування та поліморфізму, застосування словників і делегатів, обробки власних і системних виключень, а також розробки інтерактивного консольного інтерфейсу з динамічним управлінням станом об'єктів.
+                        </p>
+                    </article>
                 </p>
             </article>
         </section>
