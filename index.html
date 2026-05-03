@@ -87,6 +87,19 @@
             <li><a href="#lab6-tests">Перевірки</a></li>
             <li><a href="#lab6-conclusion">Висновки</a></li>
         </ul>
+		
+		<!-- STEM -->
+        <div class="lab-title" onclick="openLab('STEM', this)">STEM</div>
+        <ul class="submenu">
+            <li><a href="#STEM-meta">Мета</a></li>
+            <li><a href="#STEM-condition">Умова</a></li>
+            <li><a href="#STEM-analysis">Аналіз</a></li>
+            <li><a href="#STEM-diagram">Діаграма класів</a></li>
+            <li><a href="#STEM-code">Код</a></li>
+            <li><a href="#STEM-examples">Приклади</a></li>
+            <li><a href="#STEM-tests">Перевірки</a></li>
+            <li><a href="#STEM-conclusion">Висновки</a></li>
+        </ul>
     </div> 
 
     <div class="content">
@@ -9792,7 +9805,4330 @@ Press Enter to exit the application.
                         </p>
                     </article>
         </section>
-    </div>    
+    
+		<section id="STEM" class="lab-section">
+            <h1>STEM Проєкт<br></h1>
+            <h2>
+                Моделювання електронного підручника із вбудованим штучним інтелектом<br>Варіант №30<br>
+            </h2>
+
+            <article id="STEM-meta">
+                <h3>Мета</h3>
+				<p>на основі моделювання бізнес-процесів електронного підручника із вбудованим штучним інтелектом показати шляхи покращення якості підготовки студентів.</p>
+            </article>
+
+            <article id="STEM-condition">
+                <h3>Умова</h3>
+				<ul>
+					<li>Навчальний підручник  перестає бути чим-то статичним. На першому етапі - це живий підручник із постійно оновленим і адекватним реальному часу змістом, на другому - «алмазний буквар», тобто підручник із вбудованим штучним інтелектом, який є особистим тьютером, що відповідає індивідуальним вимогам студентів.</li>
+					<li>Об’єкти моделювання: студент, підручник,  штучний інтелект, знання та уміння студента</li>
+					<li>
+						Задачі моделювання:
+						<ol>
+							<li>Ініціалізація користувача.</li>
+							<li>Аналіз вимог користувача, його вподобань до навчальних предметів та графік дедлайну для тестування.</li>
+							<li>Збирання інформації по навчальним дисциплінам.</li>
+							<li>Планування графіку для навчання користувача.</li>
+							<li>Видача користувачу навчального матеріалу.</li>
+							<li>Тестування користувача по пройденій темі.</li>
+							<li>Аналіз успішності користувача.</li>
+							<li>Оптимізація навчального процесу.</li>
+							<li>Модифікація контенту підручника відповідно до вимог в індустрії</li>
+						</ol>
+					</li>
+					<li>Результат: ОО програма, яка в текстовому консольному режимі інформує про процеси, що відбуватимуться в результаті моделювання електронного підручника зі штучним інтелектом.</li>
+				</ul>
+            </article>
+
+            <article id="STEM-analysis">
+                <h3>Аналіз</h3>
+				<ul>
+					<li>Для реалізації вимог завдання розробимо багаторівневу архітектуру, розділивши проєкт на логічні шари: Core (бізнес-логіка), Infrastructure (робота з даними), UI (користувацький інтерфейс) та Components (моделі даних). Це забезпечить дотримання принципів чистого коду та Dependency Injection. Головним контролером системи виступатиме клас AITutorEngine, який об'єднуватиме роботу з базою даних, часом та алгоритмами навчання.</li>
+					<li>
+						Реалізуємо відношення між класами:
+						<ul>
+							<li>Композиція: об'єкт AITutorEngine ініціалізується з впровадженими залежностями сховища (IStorage) та годинника (IClock), які є критично необхідними для його роботи і визначають його базовий функціонал.</li>
+							<li>Агрегація: клас User містить колекції SubjectProgress, які у свою чергу агрегують об'єкти TopicProgress та ArchivedTopic. Це дозволяє гнучко відстежувати успішність студента незалежно від самого об'єкта підручника.</li>
+							<li>Асоціація: визначимо взаємодію, за якої методи двигуна ШІ приймають ID тем або об'єкти TaskItem, обробляють їх і повертають результати у шар інтерфейсу ConsoleUI для виведення на екран.</li>
+						</ul>
+					</li>
+					<li>У кожному класі моделей (User, Textbook, TaskItem, Topic тощо) визначимо закриті поля та відкриті властивості для забезпечення надійної інкапсуляції стану об'єктів.</li>
+					<li>
+						Побудову логіки симуляції та життєвого циклу програми розіб'ємо на наступні етапи:
+						<ol>
+							<li><b>Ініціалізація користувача</b><br/>Відбуватиметься через інтерактивне багаторівневе консольне меню. Система дозволятиме створювати нові профілі, генеруючи унікальні ідентифікатори (ID) з прив'язкою до поточного часу, редагувати імена, видаляти профілі або виконувати вхід в існуючий акаунт. У момент створення профілю система також пропонуватиме визначити персональний стиль сприйняття інформації (LearningStyle), зберігаючи його як Visual, Auditory або Kinesthetic.</li>
+							<li><b>Аналіз вимог користувача, його вподобань до навчальних предметів та графік дедлайну для тестування</b><br/>Після авторизації студент зможе переглянути та обрати дисципліну з доступних. Якщо користувач обирає предмет вперше, система розпізнає це як нову вимогу і перед початком навчання обов'язково запросить встановлення чіткої дати дедлайну. Ця дата буде збережена в об'єкті SubjectProgress, що дозволяє одному користувачу вивчати декілька предметів паралельно із повністю незалежними дедлайнами та розкладами.</li>
+							<li><b>Збирання інформації по навчальним дисциплінам</b><br/>Реалізуємо через клас JsonStorage, який імплементує інтерфейс IStorage. Програма динамічно скануватиме системну директорію data/textbooks, зчитуватиме всі файли формату textbook_*.json та автоматично формуватиме список доступних предметів. Це дозволяє масштабувати систему (додавати нові курси) простим копіюванням файлів без необхідності перекомпіляції вихідного коду програми.</li>
+							<li><b>Планування графіку для навчання користувача</b><br/>Для цього розробимо математичний алгоритм аналізу в класі AITutorEngine (метод AnalyzeProgress). Движок вираховуватиме різницю у днях між поточною віртуальною датою (наданою об'єктом Clock) та датою дедлайну. Далі система визначатиме кількість ще не засвоєних тем (де рівень знань нижче 90%) і динамічно розраховуватиме рекомендований темп — скільки тем потрібно проходити щодня, генеруючи пріоритетний список найслабших тем на сьогодні.</li>
+							<li><b>Видача користувачу навчального матеріалу</b><br/>Відбуватиметься з глибоким урахуванням індивідуальних особливостей. Метод PrintLessonAndPromptTest аналізуватиме обраний стиль навчання студента і пріоритетно підтягуватиме з JSON-моделі відповідні масиви сторінок (PagesVisual, PagesAuditory або PagesKinesthetic). Текст виводитиметься порціями (посторінково) зі зручною консольною навігацією (наступна/попередня сторінка), щоб не перевантажувати екран.</li>
+							<li><b>Тестування користувача по пройденій темі</b><br/>Після вивчення теорії ШІ пропонуватиме закріпити матеріал. Метод GenerateTestForTopic динамічно формуватиме пул запитань із бази задач. Для забезпечення різноманітності алгоритм випадковим чином обиратиме до 5 теоретичних (Theory) та до 5 практичних (Practice) завдань, після чого перемішуватиме їх (за допомогою Random.Next()). Це унеможливить механічне зазубрювання послідовності правильних відповідей.</li>
+							<li><b>Аналіз успішності користувача</b><br/>Базуватиметься на точному розрахунку відсотка правильних відповідей за конкретний тест. Результати проходження оброблятимуться методом ProcessTestResults, який передає отриманий бал для подальшого збереження у пам'ять об'єкта студента.</li>
+							<li><b>Оптимізація навчального процесу</b><br/>Для забезпечення об'єктивності знань ми відмовимося від простої фіксації найвищого бала. Натомість запровадимо систему "ковзного середнього" (rolling average). У класі TopicProgress створимо список RecentScores, який зберігатиме історію останніх 5 тестів. Новий рівень знань вираховуватиметься як середнє арифметичне цих спроб. Це дозволить ШІ "прощати" старі помилки, якщо студент почав здавати тести ідеально, але водночас змушуватиме повторювати тему, якщо останні результати раптово погіршилися.</li>
+							<li><b>Модифікація контенту підручника відповідно до вимог в індустрії</b><br/>Реалізується через потужний механізм міграції даних GlobalSyncAllUsersWithIndustry. При кожному запуску програма перевірятиме файли підручників на наявність змін. Якщо в індустрії з'явилися нові стандарти (у JSON додано нові теми), програма автоматично інтегрує їх у профілі всіх студентів із нульовим прогресом. Це миттєво вплине на роботу алгоритму планування (збільшиться навантаження до дедлайну).</li>
+						</ol>
+					</li>
+					<li>
+						Додатково:
+						<ol>
+							<li>Система архівації: Якщо тему буде видалено з підручника, щоб не втратити досягнення студента, розроблено словник ArchivedTopics. Далі, якщо тема колись повернеться в програму, система розумно відновить збережений прогрес з архіву.</li>
+							<li>Застосування Dependency Injection: Головний контролер AITutorEngine не створює об'єкти для роботи з файлами чи часом самостійно. Натомість він отримує їх через конструктор у вигляді абстракцій — інтерфейсів IStorage та IClock. Такий підхід робить систему слабкозв'язаною. У майбутньому це дозволить легко замінити текстове JSON-збереження на повноцінну базу даних (наприклад, PostgreSQL), створивши новий клас, який реалізує IStorage, без жодної зміни у бізнес-логіці самого ШІ-тьютора.</li>
+						</ol>
+					</li>
+				</ul>
+            </article>
+
+            <article id="STEM-diagram">
+                <h3>Діаграма класів</h3>
+                <p><img src="photos\STEM\classDiagram.png" class="photo" style = "max-width: 80%"/></p>
+            </article>
+
+            <article id="STEM-code">
+                <h3>Код</h3>
+                
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					AITutor.cs
+                    </div>
+<pre>
+using AITutor.Interfaces;
+using AITutor.Components;
+
+namespace AITutor.Core
+{
+    public class AITutorEngine
+    {
+        private readonly IStorage _storage;
+        private readonly IClock _clock;
+        private User _student;
+        private string _currentSubject;
+
+        public AITutorEngine(IStorage storage, IClock clock)
+        {
+            _storage = storage;
+            _clock = clock;
+        }
+
+        public void ConnectStudent(string userId, string subject)
+        {
+            Student = Storage.GetUser(userId) ?? throw new Exception($"Користувача {userId} не знайдено у базі!");
+            CurrentSubject = subject;
+
+            if (!Student.Progress.ContainsKey(CurrentSubject))
+            {
+                Student.Progress[CurrentSubject] = new SubjectProgress();
+                Storage.SaveUser(Student);
+            }
+
+            SyncWithIndustryUpdates();
+        }
+
+        public User Student { get => _student; set => _student = value; }
+        public string CurrentSubject { get => _currentSubject; set => _currentSubject = value; }
+        private IStorage Storage { get => _storage; }
+        private IClock Clock { get => _clock; }
+
+        public DateTime GetCurrentDate() => Clock.CurrentDate;
+        public void GoToNextDay() => Clock.AdvanceDays(1);
+        public DateTime GetCurrentSubjectDeadline() => Student.Progress[CurrentSubject].Deadline;
+
+        public Dictionary&lt;string, User> GetAllUsers() => Storage.GetAllUsers();
+        public void DeleteUser(string userId) => Storage.DeleteUser(userId);
+        public void CreateOrUpdateUser(User user) => Storage.SaveUser(user);
+        public List&lt;string> GetAvailableSubjects() => Storage.GetAvailableSubjects();
+        public string GetNextTopicId() => Student.Progress[CurrentSubject].Topics.FirstOrDefault(p => p.Value.KnowledgePercentage &lt; 90).Key;
+
+        public bool NeedsDeadlineForCurrentSubject()
+        {
+            return Student.Progress[CurrentSubject].Deadline == DateTime.MinValue;
+        }
+
+        public (int TopicsLeft, int DaysLeft, int RecommendedPerDay) AnalyzeProgress()
+        {
+            SubjectProgress subjectProgress = Student.Progress[CurrentSubject];
+            int undoneTopics = subjectProgress.Topics.Count(p => p.Value.KnowledgePercentage &lt; 90);
+            int daysLeft = (subjectProgress.Deadline - Clock.CurrentDate).Days;
+
+            int pace = 0;
+            if (daysLeft > 0)
+                pace = (int)Math.Ceiling((double)undoneTopics / daysLeft);
+            else if (undoneTopics > 0)
+                pace = undoneTopics;
+
+            return (undoneTopics, daysLeft, pace);
+        }
+
+        public int ProcessTestResults(string topicId, int correctAnswersCount, int totalQuestions)
+        {
+            if (totalQuestions == 0)
+                return 0;
+
+            SubjectProgress subjectProgress = Student.Progress[CurrentSubject];
+
+            if (!subjectProgress.Topics.ContainsKey(topicId))
+                return 0;
+
+            int currentTestPercentage = (int)Math.Round((double)correctAnswersCount / totalQuestions * 100);
+            TopicProgress progress = subjectProgress.Topics[topicId];
+
+            if (progress.RecentScores == null)
+                progress.RecentScores = new List&lt;int>();
+
+            progress.RecentScores.Add(currentTestPercentage);
+
+            if (progress.RecentScores.Count > 5)
+                progress.RecentScores.RemoveAt(0);
+
+            progress.KnowledgePercentage = (int)Math.Round(progress.RecentScores.Average());
+            Storage.SaveUser(Student);
+
+            return progress.KnowledgePercentage;
+        }
+
+        public void GlobalSyncAllUsersWithIndustry()
+        {
+            Dictionary&lt;string, User> allUsers = Storage.GetAllUsers();
+            List&lt;string> availableSubjects = Storage.GetAvailableSubjects();
+
+            foreach (var cUser in allUsers)
+            {
+                User user = cUser.Value;
+                bool isUserUpdated = false;
+
+                foreach (string subject in user.Progress.Keys.ToList())
+                {
+                    if (availableSubjects.Contains(subject))
+                    {
+                        Textbook textbook = Storage.GetTextbook(subject);
+                        if (textbook != null)
+                        {
+                            SubjectProgress subjectProgress = user.Progress[subject];
+
+                            // додавання та відновлення
+                            foreach (var topic in textbook.Topics)
+                            {
+                                if (!subjectProgress.Topics.ContainsKey(topic.Key))
+                                {
+                                    // спроба відновлення
+                                    if (user.ArchivedTopics != null && user.ArchivedTopics.TryGetValue(subject, out var archivedForSubject) && archivedForSubject.TryGetValue(topic.Key, out var archived))
+                                    {
+                                        subjectProgress.Topics[topic.Key] = archived.Progress;
+                                        archivedForSubject.Remove(topic.Key);
+                                        if (archivedForSubject.Count == 0)
+                                            user.ArchivedTopics.Remove(subject);
+                                        isUserUpdated = true;
+                                    }
+                                    else
+                                    {
+                                        subjectProgress.Topics.Add(topic.Key, new TopicProgress { KnowledgePercentage = 0, RecentScores = new List&lt;int>() });
+                                        isUserUpdated = true;
+                                    }
+                                }
+                            }
+
+                            // архівація видалених тем
+                            List&lt;string> keysToArchive = subjectProgress.Topics.Keys.Except(textbook.Topics.Keys).ToList();
+                            if (keysToArchive.Count > 0)
+                            {
+                                user.ArchivedTopics ??= new Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>>();
+                                if (!user.ArchivedTopics.ContainsKey(subject))
+                                    user.ArchivedTopics[subject] = new Dictionary&lt;string, ArchivedTopic>();
+
+                                foreach (string key in keysToArchive)
+                                {
+                                    // збереження прогресу до архіву перед видаленням
+                                    user.ArchivedTopics[subject][key] = new ArchivedTopic { Progress = subjectProgress.Topics[key] };
+                                    subjectProgress.Topics.Remove(key);
+                                }
+                                isUserUpdated = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // якщо предмет більше не доступний, архівуємо всі його теми
+                        user.ArchivedTopics ??= new Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>>();
+                        if (!user.ArchivedTopics.ContainsKey(subject))
+                            user.ArchivedTopics[subject] = new Dictionary&lt;string, ArchivedTopic>();
+
+                        SubjectProgress subjectProgress = user.Progress[subject];
+                        foreach (var keyValue in subjectProgress.Topics)
+                            user.ArchivedTopics[subject][keyValue.Key] = new ArchivedTopic { Progress = keyValue.Value };
+
+                        user.Progress.Remove(subject);
+                        isUserUpdated = true;
+                    }
+                }
+
+                if (isUserUpdated)
+                    Storage.SaveUser(user);
+            }
+        }
+
+        public (List&lt;string> Added, List&lt;string> Removed) SyncWithIndustryUpdates()
+        {
+            Textbook textbook = Storage.GetTextbook(CurrentSubject);
+            List&lt;string> newTopicsAdded = new List&lt;string>();
+            List&lt;string> removedTopics = new List&lt;string>();
+            SubjectProgress subjectProgress = Student.Progress[CurrentSubject];
+
+            // додаємо тему та відновлюємо прогрес, за наявності в архіві
+            foreach (var topic in textbook.Topics)
+            {
+                if (!subjectProgress.Topics.ContainsKey(topic.Key))
+                {
+                    // спроба відновлення з архіву
+                    if (Student.ArchivedTopics != null && Student.ArchivedTopics.TryGetValue(CurrentSubject, out var archivedForSubject) && archivedForSubject.TryGetValue(topic.Key, out var archived))
+                    {
+                        subjectProgress.Topics[topic.Key] = archived.Progress;
+                        archivedForSubject.Remove(topic.Key);
+                        if (archivedForSubject.Count == 0)
+                            Student.ArchivedTopics.Remove(CurrentSubject);
+                    }
+                    else
+                    {
+                        subjectProgress.Topics.Add(topic.Key, new TopicProgress { KnowledgePercentage = 0, RecentScores = new List&lt;int>() });
+                    }
+                    newTopicsAdded.Add(topic.Value.Title);
+                }
+            }
+
+            // архівація видалених тем
+            List&lt;string> removedKeys = subjectProgress.Topics.Keys.Except(textbook.Topics.Keys).ToList();
+            if (removedKeys.Count > 0)
+            {
+                Student.ArchivedTopics ??= new Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>>();
+                if (!Student.ArchivedTopics.ContainsKey(CurrentSubject))
+                    Student.ArchivedTopics[CurrentSubject] = new Dictionary&lt;string, ArchivedTopic>();
+
+                foreach (var key in removedKeys)
+                {
+                    Student.ArchivedTopics[CurrentSubject][key] = new ArchivedTopic { Progress = subjectProgress.Topics[key] };
+                    removedTopics.Add(key);
+                    subjectProgress.Topics.Remove(key);
+                }
+            }
+
+            if (newTopicsAdded.Count > 0 || removedKeys.Count > 0)
+                Storage.SaveUser(Student);
+
+            return (newTopicsAdded, removedTopics);
+        }
+
+        public void UpdateDeadline(DateTime newDeadlineDate)
+        {
+            Student.Progress[CurrentSubject].Deadline = newDeadlineDate;
+            Storage.SaveUser(Student);
+        }
+
+        public Dictionary&lt;string, string> GetAllTopics()
+        {
+            Textbook textbook = Storage.GetTextbook(CurrentSubject);
+            Dictionary&lt;string, string> availableTopics = new Dictionary&lt;string, string>();
+
+            foreach (var topic in textbook.Topics)
+            {
+                if (Student.Progress[CurrentSubject].Topics.ContainsKey(topic.Key))
+                    availableTopics.Add(topic.Key, topic.Value.Title);
+            }
+            return availableTopics;
+        }
+
+        public Topic GetTopicContent(string topicId)
+        {
+            if (topicId == null)
+                return null!;
+            return Storage.GetTextbook(CurrentSubject).Topics[topicId];
+        }
+
+        public List&lt;TaskItem> GenerateTestForTopic(string topicId)
+        {
+            Textbook textbook = Storage.GetTextbook(CurrentSubject);
+            Dictionary&lt;string, TaskItem> allTasks = Storage.GetTasks(CurrentSubject) ?? new Dictionary&lt;string, TaskItem>();
+
+            // якщо підручник, тема або задачі відсутні - повертаємо порожній список
+            if (textbook == null || !textbook.Topics.ContainsKey(topicId) || allTasks.Count == 0)
+                return new List&lt;TaskItem>();
+
+            List&lt;string> linkedIds = textbook.Topics[topicId].LinkedTasks ?? new List&lt;string>();
+
+            // Якщо немає зв'язаних задач, повертаємо порожній список
+            if (linkedIds.Count == 0)
+                return new List&lt;TaskItem>();
+
+            List&lt;TaskItem> theoryPool = new List&lt;TaskItem>();
+            List&lt;TaskItem> practicePool = new List&lt;TaskItem>();
+
+            foreach (string id in linkedIds)
+            {
+                if (allTasks.TryGetValue(id, out TaskItem task))
+                {
+                    if (task.Type == TaskType.Theory)
+                    {
+                        if (!theoryPool.Contains(task)) 
+                            theoryPool.Add(task);
+                    }
+                    else if (task.Type == TaskType.Practice)
+                    {
+                        if (!practicePool.Contains(task)) 
+                            practicePool.Add(task);
+                    }
+                }
+            }
+
+            // Випадковий вибір до 5 задач кожного виду
+            Random random = new Random();
+
+            int takeTheory = Math.Min(5, theoryPool.Count);
+            int takePractice = Math.Min(5, practicePool.Count);
+
+            List&lt;TaskItem> selected = new List&lt;TaskItem>();
+
+            selected.AddRange(theoryPool.OrderBy(x => random.Next()).Take(takeTheory));
+            selected.AddRange(practicePool.OrderBy(x => random.Next()).Take(takePractice));
+
+            // Перемішуємо обрані задачі
+            selected = selected.OrderBy(x => random.Next()).ToList();
+
+            return selected;
+        }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					IStorage.cs
+                    </div>
+<pre>
+using AITutor.Components;
+
+namespace AITutor.Interfaces
+{
+    public interface IStorage
+    {
+        User GetUser(string userId);
+        void SaveUser(User user);
+        Textbook GetTextbook(string subject);
+        Dictionary&lt;string, TaskItem> GetTasks(string subject);
+        Dictionary&lt;string, User> GetAllUsers();
+        void DeleteUser(string userId);
+        List&lt;string> GetAvailableSubjects();
+    }
+}
+
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					JsonStorage.cs
+                    </div>
+<pre>
+using AITutor.Components;
+using AITutor.Interfaces;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace AITutor.Infrastructure
+{
+    public class JsonStorage : IStorage
+    {
+        private readonly string _basePath;
+        private readonly JsonSerializerOptions _jsonOptions;
+
+        public JsonStorage(string basePath = "data")
+        {
+            _basePath = basePath;
+
+            _jsonOptions = new JsonSerializerOptions // Налаштування збереження JSON
+            {
+                WriteIndented = true,
+                PropertyNameCaseInsensitive = true,
+                Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase) } // Дозволяє зберігати Enum (TaskType) як текст
+            };
+
+            EnsureDirectoriesExist();
+        }
+
+        private string BasePath { get => _basePath; }
+        private JsonSerializerOptions JsonOptions { get => _jsonOptions; }
+
+        private void EnsureDirectoriesExist()
+        {
+            if (!Directory.Exists(BasePath))
+                Directory.CreateDirectory(BasePath);
+            if (!Directory.Exists(Path.Combine(BasePath, "textbooks")))
+                Directory.CreateDirectory(Path.Combine(BasePath, "textbooks"));
+            if (!Directory.Exists(Path.Combine(BasePath, "tasks")))
+                Directory.CreateDirectory(Path.Combine(BasePath, "tasks"));
+        }
+
+        public User GetUser(string userId)
+        {
+            string path = Path.Combine(BasePath, "users.json");
+            if (!File.Exists(path))
+                return null!;
+
+            string json = File.ReadAllText(path);
+            Dictionary&lt;string, User> users = JsonSerializer.Deserialize&lt;Dictionary&lt;string, User>>(json, JsonOptions)!;
+
+            return users != null && users.ContainsKey(userId) ? users[userId] : null!;
+        }
+
+        public void SaveUser(User user)
+        {
+            string path = Path.Combine(BasePath, "users.json");
+            Dictionary&lt;string, User> users = new Dictionary&lt;string, User>();
+
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                users = JsonSerializer.Deserialize&lt;Dictionary&lt;string, User>>(json, JsonOptions) ?? new Dictionary&lt;string, User>();
+            }
+
+            users[user.Id] = user; // Оновлюємо або додаємо користувача
+            File.WriteAllText(path, JsonSerializer.Serialize(users, JsonOptions));
+        }
+
+        public void DeleteUser(string userId)
+        {
+            string path = Path.Combine(BasePath, "users.json");
+            if (!File.Exists(path))
+                return;
+
+            Dictionary&lt;string, User> users = GetAllUsers();
+
+            if (users.ContainsKey(userId))
+            {
+                users.Remove(userId);
+                File.WriteAllText(path, JsonSerializer.Serialize(users, JsonOptions));
+            }
+        }
+
+        public Dictionary&lt;string, User> GetAllUsers()
+        {
+            string path = Path.Combine(BasePath, "users.json");
+            if (!File.Exists(path))
+                return new Dictionary&lt;string, User>();
+
+            string json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize&lt;Dictionary&lt;string, User>>(json, JsonOptions) ?? new Dictionary&lt;string, User>();
+        }
+
+        public List&lt;string> GetAvailableSubjects()
+        {
+            string path = Path.Combine(BasePath, "textbooks");
+            if (!Directory.Exists(path))
+                return new List&lt;string>();
+
+            string[] files = Directory.GetFiles(path, "textbook_*.json");
+            List&lt;string> subjects = new List&lt;string>();
+
+            foreach (string file in files)
+            {
+                string name = Path.GetFileNameWithoutExtension(file);
+                subjects.Add(name.Replace("textbook_", "")); // Витягуємо чисту назву предмета
+            }
+            return subjects;
+        }
+
+        public Textbook GetTextbook(string subject)
+        {
+            string path = Path.Combine(BasePath, "textbooks", $"textbook_{subject}.json");
+            if (!File.Exists(path))
+                throw new FileNotFoundException($"Підручник з предмету '{subject}' не знайдено!");
+
+            string json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize&lt;Textbook>(json, JsonOptions)!;
+        }
+
+        public Dictionary&lt;string, TaskItem> GetTasks(string subject)
+        {
+            string path = Path.Combine(BasePath, "tasks", $"tasks_{subject}.json");
+            if (!File.Exists(path))
+                return new Dictionary&lt;string, TaskItem>(); // Якщо завдань немає, повертаємо пустий словник
+
+            string json = File.ReadAllText(path);
+            return JsonSerializer.Deserialize&lt;Dictionary&lt;string, TaskItem>>(json, JsonOptions)!;
+        }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					IClock.cs
+                    </div>
+<pre>
+namespace AITutor.Interfaces
+{
+    public interface IClock
+    {
+        DateTime CurrentDate { get; }
+        void AdvanceDays(int days);
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Clock.cs
+                    </div>
+<pre>
+using System;
+using AITutor.Interfaces;
+
+namespace AITutor.Components
+{
+    public class Clock : IClock
+    {
+        private DateTime _currentDate;
+
+        public DateTime CurrentDate { get => _currentDate; private set => _currentDate = value; }
+
+        public Clock() => CurrentDate = DateTime.Now.Date;
+
+        public void AdvanceDays(int days) => CurrentDate = CurrentDate.AddDays(days);
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					ConsoleUI.cs
+                    </div>
+<pre>
+using AITutor.Components;
+using AITutor.Core;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace AITutor.UI
+{
+    public class ConsoleUI
+    {
+        private readonly AITutorEngine _engine;
+        private bool _clearConsole = true;
+
+        public ConsoleUI(AITutorEngine engine)
+        {
+            _engine = engine;
+        }
+
+        private AITutorEngine Engine { get => _engine; }
+
+        public void ClearConsole()
+        {
+            if (_clearConsole)
+                Console.Clear();
+        }
+
+        public void Start()
+        {
+            ClearConsole();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("[System]: Виконується глобальна перевірка оновлень індустрії для всіх предметів...");
+            Engine.GlobalSyncAllUsersWithIndustry();
+            Console.WriteLine("[System]: Синхронізацію завершено!\n");
+            Console.ResetColor();
+
+            // Даємо користувачу секунду прочитати це повідомлення
+            System.Threading.Thread.Sleep(1500);
+
+            MainMenu();
+        }
+
+        private void MainMenu()
+        {
+            ClearConsole();
+            bool exitProgram = false;
+
+            while (!exitProgram)
+            {
+                string userId = UserManagementMenu();
+                if (userId == null)
+                {
+                    exitProgram = true; // Вихід з програми
+                }
+                else
+                {
+                    bool backToUserMenu = false;
+
+                    while (!backToUserMenu)
+                    {
+                        string subject = SubjectSelectionMenu();
+                        if (subject == null)
+                        {
+                            backToUserMenu = true; // Повернутись до меню користувачів
+                        }
+                        else
+                        {
+                            Engine.ConnectStudent(userId, subject);
+
+                            if (Engine.NeedsDeadlineForCurrentSubject())
+                            {
+                                ClearConsole();
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"[System]: Ви вперше починаєте вивчати предмет '{subject.ToUpper()}'."); 
+                                Console.ResetColor();
+                                SetInitialDeadline();
+                            }
+
+                            SubjectMenu();
+                        }
+                    }
+                }
+            }
+        }
+
+        private string UserManagementMenu()
+        {
+            while (true)
+            {
+                //ClearConsole();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===");
+                Console.ResetColor();
+                Console.WriteLine("1. Увійти");
+                Console.WriteLine("2. Додати нового користувача");
+                Console.WriteLine("3. Видалити користувача");
+                Console.WriteLine("4. Редагувати ім'я користувача");
+                Console.WriteLine("5. Змінити стиль навчання");
+                Console.WriteLine("0. Вихід з програми");
+                Console.Write("Оберіть дію: ");
+
+                char choice = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
+
+                switch (choice)
+                {
+                    case '1':
+                        ClearConsole();
+                        string selectedId = SelectUserFromList();
+                        if (selectedId != null)
+                            return selectedId;
+                        break;
+                    case '2': ClearConsole(); CreateNewUser(); break;
+                    case '3': ClearConsole(); DeleteUser(); break;
+                    case '4': ClearConsole(); EditUser(); break;
+                    case '5': ClearConsole(); EditLearningStyle(); break;
+                    case '0': return null!; // Вихід з програми
+                }
+            }
+        }
+
+        private string SubjectSelectionMenu()
+        {
+            while (true)
+            {
+                ClearConsole();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("=== ВИБІР ПРЕДМЕТА ===");
+                Console.ResetColor();
+
+                List&lt;string> subjects = Engine.GetAvailableSubjects();
+                if (subjects.Count == 0)
+                {
+                    ClearConsole();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[System]: Жодного підручника не знайдено у папці data/textbooks!");
+                    Console.ResetColor();
+                    return null!;
+                }
+
+                for (int i = 0; i &lt; subjects.Count; i++)
+                    Console.WriteLine($"{i + 1}. {subjects[i].ToUpper()}");
+
+                Console.WriteLine("\n0. Повернутись до меню користувачів");
+                Console.Write("\nОберіть номер предмета: ");
+
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    if (choice == 0)
+                    {
+                        Console.WriteLine();
+                        ClearConsole();
+                        return null!; // Повернення до меню користувачів
+                    }
+                    if (choice > 0 && choice &lt;= subjects.Count)
+                        return subjects[choice - 1];
+                }
+            }
+        }
+
+        public void SubjectMenu()
+        {
+            ClearConsole();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[AI]: Вітаю, {Engine.Student.Name}! Я ваш персональний тьютор з предмету {Engine.CurrentSubject.ToUpper()}.");
+            Console.ResetColor();
+
+            while (true)
+            {
+                Console.WriteLine("\n==================================");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine($"Сьогоднішня дата: {Engine.GetCurrentDate().ToShortDateString()}");
+                Console.ResetColor();
+
+                Console.WriteLine("1. Переглянути план");
+                Console.WriteLine("2. Пройти наступний урок");
+                Console.WriteLine("3. Обрати урок самостійно");
+                Console.WriteLine("4. Пройти тест для наступної теми");
+                Console.WriteLine("5. Обрати тему для тестування");
+                Console.WriteLine("6. Моя статистика");
+                Console.WriteLine("7. Змінити дату дедлайну");
+                Console.WriteLine("8. Перевірити оновлення в індустрії");
+                Console.WriteLine("9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ");
+                Console.WriteLine("0. Повернутись до вибору предмета");
+                Console.Write("Оберіть дію: ");
+
+                char choice = Console.ReadKey().KeyChar;
+                Console.WriteLine("\n");
+
+                switch (choice)
+                {
+                    case '1': ClearConsole(); ShowSchedule(); break;
+                    case '2': ClearConsole(); StudyNextLesson(); break;
+                    case '3': ClearConsole(); ChooseAndStudyLesson(); break;
+                    case '4': ClearConsole(); TakeNextTest(); break;
+                    case '5': ClearConsole(); ChooseAndTakeTest(); break;
+                    case '6': ClearConsole(); ShowStats(); break;
+                    case '7': ClearConsole(); ChangeDeadline(); break;
+                    case '8': ClearConsole(); SyncUpdates(); break;
+                    case '9': ClearConsole(); SkipToNextDay(); break;
+                    case '0': ClearConsole(); return;
+                    default: ClearConsole(); Console.WriteLine("Невірний вибір."); break;
+                }
+            }
+        }
+
+        private string SelectUserFromList()
+        {
+            Dictionary&lt;string, User> users = Engine.GetAllUsers();
+            if (users.Count == 0)
+            {
+                ClearConsole();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[System]: Користувачів ще немає! Створіть нового.");
+                Console.ResetColor();
+                return null!;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("=== СПИСОК КОРИСТУВАЧІВ ===");
+            Console.ResetColor();
+            List&lt;User> userList = users.Values.ToList();
+            for (int i = 0; i &lt; userList.Count; i++)
+                Console.WriteLine($"{i + 1}. {userList[i].Name} (ID: {userList[i].Id})");
+
+            Console.Write("Оберіть користувача (0 для відміни): ");
+            if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice &lt;= userList.Count)
+            {
+                Console.WriteLine();
+                return userList[choice - 1].Id;
+            }
+            Console.WriteLine();
+            ClearConsole();
+            return null!;
+        }
+
+        private void CreateNewUser()
+        {
+            Console.Write("Введіть ім'я нового користувача: ");
+            string name = Console.ReadLine()!;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ClearConsole();
+                return;
+            }
+
+            // Вибір стилю навчання
+            LearningStyle style = SelectLearningStyle();
+
+            string newId = $"U_{DateTime.Now:yyyyMMddHHmmss}";
+            User newUser = new User(newId, name, style);
+
+            Engine.CreateOrUpdateUser(newUser);
+
+            ClearConsole();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[System]: Користувача {name} створено!");
+            Console.WriteLine($"[System]: Стиль навчання: {GetLearningStyleName(style)}");
+            Console.ResetColor();
+        }
+
+        private void DeleteUser()
+        {
+            string idToDelete = SelectUserFromList();
+            if (idToDelete != null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("[System]: Ви впевнені, що хочете видалити цього користувача? (y/n): ");
+
+                string confirmation = Console.ReadLine()!.ToLower();
+
+                if (confirmation == "y")
+                {
+                    ClearConsole();
+                    Engine.DeleteUser(idToDelete);
+                    Console.WriteLine("[System]: Користувача видалено.");
+                }
+                else
+                {
+                    ClearConsole();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("[System]: Видалення скасовано.");
+                }
+                Console.ResetColor();
+            }
+        }
+
+        private void EditUser()
+        {
+            string idToEdit = SelectUserFromList();
+            if (idToEdit != null)
+            {
+                Dictionary&lt;string, User> users = Engine.GetAllUsers();
+                User user = users[idToEdit];
+
+                Console.Write($"Введіть нове ім'я для {user.Name}: ");
+                string newName = Console.ReadLine()!;
+
+                if (!string.IsNullOrWhiteSpace(newName))
+                {
+                    user.Name = newName;
+                    Engine.CreateOrUpdateUser(user);
+
+                    ClearConsole();
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[System]: Ім'я змінено.");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        private void EditLearningStyle()
+        {
+            string idToEdit = SelectUserFromList();
+            if (idToEdit != null)
+            {
+                Dictionary&lt;string, User> users = Engine.GetAllUsers();
+                User user = users[idToEdit];
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"[System]: Поточний стиль навчання: {GetLearningStyleName(user.LearningStyle)}");
+                Console.ResetColor();
+
+                LearningStyle newStyle = SelectLearningStyle();
+
+                user.LearningStyle = newStyle;
+                Engine.CreateOrUpdateUser(user);
+
+                ClearConsole();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"[System]: Стиль навчання змінено на {GetLearningStyleName(newStyle)}.");
+                Console.ResetColor();
+            }
+        }
+
+        private void ShowSchedule()
+        {
+            var (undone, daysLeft, pace) = Engine.AnalyzeProgress();
+            Console.WriteLine($"[AI]: Дедлайн призначено на: {Engine.GetCurrentSubjectDeadline().ToShortDateString()}");
+
+            if (daysLeft &lt; 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[AI]: Дедлайн вже минув!");
+            }
+            else if (daysLeft == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[AI]: Дедлайн СЬОГОДНІ!");
+            }
+            else
+                Console.WriteLine($"[AI]: До дедлайну залишилося днів: {daysLeft}");
+
+            Console.WriteLine($"[AI]: Залишилось вивчити тем: {undone}.");
+
+            if (undone > 0 && daysLeft >= 0)
+            {
+                Console.ResetColor();
+                Console.WriteLine($"[AI]: Потрібно проходити {pace} тем(и) на день.");
+
+                Dictionary&lt;string, TopicProgress> progressForSubject = Engine.Student.Progress[Engine.CurrentSubject].Topics;
+                
+                List&lt;string> recommended = progressForSubject // Вибираємо теми з найнижчим відсотком знань
+                    .Where(p => p.Value.KnowledgePercentage &lt; 90)
+                    .OrderBy(p => p.Value.KnowledgePercentage)
+                    .Take(Math.Max(1, pace))
+                    .Select(p => p.Key)
+                    .ToList();
+
+                if (recommended.Count > 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("[AI]: Сьогодні рекомендується вивчити:");
+                    int index = 1;
+                    foreach (string topicId in recommended)
+                    {
+                        Topic topic = Engine.GetTopicContent(topicId);
+                        string title = topic != null ? topic.Title : topicId;
+                        Console.WriteLine($"[AI]: {index}. {title}");
+                        index++;
+                    }
+                    Console.ResetColor();
+                }
+            }
+            Console.ResetColor();
+        }
+
+        private void SetInitialDeadline()
+        {
+            while (true)
+            {
+                Console.Write("Введіть дату дедлайну для цього предмета (у форматі ДД.ММ.РРРР): ");
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime newDate))
+                {
+                    if (newDate &lt; Engine.GetCurrentDate())
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("[System]: Неможлива дата дедлайну!");
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Engine.UpdateDeadline(newDate);
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("[System]: Дедлайн успішно встановлено!");
+                        Console.ResetColor();
+                        Thread.Sleep(1500);
+                        return;
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[System]: Неправильний формат дати.");
+                    Console.ResetColor();
+                }
+            }
+        }
+
+        private void ChangeDeadline()
+        {
+            Console.Write("Введіть дату дедлайну (у форматі ДД.ММ.РРРР): ");
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime newDate))
+            {
+                if (newDate &lt; Engine.GetCurrentDate())
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[System]: Неможлива дата дедлайну!");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Engine.UpdateDeadline(newDate);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[System]: Дату дедлайну успішно змінено.");
+                    Console.ResetColor();
+                    ShowSchedule();
+                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[System]: Неправильний формат дати.");
+                Console.ResetColor();
+            }
+        }
+
+        private void SkipToNextDay()
+        {
+            Engine.GoToNextDay();
+            ClearConsole();
+            ShowSchedule();
+        }
+
+        // --- ЛОГІКА УРОКІВ ---
+
+        private void StudyNextLesson()
+        {
+            string topicId = Engine.GetNextTopicId();
+            if (topicId == null)
+            {
+                Console.WriteLine("[AI]: Ви вже успішно засвоїли всі доступні теми!");
+                return;
+            }
+            PrintLessonAndPromptTest(topicId);
+        }
+
+        private void ChooseAndStudyLesson()
+        {
+            string topicId = SelectTopicFromList();
+            if (topicId != null) 
+               PrintLessonAndPromptTest(topicId);
+        }
+
+        private void PrintLessonAndPromptTest(string topicId)
+        {
+            Topic topic = Engine.GetTopicContent(topicId);
+            if (topic == null)
+                return;
+
+            // Підготовка матеріалу для вивчення з урахуванням стилю навчання користувача
+            List&lt;string> pages = new List&lt;string>();
+            var style = Engine.Student.LearningStyle;
+
+            if (style == LearningStyle.Visual && topic.PagesVisual != null && topic.PagesVisual.Count > 0)
+                pages.AddRange(topic.PagesVisual);
+            else if (style == LearningStyle.Auditory && topic.PagesAuditory != null && topic.PagesAuditory.Count > 0)
+                pages.AddRange(topic.PagesAuditory);
+            else if (style == LearningStyle.Kinesthetic && topic.PagesKinesthetic != null && topic.PagesKinesthetic.Count > 0)
+                pages.AddRange(topic.PagesKinesthetic);
+            else if (topic.Pages != null && topic.Pages.Count > 0)
+                pages.AddRange(topic.Pages);
+            else if (!string.IsNullOrWhiteSpace(topic.Content))
+                pages.Add(topic.Content);
+            else
+                pages.Add(string.Empty);
+
+            int pageIndex = 0;
+            while (true)
+            {
+                ClearConsole();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"[ ТЕМА: {topic.Title} ]");
+                Console.ResetColor();
+
+                Console.WriteLine($"\n[Сторінка {pageIndex + 1}/{pages.Count}]\n");
+                Console.WriteLine(pages[pageIndex]);
+
+                bool isFirst = pageIndex == 0;
+                bool isLast = pageIndex == pages.Count - 1;
+                string line;
+
+                if (pages.Count == 1)
+                {
+                    line = "[T] Тест    [B] Назад до меню";
+                }
+                else
+                {
+                    string prevLabel = isFirst ? "" : "[P] Попередня сторінка    ";
+                    string nextLabel = isLast ? "[T] Тест    " : "[N] Наступна сторінка    ";
+                    line = $"{prevLabel}{nextLabel}[B] Назад до меню";
+                }
+
+                Console.WriteLine();
+                for(int i = 0; i &lt; line.Length; i++)
+                    Console.Write("-");
+                Console.WriteLine("\n" + line);
+
+                Console.Write("Оберіть дію: ");
+                string? action = Console.ReadKey().KeyChar.ToString().ToLower();
+                Console.WriteLine();
+
+                if (!string.IsNullOrEmpty(action))
+                {
+                    if (action == "b")
+                        return;
+
+                    if (pages.Count == 1)
+                    {
+                        if (action == "t")
+                        {
+                            ConductTest(topicId);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (action == "p" && !isFirst)
+                            pageIndex--;
+                        else if (action == "n" && !isLast)
+                            pageIndex++;
+                        else if (action == "t" && isLast)
+                        {
+                            ConductTest(topicId);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        // --- ЛОГІКА ТЕСТІВ Окремо від уроку ---
+
+        private void TakeNextTest()
+        {
+            string topicId = Engine.GetNextTopicId();
+            if (topicId == null)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("[AI]: У вас немає непройдених тем для тестування!");
+                Console.ResetColor();;
+                return;
+            }
+            ConductTest(topicId);
+        }
+
+        private void ChooseAndTakeTest()
+        {
+            string topicId = SelectTopicFromList();
+            if (topicId != null)
+                ConductTest(topicId);
+        }
+
+        private void ConductTest(string topicId)
+        {
+            List&lt;TaskItem> tasks = Engine.GenerateTestForTopic(topicId);
+            if (tasks.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("[System]: Для цієї теми немає завдань.");
+                Console.ResetColor();
+                return;
+            }
+
+            int correctAnswers = 0;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"[AI]: Починаємо тест! Питань: {tasks.Count}");
+
+            for (int i = 0; i &lt; tasks.Count; i++)
+            {
+                TaskItem task = tasks[i];
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine($"\nПитання {i + 1} ({task.Type}): {task.Question}");
+                Console.ResetColor();
+
+                for (int j = 0; j &lt; task.Options.Count; j++)
+                    Console.WriteLine($"  {j + 1}. {task.Options[j]}");
+
+                Console.Write("Ваша відповідь (номер): ");
+                if (int.TryParse(Console.ReadLine(), out int userChoice) && userChoice - 1 == task.CorrectOptionIndex)
+                {
+                    correctAnswers++;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Правильно!");
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Помилка, правильною є відповідь: {task.CorrectOptionIndex + 1}");
+                    Console.ResetColor();
+                }
+            }
+
+            int result = Engine.ProcessTestResults(topicId, correctAnswers, tasks.Count);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\n[AI]: Тест завершено! Ваш рівень знань з цієї теми: {result}%");
+            Console.ResetColor();
+        }
+
+        // --- ДОПОМІЖНІ МЕТОДИ ---
+
+        private string SelectTopicFromList()
+        {
+            Dictionary&lt;string, string> topics = Engine.GetAllTopics();
+            if (topics.Count == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Немає доступних тем у підручнику.");
+                Console.ResetColor();
+                return null!;
+            }
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=== СПИСОК ТЕМ ===");
+            Console.ResetColor();
+
+            int i = 1;
+
+            List&lt;string> keysList = new List&lt;string>(topics.Keys);
+
+            foreach (string key in keysList)
+                Console.WriteLine($"{i++}. {topics[key]}");
+
+            Console.WriteLine("\n0. Повернутись до меню");
+
+            while (true)
+            {
+                Console.Write("\nОберіть номер теми: ");
+                if (int.TryParse(Console.ReadLine(), out int choice))
+                {
+                    Console.WriteLine();
+                    if (choice == 0)
+                        return null!;
+                    if (choice >= 1 && choice &lt;= keysList.Count)
+                        return keysList[choice - 1];
+                }
+                Console.WriteLine("Невірний вибір.");
+            }
+        }
+
+        private void ShowStats()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=== ВАША СТАТИСТИКА ===");
+            Console.ResetColor();
+            foreach (var topic in Engine.Student.Progress[Engine.CurrentSubject].Topics)
+            {
+                Topic content = Engine.GetTopicContent(topic.Key);
+                string title = content != null ? content.Title : topic.Key;
+
+                int knowledge = topic.Value.KnowledgePercentage;
+
+                Console.WriteLine($" - {title}: {knowledge}%");
+            }
+        }
+
+        private void SyncUpdates()
+        {
+            Console.WriteLine("[System]: Перевірка оновлень у файлі підручника...");
+            var (added, removed) = Engine.SyncWithIndustryUpdates();
+
+            if (added.Count > 0 || removed.Count > 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("[AI]: Індустрія оновилася.");
+                if (added.Count > 0)
+                {
+                    Console.WriteLine("[AI]: Додано нові теми:");
+                    foreach (string topic in added)
+                        Console.WriteLine($"- {topic}");
+                }
+                if (removed.Count > 0)
+                {
+                    Console.WriteLine("[AI]: Видалено теми (дані архівовано):");
+                    foreach (string topicId in removed)
+                        Console.WriteLine($"- {topicId}");
+                }
+                Console.ResetColor();
+            }
+            else
+                Console.WriteLine("[AI]: Ваш підручник актуальний.");
+        }
+
+        // --- ДОПОМІЖНІ МЕТОДИ ДЛЯ СТИЛЮ НАВЧАННЯ ---
+
+        private LearningStyle SelectLearningStyle()
+        {
+            ClearConsole();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("=== ВИБІР СТИЛЮ НАВЧАННЯ ===");
+            Console.ResetColor();
+            Console.WriteLine("1. Візуальний - схеми, діаграми, картинки");
+            Console.WriteLine("2. Аудіальний - пояснення, описання, вислови");
+            Console.WriteLine("3. Кінестетичний - приклади, практика, дії");
+            Console.Write("\nОберіть стиль: ");
+
+            while (true)
+            {
+                string choice = Console.ReadLine()!;
+                Console.WriteLine();
+
+                switch (choice)
+                {
+                    case "1": return LearningStyle.Visual;
+                    case "2": return LearningStyle.Auditory;
+                    case "3": return LearningStyle.Kinesthetic;
+                    default:
+                        Console.Write("Невірний вибір. Спробуйте ще раз: ");
+                        break;
+                }
+            }
+        }
+
+        private string GetLearningStyleName(LearningStyle style)
+        {
+            return style switch
+            {
+                LearningStyle.Visual => "Візуальний",
+                LearningStyle.Auditory => "Аудіальний",
+                LearningStyle.Kinesthetic => "Кінестетичний",
+                _ => "Невідомий"
+            };
+        }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					User.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public class User
+    {
+        private string _id;
+        private string _name;
+        private LearningStyle _learningStyle;
+        private Dictionary&lt;string, SubjectProgress> _progress;
+        private Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>> _archivedTopics; // subject -> (topicId -> archived)
+
+        public User() { }
+
+        public User(string id, string name, LearningStyle learningStyle = LearningStyle.Visual)
+        {
+            Id = id;
+            Name = name;
+            LearningStyle = learningStyle;
+            Progress = new Dictionary&lt;string, SubjectProgress>();
+            ArchivedTopics = new Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>>();
+        }
+
+        public string Id { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+        public LearningStyle LearningStyle { get => _learningStyle; set => _learningStyle = value; }
+        public Dictionary&lt;string, SubjectProgress> Progress { get => _progress; set => _progress = value; } 
+        public Dictionary&lt;string, Dictionary&lt;string, ArchivedTopic>> ArchivedTopics { get => _archivedTopics; set => _archivedTopics = value; }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					ArchievedTopic.cs
+                    </div>
+<pre>
+using System;
+
+namespace AITutor.Components
+{
+    public class ArchivedTopic
+    {
+        private TopicProgress _progress;
+
+        public ArchivedTopic() { }
+
+        public TopicProgress Progress { get => _progress; set => _progress = value; }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					LearningStyle.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public enum LearningStyle
+    {
+        Visual,      // Візуальний - сприйняття через зір, малювання, графіка
+        Auditory,    // Аудіальний - сприйняття через слух, музика, усне мовлення
+        Kinesthetic  // Кінестетичний - сприйняття через дотик, рух, практичні заняття
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					SubjectProgress.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public class SubjectProgress
+    {
+        private DateTime _deadline;
+        private Dictionary&lt;string, TopicProgress> _topics;
+
+        public SubjectProgress()
+        {
+            _deadline = DateTime.MinValue;
+            _topics = new Dictionary&lt;string, TopicProgress>();
+        }
+
+        public DateTime Deadline { get => _deadline; set => _deadline = value; }
+        public Dictionary&lt;string, TopicProgress> Topics 
+        { 
+            get 
+            { 
+                _topics ??= new Dictionary&lt;string, TopicProgress>();
+                return _topics;
+            }
+            set => _topics = value; 
+        }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					TaskItem.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public enum TaskType
+    {
+        Theory,     // Теоретичне питання
+        Practice    // Повноцінна задача
+    }
+
+    public class TaskItem
+    {
+        private string _question;
+        private TaskType _type;
+        private List&lt;string> _options;
+        private int _correctOptionIndex;
+        private string _difficulty;
+
+        public string Question { get => _question; set => _question = value; }
+        public TaskType Type { get => _type; set => _type = value; }
+        public List&lt;string> Options { get => _options; set => _options = value; }
+        public int CorrectOptionIndex { get => _correctOptionIndex; set => _correctOptionIndex = value; }
+        public string Difficulty { get => _difficulty; set => _difficulty = value; }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Textbook.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public class Textbook
+    {
+        private string _subject;
+        private string _version;
+        private Dictionary&lt;string, Topic> _topics;
+
+        public string Subject { get => _subject; set => _subject = value; }
+        public string Version { get => _version; set => _version = value; }
+        public Dictionary&lt;string, Topic> Topics { get => _topics; set => _topics = value; }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Topic.cs
+                    </div>
+<pre>
+namespace AITutor.Components
+{
+    public class Topic
+    {
+        private string _title;
+        private string _content;
+        private List&lt;string> _linkedTasks;
+        private List&lt;string> _pages;
+        private List&lt;string> _pagesVisual;
+        private List&lt;string> _pagesAuditory;
+        private List&lt;string> _pagesKinesthetic;
+
+        public string Title { get => _title; set => _title = value; }
+        public string Content { get => _content; set => _content = value; }
+        public List&lt;string> LinkedTasks { get => _linkedTasks; set => _linkedTasks = value; }
+        // Опціональні загальні сторінки для вивчення теми. Якщо присутні, вони є основними для всіх користувачів
+        public List&lt;string> Pages { get => _pages; set => _pages = value; }
+
+        // Опціональні сторінки для конкретного стилю навчання. Якщо присутні, вони є переважними для користувачів з відповідним стилем навчання
+        public List&lt;string> PagesVisual { get => _pagesVisual; set => _pagesVisual = value; }
+        public List&lt;string> PagesAuditory { get => _pagesAuditory; set => _pagesAuditory = value; }
+        public List&lt;string> PagesKinesthetic { get => _pagesKinesthetic; set => _pagesKinesthetic = value; }
+    }
+}
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					TopicProgress.cs
+                    </div>
+<pre>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AITutor.Components
+{
+    public class TopicProgress
+    {
+        private int _knowledgePercentage;
+        private List&lt;int> _recentScores;
+
+        public int KnowledgePercentage { get => _knowledgePercentage; set => _knowledgePercentage = value; }
+        public List&lt;int> RecentScores { get => _recentScores; set => _recentScores = value; }
+    }
+}
+
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Program.cs
+                    </div>
+<pre>
+using AITutor.Components;
+using AITutor.Core;
+using AITutor.Infrastructure;
+using AITutor.UI;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+namespace AITutor
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
+
+            JsonStorage storage = new JsonStorage("data");
+            Clock clock = new Clock();
+
+            AITutorEngine engine = new AITutorEngine(storage, clock);
+
+            ConsoleUI ui = new ConsoleUI(engine);
+            ui.Start();
+        }
+	}
+}
+</pre>
+                </div>
+
+				<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					textbook_math.json
+                    </div>
+<pre>
+{
+  "Subject": "math",
+  "Version": "1.0",
+  "Topics": {
+    "topic_1_intro": {
+      "Title": "Вступ до квадратних рівнянь та їх класифікація",
+	  "PagesVisual": ["Уявіть собі нескінченну координатну площину, на якій намальована плавна, симетрична дуга у формі підкови — це парабола. Квадратне рівняння виду ax^2 + bx + c = 0 — це математичний інструмент, який допомагає нам побачити, у яких саме точках ця 'підкова' перетинає горизонтальну лінію (вісь Х). Уявіть коефіцієнти як кольорові повзунки в графічному редакторі: червоний повзунок 'a' визначає, наскільки парабола широка чи вузька, і куди дивляться її гілки (вгору чи вниз).",
+        "Синій повзунок 'b' зсуває нашу параболу вліво або вправо, а зелений повзунок 'c' (вільний член) працює як ліфт, піднімаючи графік вгору або опускаючи вниз. Рівняння називається квадратним, бо його найстарший член (x^2) формує квадратну залежність. Якщо ми графічно 'приберемо' повзунок 'a' (тобто a=0), наша красива дуга миттєво вирівняється і перетвориться на звичайну пряму лінію. Тому правило 'a ≠ 0' є візуальною гарантією того, що ми працюємо саме з дугою.",
+        "Якщо ми 'вимкнемо' повзунок 'b' або 'c' (зробимо їх нулями), наша фігура стане набагато простішою — такі рівняння називаються неповними. Уявіть графік рівняння ax^2 + c = 0: він ідеально симетричний відносно вертикальної осі Y, ніби метелик із розкритими крилами. А якщо 'вимкнути' вільний член (ax^2 + bx = 0), графік обов'язково пройде через самісінький центр координат (точку 0,0). Візуалізація цих властивостей дозволяє передбачати відповідь ще до початку обчислень."],
+	  "PagesAuditory": ["Давайте промовимо вголос загальний вигляд рівняння: 'а-ікс-квадрат, плюс бе-ікс, плюс це, дорівнює нулю'. Чуєте цей ритм? Головна роль тут завжди у першого доданка — 'ікс у квадраті', саме він задає 'тон' і назву всьому рівнянню. Коефіцієнти a, b і c — це просто числа, які ми підставляємо замість букв. Наприклад, промовте 'два ікс квадрат мінус п'ять ікс плюс три'. Тут чітко чути, що a дорівнює два, b дорівнює мінус п'ять, а c дорівнює три.",
+        "Обговоримо ключове правило: коефіцієнт 'a' ніколи не може дорівнювати нулю. Пояснення дуже просте: якщо ми скажемо, що 'a' дорівнює нулю, то звук 'ікс-квадрат' просто зникне (бо нуль помножити на що завгодно дорівнює нулю). Наше рівняння перетвориться на звичайне лінійне. Послухайте різницю: '3x^2 + 5x = 0' — це квадратне (неповне), а якщо прибрати перший член, залишиться '5x = 0' — це вже зовсім інша історія. Звучання квадратного рівняння завжди починається з другого степеня.",
+        "А як звучать неповні квадратні рівняння? Це ті, в яких 'випав' один із доданків. Якщо випав вільний член 'c', рівняння звучить коротше: 'x^2 мінус 7x дорівнює нулю'. Щоб його розв'язати, вам треба лише винести спільний ікс за дужки, і ви одразу почуєте відповідь: один корінь завжди нуль. А якщо рівняння зведене — це означає, що коефіцієнт 'a' дорівнює одиниці. Ми не кажемо 'один ікс квадрат', ми просто кажемо 'ікс квадрат'. Це ніби полегшена, приємніша для слуху версія рівняння."],
+	  "PagesKinesthetic": ["Математика потребує дій! Візьміть ручку, аркуш паперу і давайте власноруч складемо квадратне рівняння. Напишіть по центру `x^2`. Тепер додайте до нього `7x`. І наприкінці допишіть `+ 10 = 0`. Ви щойно створили зведене квадратне рівняння! Тепер візьміть маркер: підкресліть числа перед іксами. Перед x^2 нічого немає, отже там ховається 1 — напишіть її. Обведіть кружечком число 7 (це коефіцієнт 'b'). І підкресліть двома лініями 10 (це вільний член 'c').",
+        "Щоб зрозуміти, як працюють неповні квадратні рівняння, давайте їх фізично розв'яжемо. Напишіть рівняння `x^2 - 25 = 0`. Перенесіть 25 на іншу сторону: `x^2 = 25`. Тепер запитайте себе: яке число треба помножити саме на себе, щоб отримати 25? Запишіть: `x = 5`. Але зачекайте! Напишіть поруч `-5 * -5`. Воно теж дає 25! Тому рукою допишіть: `x1 = 5, x2 = -5`. Ви щойно розв'язали неповне рівняння методом добування кореня.",
+        "Тепер розберемо інший тип неповного рівняння: `x^2 - 7x = 0`. Тут немає вільного числа, але є ікс в обох доданках. Напишіть його. Тепер фізично винесіть ікс за дужки: `x(x - 7) = 0`. Коли добуток двох множників дорівнює нулю? Коли хоча б один із них нуль! Запишіть два варіанти: `x = 0` (це наша перша відповідь) або `x - 7 = 0`. З другого рівняння переносимо 7 і отримуємо `x = 7`. Цей процес розбиття одного великого рівняння на два маленьких — найкращий спосіб тренування!"],
+      "Pages":[
+        "Квадратним рівнянням називається рівняння виду ax^2 + bx + c = 0, де x — невідома змінна, а a, b і c — задані дійсні числа, причому обов'язково a ≠ 0. Ці числа мають спеціальні назви: 'a' — перший (або старший) коефіцієнт, 'b' — другий коефіцієнт, 'c' — вільний член. Назва 'квадратне' походить від того, що найвищий степінь змінної x у цьому рівнянні дорівнює двом.",
+        "Якщо старший коефіцієнт a = 1, таке рівняння називається зведеним. Воно має вигляд x^2 + px + q = 0. Зведені рівняння набагато легше розв'язувати усно. Важливо пам'ятати: будь-яке незведене рівняння можна легко перетворити на зведене, просто поділивши обидві його частини на старший коефіцієнт 'a'.",
+        "Якщо хоча б один із коефіцієнтів b або c дорівнює нулю, квадратне рівняння називається неповним. Такі рівняння розв'язуються набагато простіше. Наприклад, якщо c = 0 (рівняння виду ax^2 + bx = 0), його розв'язують винесенням x за дужки: x(ax + b) = 0. Коренями завжди будуть x1 = 0 та x2 = -b/a. Якщо ж b = 0 (вигляд ax^2 + c = 0), тоді x^2 = -c/a, і дійсний корінь існує лише тоді, коли вираз праворуч є невід'ємним числом."
+      ],
+      "LinkedTasks":[
+        "TASK_MATH_intro_001",
+        "TASK_MATH_intro_002",
+        "TASK_MATH_intro_003",
+        "TASK_MATH_intro_004",
+        "TASK_MATH_intro_005",
+        "TASK_MATH_intro_006",
+        "TASK_MATH_intro_007",
+        "TASK_MATH_intro_008",
+        "TASK_MATH_intro_009",
+        "TASK_MATH_intro_010",
+        "TASK_MATH_intro_011",
+        "TASK_MATH_intro_012",
+        "TASK_MATH_intro_013",
+        "TASK_MATH_intro_014",
+        "TASK_MATH_intro_015",
+        "TASK_MATH_intro_016",
+        "TASK_MATH_intro_017",
+        "TASK_MATH_intro_018",
+        "TASK_MATH_intro_019",
+        "TASK_MATH_intro_020"
+      ]
+    },
+    "topic_2_discriminant": {
+      "Title": "Дискримінант та універсальна формула коренів",
+	  "PagesVisual": ["Уявіть Дискримінант (D) як потужний візуальний радар або світлофор для нашого рівняння, який розраховується за формулою D = b^2 - 4ac. Коли ви дивитесь на цю формулу, уявіть, як коефіцієнти збираються разом, щоб утворити єдине число. Це число — ваш дороговказ. Якщо радар показує зелене світло (D > 0) — уявіть чітку картинку, де графік параболи впевнено пробиває вісь Х у двох різних місцях. Ми маємо 2 різні корені! Шлях відкрито.",
+        "Якщо наш радар показує жовте світло (D = 0) — графік лише злегка торкається осі Х самою своєю вершиною, ніби м'ячик, що завмер, торкнувшись підлоги. У цьому випадку у нас є лише один дійсний корінь. А от якщо спалахує червоне світло (D &lt; 0) — графік 'завис' у повітрі. Візуалізуйте параболу, яка літає високо над віссю Х або глибоко під нею, ніколи її не перетинаючи. Уявіть порожнечу — в такому випадку дійсних розв'язків просто не існує.",
+        "Як виглядає сама формула коренів? Подивіться на запис: x = (-b ± √D) / 2a. Знак 'плюс-мінус' (±) — це роздоріжжя. Уявіть, що ви стоїте в точці '-b' і вам потрібно зробити крок вправо (додавши √D) та крок вліво (віднявши √D). Саме ця візуальна симетрія відносно центру параболи і створює два різних корені. Якщо D = 0, то √D теж нуль, і кроки вліво-вправо робити не потрібно — ви залишаєтесь в єдиній центральній точці."],
+	  "PagesAuditory": ["Слово 'дискримінант' походить від латинського слова 'discriminare', що означає 'розрізняти' або 'відокремлювати'. Послухайте, як звучить його формула, і спробуйте повторити кілька разів вголос, як ритмічну лічилку: 'Де дорівнює бе-квадрат мінус чотири а-це'. Цей звук має закарбуватися у вашій пам'яті. Коли ви отримуєте значення D, воно ніби 'говорить' з вами, підказуючи подальші дії.",
+        "Давайте прислухаємося до того, що 'каже' дискримінант. Якщо отримане число додатне, воно каже: 'Все добре, рухайся далі, шукай дві відповіді за повною формулою'. Якщо число дорівнює нулю, воно підказує: 'Тобі потрібна лише одна відповідь, ти можеш ігнорувати корінь і просто поділити мінус b на два a'. А якщо воно від'ємне, воно просто кричить: 'Зупинись! Далі йти не можна, з від'ємного числа корінь не добувається!'. На цьому розмова з таким рівнянням завершується.",
+        "Давайте проговоримо процес знаходження коренів. Формула звучить так: 'мінус бе, плюс-мінус корінь з де, поділене на два а'. Наприклад, якщо рівняння x^2 - 5x + 6 = 0. Дискримінант: мінус п'ять у квадраті — це двадцять п'ять; відняти чотири помножене на один і на шість (це двадцять чотири). Двадцять п'ять мінус двадцять чотири дорівнює один! Корінь з одного — це один. Тепер фінал: п'ять плюс один — шість, ділимо на два — буде три. П'ять мінус один — чотири, ділимо на два — буде два. Корені: три і два. Проговорюйте ці кроки, і ви ніколи не помилитесь."],
+	  "PagesKinesthetic": ["Дискримінант не терпить теорії, він потребує практики! Візьміть чистий аркуш і ручку. Давайте пройдемо всі кроки власноруч. Запишіть рівняння: `2x^2 - 5x + 3 = 0`. Крок перший — випишіть збоку коефіцієнти, щоб вони були перед очима: a = 2, b = -5, c = 3. Це ваш будівельний матеріал. Тепер напишіть 'скелет' формули: D = ( )^2 - 4 * ( ) * ( ). Це допоможе не загубити мінуси.",
+        "Тепер фізично підставте туди ваші числа. У перші дужки ставте -5. Квадрат будь-якого числа завжди додатний, тому записуємо: 25. Далі виконуємо множення: 4 множимо на 2 і на 3. 4*2 = 8, 8*3 = 24. Записуємо результат поруч. Тепер віднімаємо: 25 - 24 = 1. Наш D = 1. Відчули цей процес? Ви щойно власноруч розібрали складне рівняння на прості арифметичні дії. Оскільки 1 більше нуля, ми готові рухатися далі і шукати два корені.",
+        "Крок третій — знаходження самих коренів. Намалюйте дві стрілочки від вашого D=1. Верхня стрілочка буде для x1 (з плюсом), нижня для x2 (з мінусом). Пишемо: x1 = (5 + 1) / (2*2). Рахуємо чисельник: 6. Знаменник: 4. Ділимо: 6/4 = 1.5. Перший корінь є! Переходимо до нижньої гілки: x2 = (5 - 1) / 4. Рахуємо: 4 / 4 = 1. Другий корінь знайдено. Цей механічний процес розгалуження на плюс і мінус є найкращим способом закріпити навичку роботи з формулою."],
+      "Pages":[
+        "Універсальним алгоритмом розв'язання будь-якого повного квадратного рівняння є використання дискримінанта. Дискримінант (від латинського слова, що означає 'розрізняючий') позначається великою літерою D і обчислюється за формулою: D = b^2 - 4ac. Це ключове число є своєрідним 'індикатором', який показує природу розв'язків рівняння.",
+        "Кількість дійсних коренів залежить від знака дискримінанта. Існує три випадки: 1) Якщо D > 0, рівняння має два різні дійсні корені. Графічно це означає, що парабола перетинає вісь Х у двох точках. 2) Якщо D = 0, рівняння має рівно один дійсний корінь (або два однакові), оскільки вершина параболи лише торкається осі Х. 3) Якщо D &lt; 0, рівняння взагалі не має дійсних коренів.",
+        "Якщо корені існують, їх знаходять за формулами: x1 = (-b + √D) / (2a) та x2 = (-b - √D) / (2a). Розглянемо класичний приклад: 2x^2 - 5x + 3 = 0. Маємо a=2, b=-5, c=3. Обчислюємо D = (-5)^2 - 4*2*3 = 25 - 24 = 1. Оскільки D > 0, рахуємо корені: x1 = (5 + 1) / 4 = 1.5, а x2 = (5 - 1) / 4 = 1. Рівняння успішно розв'язане!"
+      ],
+      "LinkedTasks":[
+        "TASK_MATH_discriminant_001",
+        "TASK_MATH_discriminant_002",
+        "TASK_MATH_discriminant_003",
+        "TASK_MATH_discriminant_004",
+        "TASK_MATH_discriminant_005",
+        "TASK_MATH_discriminant_006",
+        "TASK_MATH_discriminant_007",
+        "TASK_MATH_discriminant_008",
+        "TASK_MATH_discriminant_009",
+        "TASK_MATH_discriminant_010",
+        "TASK_MATH_discriminant_011",
+        "TASK_MATH_discriminant_012",
+        "TASK_MATH_discriminant_013",
+        "TASK_MATH_discriminant_014",
+        "TASK_MATH_discriminant_015",
+        "TASK_MATH_discriminant_016",
+        "TASK_MATH_discriminant_017",
+        "TASK_MATH_discriminant_018",
+        "TASK_MATH_discriminant_019",
+        "TASK_MATH_discriminant_020"
+      ]
+    },
+    "topic_3_vieta_and_factoring": {
+      "Title": "Теорема Вієта та розкладання на множники",
+	  "PagesVisual": ["Уявіть класичні математичні терези (ваги). На одній шальці терезів лежать наші два знайдені корені (x1 та x2). На іншій — коефіцієнти рівняння. Теорема Вієта показує ідеальну візуальну симетрію: якщо ми об'єднаємо наші корені знаком '+' (x1 + x2), вони ідеально врівноважать середній коефіцієнт `p`, але ніби 'перефарбований' у протилежний колір (знак мінус). А якщо ми перемножимо ці корені (x1 * x2), вони ідеально врівноважать останній блок `q`.",
+        "Давайте подивимось на цю гармонію візуально. Уявіть рівняння x^2 - 5x + 6 = 0. Коренями є числа 2 і 3. Подивіться на них: 2 + 3 = 5 (а в рівнянні стоїть -5, колір змінився!), а 2 * 3 = 6 (в рівнянні стоїть 6, колір той самий). Ця картина дозволяє розв'язувати рівняння без довгих формул. Ви просто малюєте в уяві дві комірки `[ ]` та `[ ]` і підбираєте такі 'кубики' з цифрами, які одночасно підійдуть і для додавання, і для множення.",
+        "Знання коренів дозволяє візуально 'розібрати' складний квадратний тричлен на два прості блоки. Універсальний розклад виглядає як a(x - x1)(x - x2). Наприклад, для виразу x^2 - 7x + 10, корені якого 2 і 5, ми можемо уявити, як великий вираз розвалюється на дві акуратні дужки: (x - 2)(x - 5). Це надзвичайно важлива візуальна трансформація, яка дозволяє легко 'скорочувати' поверхи у великих алгебраїчних дробах."],
+	  "PagesAuditory": ["Видатний французький математик Франсуа Вієт відкрив дивовижну залежність, яка звучить як правило з підручника магії: 'Сума коренів зведеного квадратного рівняння дорівнює другому коефіцієнту з протилежним знаком, а їхній добуток дорівнює вільному члену'. Проговоріть це вголос: сума — протилежний другий, добуток — останній. Це ідеальний інструмент для швидкої усної перевірки коренів, які ви знайшли через дискримінант.",
+        "На практиці набагато кориснішою є обернена теорема Вієта. Це як словесна математична загадка. Давайте зіграємо в гру. Я загадую два числа. Коли я їх множу, я чую число 10. А коли я їх додаю, я чую число 7. Що це за числа? Проговоріть варіанти вголос... Може 1 і 10? Ні, сума 11. А 2 і 5? Так! 2 * 5 = 10, а 2 + 5 = 7. Вітаю, ви щойно абсолютно усно і без ручки розв'язали квадратне рівняння x^2 - 7x + 10 = 0!",
+        "Що робити, якщо добуток від'ємний? Давайте проговоримо ще одну загадку: рівняння x^2 - x - 12 = 0. Добуток дорівнює мінус 12. Якщо при множенні ми чуємо мінус, значить наші два числа мають різні знаки (одне з плюсом, інше з мінусом). Сума дорівнює плюс 1 (бо перед іксом стоїть невидима -1, беремо з протилежним знаком). Які числа дають в добутку 12 і відрізняються на 1? Це 3 і 4! Оскільки сума додатна (+1), то більше число має бути додатним. Відповідь: 4 та -3. Читання таких загадок вголос швидко зробить вас майстром."],
+	  "PagesKinesthetic": ["Теорема Вієта — це метод активного підбору і дії. Щоб його опанувати, треба тренуватися писати. Напишіть на аркуші рівняння: `x^2 - 8x + 15 = 0`. Намалюйте під ним дві порожні клітинки: `[ ] * [ ] = 15` та `[ ] + [ ] = 8`. Наша мета — фізично заповнити ці клітинки. Завжди починайте з множення (з числа 15). Виписуйте на полях всі можливі пари чисел, що дають 15: це 1 і 15, або 3 і 5.",
+        "Дія друга: перевірка додаванням. Беремо наші виписані пари і перевіряємо, чи дадуть вони в сумі 8 (бо в рівнянні стоїть -8). Перевіряємо першу: 1+15=16. Ручкою закреслюємо цю пару, вона не підходить. Перевіряємо другу: 3+5=8. Ідеально! Впишіть числа 3 і 5 у ваші порожні клітинки. Ви власноруч знайшли корені: x1=3, x2=5. Цей процес виписування та закреслення варіантів — найкращий тренажер для мозку.",
+        "Тепер використаємо наші знайдені корені (3 і 5), щоб розкласти тричлен на множники. Напишіть 'скелет' розкладу: `(x -  )(x -  )`. Тепер візьміть ваші корені і фізично вставте їх у ці порожні місця. У вас вийде: `(x - 3)(x - 5)`. Ви щойно перетворили суму в добуток! Якщо корінь від'ємний, наприклад -2, то при підстановці два мінуси дадуть плюс, і ви напишете `(x + 2)`. Спробуйте прямо зараз розкласти вираз `x^2 - 5x - 14`, коренями якого є 7 та -2."],
+      "Pages":[
+        "Видатний французький математик Франсуа Вієт відкрив дивовижну залежність між коренями рівняння та його коефіцієнтами. Для зведеного рівняння x^2 + px + q = 0 пряма теорема Вієта звучить так: сума коренів дорівнює другому коефіцієнту з протилежним знаком (x1 + x2 = -p), а добуток коренів дорівнює вільному члену (x1 * x2 = q). Це ідеальний інструмент для швидкої перевірки знайдених коренів.",
+        "На практиці ще кориснішою є обернена теорема Вієта: якщо ви підібрали два числа, сума яких дорівнює -p, а добуток дорівнює q, то ці числа гарантовано є коренями даного рівняння. Це дозволяє розв'язувати рівняння усно! Наприклад, для рівняння x^2 - 7x + 10 = 0 шукаємо числа, сума яких 7, а добуток 10. Очевидно, це числа 2 і 5. Отже, корені знайдені без жодного дискримінанта.",
+        "Знання коренів дозволяє легко розкласти квадратний тричлен на множники. Універсальна формула розкладання має вигляд: ax^2 + bx + c = a(x - x1)(x - x2). Наприклад, для виразу x^2 - 7x + 10, корені якого ми щойно визначили як 2 і 5, розклад буде мати вигляд: (x - 2)(x - 5). Це надзвичайно важливий навик, який використовується при скороченні алгебраїчних дробів та розв'язанні складних нерівностей методом інтервалів."
+      ],
+      "LinkedTasks":[
+        "TASK_MATH_vieta_001",
+        "TASK_MATH_vieta_002",
+        "TASK_MATH_vieta_003",
+        "TASK_MATH_vieta_004",
+        "TASK_MATH_vieta_005",
+        "TASK_MATH_vieta_006",
+        "TASK_MATH_vieta_007",
+        "TASK_MATH_vieta_008",
+        "TASK_MATH_vieta_009",
+        "TASK_MATH_vieta_010",
+        "TASK_MATH_vieta_011",
+        "TASK_MATH_vieta_012",
+        "TASK_MATH_vieta_013",
+        "TASK_MATH_vieta_014",
+        "TASK_MATH_vieta_015",
+        "TASK_MATH_vieta_016",
+        "TASK_MATH_vieta_017",
+        "TASK_MATH_vieta_018",
+        "TASK_MATH_vieta_019",
+        "TASK_MATH_vieta_020"
+      ]
+    }
+  }
+}
+</pre>
+                </div>
+				
+				<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					tasks_math.json
+                    </div>
+<pre>
+{
+  "TASK_MATH_intro_001": {
+    "Question": "Яке з наведених рівнянь називається квадратним?",
+    "Type": "Theory",
+    "Options":["ax + b = 0", "ax^2 + bx + c = 0", "ax^3 + bx^2 + c = 0"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_002": {
+    "Question": "Яка обов'язкова умова повинна виконуватись для коефіцієнта 'a' у квадратному рівнянні?",
+    "Type": "Theory",
+    "Options":["a > 0", "a = 1", "a ≠ 0"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_003": {
+    "Question": "Як називається квадратне рівняння, у якому старший коефіцієнт (a) дорівнює 1?",
+    "Type": "Theory",
+    "Options":["Зведене", "Неповне", "Лінійне"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_004": {
+    "Question": "Як називається коефіцієнт 'c' у квадратному рівнянні?",
+    "Type": "Theory",
+    "Options": ["Старший коефіцієнт", "Другий коефіцієнт", "Вільний член"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_005": {
+    "Question": "Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?",
+    "Type": "Theory",
+    "Options": ["Зведене", "Неповне", "Просте"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_006": {
+    "Question": "Скільки коренів завжди має рівняння виду ax^2 = 0?",
+    "Type": "Theory",
+    "Options":["Жодного", "Один (x = 0)", "Два (x = 0 та x = a)"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_007": {
+    "Question": "Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?",
+    "Type": "Theory",
+    "Options":["Винесенням x за дужки", "Діленням на b", "Використанням дискримінанта"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_008": {
+    "Question": "За якої умови неповне квадратне рівняння ax^2 + c = 0 не має дійсних коренів?",
+    "Type": "Theory",
+    "Options":["Якщо a і c мають різні знаки", "Якщо a і c мають однакові знаки", "Воно завжди має корені"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_intro_009": {
+    "Question": "Що потрібно зробити, щоб перетворити будь-яке незведене квадратне рівняння на зведене?",
+    "Type": "Theory",
+    "Options":["Помножити на a", "Поділити всі члени на a", "Відняти a від обох частин"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_010": {
+    "Question": "Який найвищий степінь змінної у квадратному рівнянні?",
+    "Type": "Theory",
+    "Options":["1", "2", "3"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_011": {
+    "Question": "Визначте коефіцієнти a, b, c для рівняння 3x^2 - 5x + 2 = 0:",
+    "Type": "Practice",
+    "Options":["a=3, b=5, c=2", "a=3, b=-5, c=2", "a=-3, b=-5, c=-2"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_012": {
+    "Question": "Які корені має рівняння x^2 - 16 = 0?",
+    "Type": "Practice",
+    "Options": ["тільки 4", "тільки -4", "4 та -4"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_013": {
+    "Question": "Розв'яжіть рівняння 2x^2 = 0:",
+    "Type": "Practice",
+    "Options":["x = 0", "x = 2", "Коренів немає"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_intro_014": {
+    "Question": "Які корені має рівняння x^2 + 25 = 0?",
+    "Type": "Practice",
+    "Options": ["5 та -5", "тільки 5", "Дійсних коренів немає"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_015": {
+    "Question": "Розв'яжіть неповне рівняння x^2 - 7x = 0:",
+    "Type": "Practice",
+    "Options":["x = 7", "x = 0 та x = 7", "x = 0 та x = -7"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_016": {
+    "Question": "Знайдіть корені рівняння 3x^2 - 12x = 0:",
+    "Type": "Practice",
+    "Options":["0 та 4", "0 та -4", "3 та 12"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_017": {
+    "Question": "Перетворіть рівняння 2x^2 - 8x + 10 = 0 у зведене:",
+    "Type": "Practice",
+    "Options":["x^2 - 8x + 10 = 0", "x^2 - 4x + 5 = 0", "x^2 - 4x + 10 = 0"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_intro_018": {
+    "Question": "Яке з рівнянь має корені x1=0, x2=5?",
+    "Type": "Practice",
+    "Options":["x^2 - 25 = 0", "x^2 + 5x = 0", "x^2 - 5x = 0"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_intro_019": {
+    "Question": "Розв'яжіть рівняння -x^2 + 9 = 0:",
+    "Type": "Practice",
+    "Options":["3 та -3", "Коренів немає", "тільки 9"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_intro_020": {
+    "Question": "Якщо 5x^2 = 20, то x дорівнює:",
+    "Type": "Practice",
+    "Options":["тільки 2", "2 та -2", "4 та -4"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+
+  "TASK_MATH_discriminant_001": {
+    "Question": "За якою формулою обчислюється дискримінант квадратного рівняння?",
+    "Type": "Theory",
+    "Options":["D = b^2 + 4ac", "D = b^2 - 4ac", "D = a^2 - 4bc"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_002": {
+    "Question": "Скільки коренів має квадратне рівняння, якщо D > 0?",
+    "Type": "Theory",
+    "Options": ["Жодного", "Один", "Два різні"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_003": {
+    "Question": "Що означає, коли дискримінант дорівнює нулю (D = 0)?",
+    "Type": "Theory",
+    "Options":["Рівняння має один корінь", "Рівняння не має коренів", "Рівняння має безліч коренів"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_004": {
+    "Question": "Скільки дійсних коренів має рівняння, якщо D &lt; 0?",
+    "Type": "Theory",
+    "Options": ["Один", "Два", "Жодного дійсного кореня"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_005": {
+    "Question": "Якою літерою позначається дискримінант?",
+    "Type": "Theory",
+    "Options":["C", "D", "P"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_006": {
+    "Question": "За якою формулою знаходять корені, якщо D > 0?",
+    "Type": "Theory",
+    "Options":["x = (-b ± √D) / 2a", "x = (b ± √D) / a", "x = (-b ± D) / 2a"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_007": {
+    "Question": "Що графічно означає умова D > 0 для функції y = ax^2 + bx + c?",
+    "Type": "Theory",
+    "Options":["Парабола не перетинає вісь Х", "Парабола торкається осі Х", "Парабола перетинає вісь Х у двох точках"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_008": {
+    "Question": "Якщо D = 0, за якою спрощеною формулою обчислюється єдиний корінь?",
+    "Type": "Theory",
+    "Options":["x = -b / a", "x = -b / (2a)", "x = b / 2a"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_discriminant_009": {
+    "Question": "Що є причиною відсутності дійсних коренів при D &lt; 0?",
+    "Type": "Theory",
+    "Options":["Коефіцієнт a від'ємний", "Не можна добути квадратний корінь з від'ємного числа", "Помилка в обчисленнях"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_010": {
+    "Question": "Якщо a і c мають різні знаки (одне додатне, інше від'ємне), яким завжди буде D?",
+    "Type": "Theory",
+    "Options": ["Додатним", "Від'ємним", "Нулем"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_discriminant_011": {
+    "Question": "Обчисліть дискримінант для рівняння x^2 - 5x + 6 = 0:",
+    "Type": "Practice",
+    "Options": ["D = 1", "D = -1", "D = 49"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_012": {
+    "Question": "Чому дорівнює D у рівнянні x^2 - 4x + 4 = 0?",
+    "Type": "Practice",
+    "Options":["16", "0", "-16"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_discriminant_013": {
+    "Question": "Обчисліть D для рівняння 2x^2 + x + 3 = 0:",
+    "Type": "Practice",
+    "Options":["-23", "25", "1"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_014": {
+    "Question": "Скільки коренів має рівняння x^2 + 2x + 5 = 0?",
+    "Type": "Practice",
+    "Options": ["Один", "Два", "Жодного"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_015": {
+    "Question": "Знайдіть корені рівняння x^2 - 6x + 8 = 0:",
+    "Type": "Practice",
+    "Options":["2 та 4", "-2 та -4", "тільки 4"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_016": {
+    "Question": "Знайдіть корінь рівняння x^2 - 10x + 25 = 0:",
+    "Type": "Practice",
+    "Options":["5 та -5", "тільки 5", "тільки 10"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_017": {
+    "Question": "Обчисліть корені рівняння 2x^2 - 5x + 2 = 0:",
+    "Type": "Practice",
+    "Options":["2 та 0.5", "-2 та -0.5", "4 та 1"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_discriminant_018": {
+    "Question": "Рівняння 3x^2 + 4x - 4 = 0 має корені:",
+    "Type": "Practice",
+    "Options":["2/3 та -2", "-2/3 та 2", "тільки -2"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_discriminant_019": {
+    "Question": "Чому дорівнює √D для рівняння x^2 - 7x + 12 = 0?",
+    "Type": "Practice",
+    "Options":["1", "5", "7"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_discriminant_020": {
+    "Question": "Якщо D = 81, a = 1, b = -1, які корені матиме рівняння?",
+    "Type": "Practice",
+    "Options":["5 та -4", "-5 та 4", "9 та -9"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+
+  "TASK_MATH_vieta_001": {
+    "Question": "Для якого типу квадратних рівнянь найзручніше використовувати теорему Вієта?",
+    "Type": "Theory",
+    "Options":["Для будь-яких", "Для неповних", "Для зведених (де a=1)"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_vieta_002": {
+    "Question": "Чому дорівнює сума коренів (x1 + x2) зведеного рівняння x^2 + px + q = 0?",
+    "Type": "Theory",
+    "Options": ["q", "p", "-p"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_vieta_003": {
+    "Question": "Чому дорівнює добуток коренів (x1 * x2) зведеного рівняння x^2 + px + q = 0?",
+    "Type": "Theory",
+    "Options": ["q", "-q", "p"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_vieta_004": {
+    "Question": "Якщо корені рівняння x1 і x2 додатні, яким буде знак q?",
+    "Type": "Theory",
+    "Options":["Від'ємним", "Додатним", "Нулем"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_005": {
+    "Question": "Як записується загальна формула розкладання квадратного тричлена на множники?",
+    "Type": "Theory",
+    "Options":["a(x - x1)(x - x2)", "a(x + x1)(x + x2)", "(x - x1)(x - x2)"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_006": {
+    "Question": "Якщо один із коренів зведеного рівняння дорівнює 0, чому дорівнює q?",
+    "Type": "Theory",
+    "Options": ["1", "-p", "0"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_007": {
+    "Question": "Що дозволяє зробити обернена теорема Вієта?",
+    "Type": "Theory",
+    "Options":["Скласти рівняння за відомими коренями", "Знайти дискримінант", "Розкласти на множники без коренів"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_008": {
+    "Question": "Якщо добуток коренів (q) від'ємний, що це означає?",
+    "Type": "Theory",
+    "Options":["Обидва корені від'ємні", "Обидва корені додатні", "Корені мають різні знаки"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_009": {
+    "Question": "Для незведеного рівняння ax^2 + bx + c = 0 добуток коренів дорівнює:",
+    "Type": "Theory",
+    "Options": ["c", "c / a", "-b / a"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_010": {
+    "Question": "Для незведеного рівняння ax^2 + bx + c = 0 сума коренів дорівнює:",
+    "Type": "Theory",
+    "Options":["-b / a", "b / a", "c / a"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_011": {
+    "Question": "Знайдіть суму коренів рівняння x^2 - 8x + 15 = 0:",
+    "Type": "Practice",
+    "Options":["-8", "8", "15"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_vieta_012": {
+    "Question": "Знайдіть добуток коренів рівняння x^2 + 5x - 14 = 0:",
+    "Type": "Practice",
+    "Options": ["-14", "14", "5"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_MATH_vieta_013": {
+    "Question": "Підберіть корені для рівняння x^2 - 5x + 6 = 0:",
+    "Type": "Practice",
+    "Options":["1 і 6", "2 і 3", "-2 і -3"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_014": {
+    "Question": "Підберіть корені для рівняння x^2 + 7x + 10 = 0:",
+    "Type": "Practice",
+    "Options":["2 і 5", "-2 і -5", "-2 і 5"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_015": {
+    "Question": "Складіть зведене квадратне рівняння, якщо його корені x1=3, x2=4:",
+    "Type": "Practice",
+    "Options":["x^2 - 7x + 12 = 0", "x^2 + 7x + 12 = 0", "x^2 - 12x + 7 = 0"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_MATH_vieta_016": {
+    "Question": "Складіть рівняння, якщо його корені x1=-2, x2=5:",
+    "Type": "Practice",
+    "Options":["x^2 - 3x - 10 = 0", "x^2 + 3x - 10 = 0", "x^2 - 10x - 3 = 0"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_017": {
+    "Question": "Розкладіть на множники тричлен x^2 - 9x + 20:",
+    "Type": "Practice",
+    "Options":["(x - 4)(x - 5)", "(x + 4)(x + 5)", "(x - 2)(x - 10)"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_018": {
+    "Question": "Розкладіть на множники 2x^2 - 6x + 4:",
+    "Type": "Practice",
+    "Options":["2(x - 1)(x - 2)", "(x - 1)(x - 2)", "2(x + 1)(x + 2)"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_019": {
+    "Question": "Знайдіть суму коренів незведеного рівняння 3x^2 - 12x + 7 = 0:",
+    "Type": "Practice",
+    "Options": ["12", "4", "-4"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_MATH_vieta_020": {
+    "Question": "Якщо добуток коренів x^2 + px - 24 = 0 дорівнює -24, а один корінь x1 = 6, знайдіть x2:",
+    "Type": "Practice",
+    "Options": ["4", "-4", "-6"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  }
+}
+</pre>
+                </div>
+				
+				<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					textbook_python.json
+                    </div>
+<pre>
+{
+  "Subject": "python",
+  "Version": "1.0",
+  "Topics": {
+    "topic_1_basics": {
+      "Title": "Вступ до Python, Змінні та Базові типи даних",
+	  "PagesVisual": ["Уявіть код мовою Python як чистий, мінімалістичний архітектурний план. Тут немає хаосу з фігурних дужок чи крапок з комою в кінці кожного рядка. Візуальна структура коду формується виключно відступами — пустим простором (зазвичай 4 пробіли). Це робить код схожим на акуратно відформатований вірш, де кожен блок має своє чітке візуальне вирівнювання.",
+        "Змінні в Python найкраще уявляти як картонні коробки з наклеєними на них ярликами (назвами). На відміну від мови C++, де коробка має жорстку форму (тільки для чисел або тільки для тексту), коробка в Python 'гумова'. Ви можете покласти туди число `10`, і коробка набуде форми числа. А через секунду можете викинути число і покласти туди рядок `'Привіт'`, і коробка миттєво адаптується під текст. Це візуалізує концепцію динамічної типізації.",
+        "Уявіть чотири базові типи даних як різні фізичні об'єкти. Цілі числа (int) — це рівні, тверді цеглини: 5, -10. Дійсні числа (float) — це вода, яку можна виміряти з точністю до краплі: 3.14. Рядки тексту (str) — це намиста, де кожна літера нанизана на нитку, і все це обов'язково взято в лапки (візуальні 'застібки' намиста). А булеві значення (bool) — це звичайний перемикач світла, який може бути лише в двох положеннях: Увімкнено (True) або Вимкнено (False)."],
+	  "PagesAuditory": ["Python створювався так, щоб його можна було читати вголос, майже як звичайну англійську мову. Послухайте, як звучить створення змінної: 'name дорівнює Ivan'. Вам не потрібно голосно попереджати програму: 'УВАГА, зараз буде рядок!'. Ви просто спілкуєтесь з комп'ютером прямими фактами. Ця відсутність зайвого 'шуму' у вигляді специфічних декларацій типів робить Python надзвичайно приємним для слуху та читання.",
+        "Оскільки Python має динамічну типізацію, інтерпретатор сам здогадується, що ви мали на увазі. Але як дізнатися, що комп'ютер 'почув'? Для цього існує функція `type()`. Уявіть, що це ніби запитання 'Хто ти?'. Ви кажете програмі: `print(type(x))`, і програма відповідає вам: `&lt;class 'int'>` (я — ціле число!) або `&lt;class 'str'>` (я — рядок!). Це справжній діалог між розробником і машиною.",
+        "Поговорімо про базові типи даних. Назви типів звучать як скорочення. 'int' (від integer) звучить коротко і чітко — це цілі числа. 'float' (плавати) — числа з плаваючою крапкою, послухайте, як плавно звучить 3.14. 'str' (від string) — це струна, рядок тексту. А 'bool' (від імені математика Буля) — це відповіді на питання 'Так' чи 'Ні' (True або False). Завжди проговорюйте вголос, з яким типом ви зараз працюєте, це допоможе уникнути помилок."],
+	  "PagesKinesthetic": ["Досить теорії, час відкрити інтерпретатор Python (або консоль) і відчути це руками! Надрукуйте `x = 10` і натисніть Enter. Нічого не відбулося? Насправді ви щойно створили змінну. Тепер надрукуйте `print(x)`. Ви побачите число 10. А тепер зробіть те, що в багатьох інших мовах заборонено: напишіть `x = 'Python'` і знову `print(x)`. Ви відчуєте, як легко змінна 'переодягнулася' з числа на текст. Це і є динамічна типізація в дії.",
+        "Давайте попрацюємо з функцією `type()`. Напишіть: `type(5)`. Комп'ютер поверне вам тип. Тепер спробуйте написати `type(5.0)`. Зверніть увагу, як лише одна крапка змусила систему змінити тип з `int` на `float`. Спробуйте 'помацати' різні значення: напишіть `type('5')` в лапках. Тепер це вже рядок (`str`). Цей процес ручного перемикання типів розвиває глибоке розуміння того, як Python сприймає дані.",
+        "Давайте фізично перетворимо один тип на інший. Уявіть, що у вас є текстовий рядок '100', з яким не можна робити математику. Напишіть `a = '100'`. Тепер використайте інструмент перетворення: напишіть `b = int(a)`. Ви щойно 'розбили' текстовий панцир і дістали звідти справжнє число! Перевірте це, написавши `print(b + 50)`. Програма видасть 150. Якби ви спробували додати 50 до `a`, Python видав би помилку, бо не можна додавати числа до літер."],
+      "Pages":[
+        "Python — високорівнева мова програмування загального призначення, яка славиться своїм чистим і зрозумілим синтаксисом. Вона є інтерпретованою: код виконується рядок за рядком спеціальною програмою (інтерпретатором), що робить процес розробки та пошуку помилок дуже швидким. У Python не використовуються фігурні дужки для виділення блоків коду, натомість тут критично важливими є відступи (зазвичай 4 пробіли).",
+        "Змінні у Python створюються в момент присвоєння їм значення. Мова підтримує динамічну типізацію — вам не потрібно вказувати тип змінної (наприклад, int чи string) під час її створення. Тип визначається автоматично. Більше того, одна і та сама змінна може змінювати свій тип протягом виконання програми. Наприклад: спочатку `x = 10` (число), а потім `x = 'Привіт'` (рядок). Для іменування змінних у Python прийнято використовувати стиль snake_case (всі літери малі, слова розділені підкресленням: my_first_variable).",
+        "Існує чотири основні (вбудовані) типи даних. 1) Цілі числа (int): `5`, `-10`. 2) Дійсні числа (float): `3.14`, `-0.001`. 3) Рядки (str) — текст, який береться в одинарні або подвійні лапки: `'Hello'` або `\"Python\"`. 4) Булеві значення (bool), які можуть бути лише `True` (Істина) або `False` (Хибність). Щоб дізнатися тип будь-якої змінної, використовують функцію `type()`. Для перетворення одного типу в інший використовують функції `int()`, `str()`, `float()`."
+      ],
+      "LinkedTasks":[
+        "TASK_PY_basics_001",
+        "TASK_PY_basics_002",
+        "TASK_PY_basics_003",
+        "TASK_PY_basics_004",
+        "TASK_PY_basics_005",
+        "TASK_PY_basics_006",
+        "TASK_PY_basics_007",
+        "TASK_PY_basics_008",
+        "TASK_PY_basics_009",
+        "TASK_PY_basics_010",
+        "TASK_PY_basics_011",
+        "TASK_PY_basics_012",
+        "TASK_PY_basics_013",
+        "TASK_PY_basics_014",
+        "TASK_PY_basics_015",
+        "TASK_PY_basics_016",
+        "TASK_PY_basics_017",
+        "TASK_PY_basics_018",
+        "TASK_PY_basics_019",
+        "TASK_PY_basics_020"
+      ]
+    },
+    "topic_2_control_flow": {
+      "Title": "Керуючі конструкції: Умови та Цикли",
+	  "PagesVisual": ["Уявіть конструкцію `if-elif-else` як розвилку на дорозі з трьома світлофорами. Ви під'їжджаєте до `if` (першого світлофора). Якщо там зелене (умова True) — ви повертаєте туди і далі не їдете. Якщо червоне (False) — ви їдете до `elif` (другого світлофора). Якщо і там червоне, ви гарантовано повертаєте на запасну дорогу `else`, яка працює завжди, коли всі інші шляхи закриті. Двокрапка в кінці кожної умови — це ніби шлагбаум, який відкриває доступ до блоку коду.",
+        "Цикл `while` візуально схожий на бігову доріжку на стадіоні. Ви біжите по колу, і після кожного кола дивитесь на табло (перевіряєте умову). Якщо на табло 'True' — біжите ще одне коло. Якщо 'False' — сходите з доріжки. А що таке оператор `break`? Це двері аварійного виходу! Якщо всередині циклу стається щось непередбачуване, `break` дозволяє вам миттєво вибити ці двері і вистрибнути з циклу назовні, не чекаючи завершення кола.",
+        "Цикл `for` у Python має іншу візуалізацію. Уявіть конвеєрну стрічку, по якій їдуть коробки (елементи списку або літери слова). Ви стоїте біля стрічки, і цикл `for` по черзі дає вам у руки кожну коробку. Конструкція `for item in items:` буквально означає: 'для кожної коробки на цій стрічці зроби наступну дію'. Вам не треба рахувати кількість коробок — цикл сам зупиниться, коли конвеєр спорожніє."],
+      "PagesAuditory": ["Умовні конструкції в Python звучать як звичайна людська розмова. Прочитайте це вголос: `if temperature > 20: print('Тепло') else: print('Холодно')`. Звучить як 'Якщо температура більше 20, скажи Тепло, інакше скажи Холодно'. Це природний плин думок. Зверніть увагу на двокрапку в кінці рядка з `if` — при читанні вголос вона звучить як пауза або слово 'тоді'. Якщо умова виконується — 'тоді' роби це.",
+        "Цикл `while` (перекладається як 'поки') звучить як мантра, що повторюється. 'Поки x менше 10, друкуй x і додавай одиницю'. Кожного разу, коли код доходить до кінця блоку, він ніби 'відстрибує' назад вгору, щоб знову запитати: 'x все ще менше 10?'. А от оператори `break` і `continue` змінюють ритм. `Break` звучить як різкий удар по гальмах: все, цикл зупинено! А `continue` — це як команда 'пропусти хід': ми ігноруємо залишок коду і швидко перескакуємо на наступну ітерацію.",
+        "Цикл `for` створений для перерахунку. Послухайте конструкцію: `for i in range(5)`. Вона читається як: 'для кожного i в діапазоні до п'яти'. Функція `range()` — це ніби невидимий диктор, який диктує вам числа від 0 до 4. Коли вам треба повторити дію 100 разів, вам не треба писати багато коду, ви просто кажете: `for step in range(100)`, і Python безмовно виконає вказану роботу рівно сто разів."],
+	  "PagesKinesthetic": ["Щоб зрозуміти відступи в Python (індентацію), вам треба це надрукувати. Напишіть `if 5 > 2:`, натисніть Enter. Ваш редактор автоматично зробить 4 пробіли відступу! Надрукуйте там `print('Так')`. Тепер натисніть Backspace (щоб стерти відступ і повернутися до лівого краю) і напишіть `else:`. Знову Enter, знову відступ — і напишіть `print('Ні')`. Це фізичне відчуття зміщення тексту вправо-вліво формує ваше розуміння того, які команди належать умові, а які виконуються після неї.",
+        "Давайте створимо цикл `while` своїми руками. Задайте змінну `count = 0`. Наступним рядком напишіть `while count &lt; 3:`. Всередині циклу напишіть дві команди: `print(count)` та обов'язково `count = count + 1`. Запустіть програму. Вона виведе 0, 1, 2. А тепер спробуйте видалити рядок `count = count + 1` і запустіть (будьте готові швидко натиснути Ctrl+C для зупинки!). Програма почне безкінечно друкувати нулі. Ви щойно на власному досвіді відчули, що таке 'нескінченний цикл' і чому важливо фізично змінювати лічильник.",
+        "Спробуємо магію циклу `for` і оператора `break`. Напишіть цикл: `for letter in 'Python':`. Всередині додайте умову: `if letter == 'h': break`. І під умовою (але все ще всередині циклу) напишіть `print(letter)`. Запустіть код. Програма надрукує 'P', потім 'y', і раптом зупиниться! Ви наче власноруч поставили пастку: щойно програма наступила на літеру 'h', механізм `break` розірвав цикл. Пограйтеся з цим: замініть `break` на `continue` і подивіться, як літера 'h' просто зникне зі слова, а решта надрукується."],
+	  "Pages":[
+        "Умовні конструкції дозволяють програмі приймати рішення. Вони будуються за допомогою ключових слів `if`, `elif` (скорочення від else if) та `else`. Після умови ставиться двокрапка, а код, який має виконатися, пишеться з відступом. Для порівняння значень використовуються оператори: `==` (дорівнює), `!=` (не дорівнює), `>`, `&lt;`, `>=`, `&lt;=`. Також умови можна об'єднувати логічними операторами `and` (і), `or` (або), `not` (ні).",
+        "Цикл `while` виконує блок коду доти, доки задана умова залишається істинною (True). Це корисно, коли ви заздалегідь не знаєте точної кількості повторень. Важливо стежити, щоб умова циклу колись стала хибною, інакше програма потрапить у 'нескінченний цикл' і зависне. Якщо вам потрібно екстрено зупинити цикл достроково, використовуйте команду `break`. Якщо ж потрібно пропустити поточну ітерацію і одразу перейти до наступної, використовуйте `continue`.",
+        "Цикл `for` у Python працює інакше, ніж у мовах на кшталт C++ чи Java. Він створений спеціально для ітерації (перебору) елементів у послідовностях: рядках, списках чи діапазонах. Наприклад, конструкція `for letter in 'Apple':` виконає блок коду 5 разів, по черзі підставляючи літери у змінну letter. Якщо вам треба виконати дію певну кількість разів, використовують функцію `range()`. Наприклад, `for i in range(5):` згенерує числа від 0 до 4."
+      ],
+      "LinkedTasks":[
+        "TASK_PY_control_001",
+        "TASK_PY_control_002",
+        "TASK_PY_control_003",
+        "TASK_PY_control_004",
+        "TASK_PY_control_005",
+        "TASK_PY_control_006",
+        "TASK_PY_control_007",
+        "TASK_PY_control_008",
+        "TASK_PY_control_009",
+        "TASK_PY_control_010",
+        "TASK_PY_control_011",
+        "TASK_PY_control_012",
+        "TASK_PY_control_013",
+        "TASK_PY_control_014",
+        "TASK_PY_control_015",
+        "TASK_PY_control_016",
+        "TASK_PY_control_017",
+        "TASK_PY_control_018",
+        "TASK_PY_control_019",
+        "TASK_PY_control_020"
+      ]
+    },
+    "topic_3_data_structures": {
+      "Title": "Структури даних: Списки, Кортежі та Словники",
+	  "PagesVisual": ["Уявіть Список (list) як потяг з вагонами. Потяг формується за допомогою квадратних дужок `[ ]`. Кожен елемент — це окремий вагончик з номером (індексом). Нумерація завжди починається з нуля (головний вагон). Ви можете візуально 'відчепити' останній вагон (видалити елемент), можете 'причепити' новий вагон у хвіст потяга (метод `.append()`), або навіть вставити новий вагон посередині потяга (`.insert()`). Список дуже гнучкий і постійно змінює довжину.",
+        "Кортеж (tuple) візуально відрізняється круглими дужками `( )`. Уявіть кортеж як монолітний сейф або запаяну скляну колбу, всередині якої лежать предмети. Ви чудово бачите все, що там лежить (можете прочитати елементи), але ви не можете їх дістати, замінити чи додати нові. Він незмінний. Це робить кортежі набагато надійнішими і 'швидшими' за списки, коли мова йде про захист важливих даних, наприклад, координат (x, y) на карті.",
+        "Словник (dict) — це як велика шафка в роздягальні, яка створюється фігурними дужками `{ }`. У списку ми шукали елементи за їхнім порядковим номером (0, 1, 2), а в словнику кожна комірка має власне унікальне ім'я — 'ключ'. Уявіть, що ви берете бірку з написом 'ім'я' і відкриваєте нею конкретну дверцяту, де лежить значення 'Іван'. Словники візуалізують зв'язок між двома об'єктами (ключем і значенням), і знайти потрібне значення за ключем тут можна миттєво, якою б величезною не була шафка."],
+	  "PagesAuditory": ["Послухайте, як називаються дужки, і запам'ятайте їхнє призначення. Квадратні дужки `[ ]` — це Списки (Lists). Вони різкі, кутасті, їх можна 'розрізати' і змінювати. Круглі дужки `( )` — це Кортежі (Tuples). Вони гладенькі, закриті і незмінні. Фігурні дужки `{ }` — це Словники (Dictionaries). Вони найскладніші за формою і зберігають складні пари 'ключ-значення'. Запам'ятавши звучання: 'квадратні-список, круглі-кортеж, фігурні-словник', ви більше ніколи їх не сплутаєте.",
+        "Робота зі словником — це як гра в запитання та відповіді. Ключ — це ваше запитання, а значення — це відповідь. Проговоріть це: `user = {'вік': 25}`. Коли ви пишете `user['вік']`, ви ніби голосно запитуєте у програми: 'Скільки йому років?'. І програма відповідає: '25'. Зверніть увагу: ключами можуть бути лише незмінні типи (рядки або числа). Ви не можете запитати у словника щось 'мінливе', бо програма просто вас не зрозуміє.",
+        "Зверніть увагу на від'ємну індексацію в списках. Уявіть, що ви стоїте в черзі. Перша людина має індекс 0, друга 1 і так далі. Але якщо ви хочете звернутися до людини в самому кінці черги, вам не обов'язково рахувати всіх! Ви просто кажете 'мінус один' (`my_list[-1]`), і Python дає вам останній елемент. 'Мінус два' — передостанній. Це звучить як крок назад. Від'ємна індексація — це одна з найкрутіших і найзручніших 'фішок' синтаксису Python."],
+	  "PagesKinesthetic": ["Давайте попрацюємо зі списком руками. Створіть список: `cars = ['BMW', 'Audi']`. Тепер додайте туди нову машину: напишіть `cars.append('Ford')`. Виведіть список на екран (`print(cars)`). Бачите? Він розширився! Тепер давайте замінимо 'Audi' (вона під індексом 1). Напишіть `cars[1] = 'Tesla'`. Знову виведіть список. Ви фізично 'витягли' старе значення і 'поклали' нове в ту саму комірку пам'яті.",
+        "Тепер спробуємо зробити те саме з кортежем, щоб відчути його жорсткість. Створіть кортеж: `colors = ('червоний', 'синій')`. А тепер спробуйте змінити перший колір: напишіть `colors[0] = 'зелений'` і натисніть Enter. БАМ! Ви отримаєте червоний текст з помилкою `TypeError: 'tuple' object does not support item assignment`. Ця помилка — ваш найкращий вчитель. Вона фізично не дала вам порушити правило: кортежі незмінні!",
+        "Відчуємо міць словників. Створіть порожній словник: `player = {}`. Тепер наповніть його даними, ніби заповнюєте анкету. Напишіть `player['name'] = 'Alex'`. Потім `player['score'] = 100`. Роздрукуйте `player`. Ви побачите акуратну структуру `{'name': 'Alex', 'score': 100}`. Якщо вам треба додати гравцю балів, ви не переписуєте весь словник. Ви просто звертаєтесь до ключа: `player['score'] = 150`. Цей процес 'точкового' оновлення даних є основою розробки будь-яких серйозних програм."],
+      "Pages":[
+        "Список (list) — це впорядкована колекція елементів, яка може змінюватися. Створюється за допомогою квадратних дужок: `fruits = ['apple', 'banana', 'cherry']`. Елементи в списку індексуються, починаючи з нуля (fruits[0] — це 'apple'). Python також підтримує від'ємні індекси (наприклад, -1 означає останній елемент). Списки є змінними: ви можете додавати елементи в кінець (`append()`), вставляти в певну позицію (`insert()`), видаляти (`remove()`) або змінювати їхні значення напряму.",
+        "Кортеж (tuple) дуже схожий на список, але має одну критичну відмінність — він є незмінним (immutable). Після створення кортежу ви не можете додавати, видаляти або змінювати його елементи. Кортежі створюються за допомогою круглих дужок: `colors = ('red', 'green', 'blue')`. Вони працюють швидше за списки і використовуються для захисту даних від випадкових змін, а також як ключі у словниках.",
+        "Словник (dict) — це колекція, яка зберігає дані у форматі 'ключ: значення'. Створюється у фігурних дужках: `person = {'name': 'Ivan', 'age': 20}`. Доступ до значень здійснюється за ключем: `person['name']`. Ключі у словнику мають бути унікальними та незмінними типами даних (рядки, числа, кортежі). Словники оптимізовані для надзвичайно швидкого пошуку даних, навіть якщо в них зберігаються мільйони записів. Метод `get()` дозволяє безпечно отримати значення за ключем, не викликаючи помилки, якщо такого ключа не існує."
+      ],
+      "LinkedTasks":[
+        "TASK_PY_struct_001",
+        "TASK_PY_struct_002",
+        "TASK_PY_struct_003",
+        "TASK_PY_struct_004",
+        "TASK_PY_struct_005",
+        "TASK_PY_struct_006",
+        "TASK_PY_struct_007",
+        "TASK_PY_struct_008",
+        "TASK_PY_struct_009",
+        "TASK_PY_struct_010",
+        "TASK_PY_struct_011",
+        "TASK_PY_struct_012",
+        "TASK_PY_struct_013",
+        "TASK_PY_struct_014",
+        "TASK_PY_struct_015",
+        "TASK_PY_struct_016",
+        "TASK_PY_struct_017",
+        "TASK_PY_struct_018",
+        "TASK_PY_struct_019",
+        "TASK_PY_struct_020"
+      ]
+    }
+  }
+}
+</pre>
+                </div>
+				
+				<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					tasks_python.json
+                    </div>
+<pre>
+{
+  "TASK_PY_basics_001": {
+    "Question": "До якого типу мов програмування належить Python?",
+    "Type": "Theory",
+    "Options": ["Компільована", "Інтерпретована", "Асемблерна"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_002": {
+    "Question": "Як у Python виділяються блоки коду?",
+    "Type": "Theory",
+    "Options":["Фігурними дужками {}", "Ключовими словами begin/end", "Відступами (пробілами)"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_003": {
+    "Question": "Що означає динамічна типізація у Python?",
+    "Type": "Theory",
+    "Options":["Тип змінної визначається автоматично при присвоєнні значення", "Тип змінної потрібно вказувати вручну", "Тип змінної не можна змінити ніколи"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_004": {
+    "Question": "Який стиль іменування змінних вважається стандартним у Python?",
+    "Type": "Theory",
+    "Options":["camelCase", "PascalCase", "snake_case"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_005": {
+    "Question": "Який з цих типів даних використовується для збереження дійсних чисел (з комою)?",
+    "Type": "Theory",
+    "Options": ["int", "float", "str"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_006": {
+    "Question": "Які два значення може приймати тип bool?",
+    "Type": "Theory",
+    "Options": ["True та False", "1 та 0", "Yes та No"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_007": {
+    "Question": "Яка функція дозволяє дізнатися тип змінної?",
+    "Type": "Theory",
+    "Options":["get_type()", "typeof()", "type()"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_008": {
+    "Question": "Як перетворити рядок '123' у ціле число?",
+    "Type": "Theory",
+    "Options": ["int('123')", "str('123')", "number('123')"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_009": {
+    "Question": "Чи можна одній і тій самій змінній спочатку присвоїти число, а потім рядок?",
+    "Type": "Theory",
+    "Options":["Ні, це викличе помилку", "Так, завдяки динамічній типізації", "Тільки якщо використати спеціальне ключове слово"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_010": {
+    "Question": "Що з наведеного є правильною назвою змінної за стандартом PEP8?",
+    "Type": "Theory",
+    "Options": ["MyVariable", "my_variable", "my-variable"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_011": {
+    "Question": "Що виведе функція type() для змінної x = 3.14?",
+    "Type": "Practice",
+    "Options":["&lt;class 'int'>", "&lt;class 'str'>", "&lt;class 'float'>"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_012": {
+    "Question": "Який результат виконання коду: x = 5; x = 'Привіт'; print(type(x))?",
+    "Type": "Practice",
+    "Options":["&lt;class 'int'>", "&lt;class 'str'>", "Помилка (Error)"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_013": {
+    "Question": "Що збережеться у змінній y після виконання: y = int(5.9)?",
+    "Type": "Practice",
+    "Options": ["6", "5", "5.9"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_basics_014": {
+    "Question": "Що виведе print('10' + '5')?",
+    "Type": "Practice",
+    "Options":["15", "105", "Помилку"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_015": {
+    "Question": "Чому дорівнює x: x = float('3')?",
+    "Type": "Practice",
+    "Options":["3", "3.0", "Помилка"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_016": {
+    "Question": "Яке значення матиме змінна res = bool(0)?",
+    "Type": "Practice",
+    "Options": ["True", "False", "0"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_basics_017": {
+    "Question": "Що виведе код: a = 10; b = a; a = 20; print(b)?",
+    "Type": "Practice",
+    "Options":["10", "20", "Помилку"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_basics_018": {
+    "Question": "Який запис є некоректним і викличе синтаксичну помилку?",
+    "Type": "Practice",
+    "Options":["user_age = 25", "1_user_age = 25", "_userAge = 25"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_basics_019": {
+    "Question": "Що виведе print(type(True))?",
+    "Type": "Practice",
+    "Options":["&lt;class 'bool'>", "&lt;class 'str'>", "&lt;class 'int'>"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_basics_020": {
+    "Question": "Що виведе print(int('10') + 5)?",
+    "Type": "Practice",
+    "Options": ["105", "15", "Помилка"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+
+  "TASK_PY_control_001": {
+    "Question": "Яке ключове слово використовується для перевірки додаткових умов, якщо перша умова (if) хибна?",
+    "Type": "Theory",
+    "Options": ["else", "elif", "elseif"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_002": {
+    "Question": "Який оператор використовується для перевірки на рівність у Python?",
+    "Type": "Theory",
+    "Options": ["=", "==", "==="],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_003": {
+    "Question": "Який логічний оператор повертає True, тільки якщо ОБИДВІ умови істинні?",
+    "Type": "Theory",
+    "Options": ["and", "or", "not"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_004": {
+    "Question": "Для чого найчастіше використовується цикл for у Python?",
+    "Type": "Theory",
+    "Options":["Для безкінечних повторень", "Для ітерації по колекціях (спискам, рядкам)", "Тільки для математичних розрахунків"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_005": {
+    "Question": "Що робить оператор break у циклі?",
+    "Type": "Theory",
+    "Options":["Призупиняє програму", "Достроково завершує весь цикл", "Пропускає поточну ітерацію"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_006": {
+    "Question": "Що робить оператор continue у циклі?",
+    "Type": "Theory",
+    "Options":["Завершує цикл", "Продовжує виконання програми після циклу", "Пропускає залишок коду в поточній ітерації та переходить до наступної"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_007": {
+    "Question": "Яку функцію використовують для генерації послідовності чисел у циклі for?",
+    "Type": "Theory",
+    "Options": ["sequence()", "generate()", "range()"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_008": {
+    "Question": "Який цикл буде виконуватися, поки його умова є True?",
+    "Type": "Theory",
+    "Options":["for", "while", "do-while"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_009": {
+    "Question": "Що станеться, якщо умова циклу while завжди залишатиметься True?",
+    "Type": "Theory",
+    "Options":["Цикл виконається 1 раз", "Програма видасть синтаксичну помилку", "Виникне нескінченний цикл"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_010": {
+    "Question": "Який символ ставиться в кінці рядка з if, elif, else, for або while?",
+    "Type": "Theory",
+    "Options":["; (крапка з комою)", ": (двокрапка)", "Нічого не ставиться"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_011": {
+    "Question": "Що виведе код: if 5 > 2: print('A') else: print('B')?",
+    "Type": "Practice",
+    "Options":["A", "B", "Помилку (неправильний синтаксис)"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_012": {
+    "Question": "Скільки разів виконається цикл: for i in range(3): print('ok')?",
+    "Type": "Practice",
+    "Options":["2 рази", "3 рази", "4 рази"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_013": {
+    "Question": "Які числа згенерує range(5)?",
+    "Type": "Practice",
+    "Options":["1, 2, 3, 4, 5", "0, 1, 2, 3, 4", "0, 1, 2, 3, 4, 5"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_014": {
+    "Question": "Що виведе код: x = 10; if x == 10: print('Yes')",
+    "Type": "Practice",
+    "Options": ["Yes", "Нічого", "Помилку"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_control_015": {
+    "Question": "Що виведе код: x = 5; while x > 0: x = x - 2; print(x) (останнє значення)?",
+    "Type": "Practice",
+    "Options": ["1", "-1", "0"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_control_016": {
+    "Question": "Результат виразу: (5 > 3) and (10 &lt; 5)?",
+    "Type": "Practice",
+    "Options": ["True", "False", "None"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_control_017": {
+    "Question": "Що виведе код: for i in range(5): if i == 2: break; print(i)?",
+    "Type": "Practice",
+    "Options":["0 1 2 3 4", "0 1", "0 1 3 4"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_control_018": {
+    "Question": "Що виведе код: for i in range(3): if i == 1: continue; print(i)?",
+    "Type": "Practice",
+    "Options": ["0 1 2", "0 2", "0"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_control_019": {
+    "Question": "x = 10. Якщо if x > 5: x=x+1; elif x > 8: x=x+2. Чому дорівнює x?",
+    "Type": "Practice",
+    "Options":["11", "12", "13"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_control_020": {
+    "Question": "Результат виразу: not (5 == 5)?",
+    "Type": "Practice",
+    "Options":["True", "False", "Помилка"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+
+  "TASK_PY_struct_001": {
+    "Question": "Які дужки використовуються для створення списку (list)?",
+    "Type": "Theory",
+    "Options":["()", "{}", "[]"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_002": {
+    "Question": "Яка головна відмінність кортежу (tuple) від списку (list)?",
+    "Type": "Theory",
+    "Options":["Кортеж незмінний (immutable)", "Кортеж може містити лише числа", "Кортеж працює повільніше"],
+    "CorrectOptionIndex": 0,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_003": {
+    "Question": "Які дужки використовуються для створення словника (dict)?",
+    "Type": "Theory",
+    "Options": ["[]", "{}", "()"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_004": {
+    "Question": "У якому форматі словник зберігає дані?",
+    "Type": "Theory",
+    "Options":["Тільки як індекси", "Ключ: Значення", "Як масив байтів"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_005": {
+    "Question": "З якого числа починається індексація елементів у списку?",
+    "Type": "Theory",
+    "Options":["З 1", "З 0", "Можна обрати самостійно"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_006": {
+    "Question": "Що означає індекс -1 при доступі до елементів списку?",
+    "Type": "Theory",
+    "Options":["Перший елемент", "Останній елемент", "Помилка (Error)"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_007": {
+    "Question": "Який метод додає новий елемент у КІНЕЦЬ списку?",
+    "Type": "Theory",
+    "Options":["insert()", "add()", "append()"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_008": {
+    "Question": "Які типи даних можуть бути КЛЮЧАМИ у словнику?",
+    "Type": "Theory",
+    "Options":["Будь-які", "Тільки незмінні (рядки, числа, кортежі)", "Тільки списки"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_struct_009": {
+    "Question": "Який метод дозволяє безпечно отримати значення зі словника (без помилки KeyError)?",
+    "Type": "Theory",
+    "Options": ["find()", "get()", "search()"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_010": {
+    "Question": "Чи можуть ключі у словнику дублюватися?",
+    "Type": "Theory",
+    "Options":["Так", "Ні, ключі мають бути унікальними", "Тільки якщо їхні значення однакові"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_011": {
+    "Question": "Є список my_list =[10, 20, 30]. Чому дорівнює my_list[1]?",
+    "Type": "Practice",
+    "Options":["10", "20", "30"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_012": {
+    "Question": "my_list =[1, 2, 3]. Що буде в my_list після my_list.append(4)?",
+    "Type": "Practice",
+    "Options": ["[4, 1, 2, 3]", "[1, 2, 3, 4]", "Помилка"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_013": {
+    "Question": "Що виведе код: t = (1, 2, 3); t[0] = 10?",
+    "Type": "Practice",
+    "Options":["(10, 2, 3)", "Помилку (TypeError)", "[10, 2, 3]"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_014": {
+    "Question": "d = {'a': 1, 'b': 2}. Як отримати значення 2?",
+    "Type": "Practice",
+    "Options": ["d[1]", "d['b']", "d.b"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_015": {
+    "Question": "d = {'x': 10}. Що відбудеться після d['x'] = 20?",
+    "Type": "Practice",
+    "Options":["Додасться новий ключ", "Значення 'x' стане 20", "Помилка, словники незмінні"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "medium"
+  },
+  "TASK_PY_struct_016": {
+    "Question": "my_list = ['a', 'b', 'c', 'd']. Чому дорівнює my_list[-2]?",
+    "Type": "Practice",
+    "Options":["'a'", "'b'", "'c'"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_struct_017": {
+    "Question": "Що виведе функція len([10, 20, 30])?",
+    "Type": "Practice",
+    "Options":["2", "3", "30"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_018": {
+    "Question": "d = {'name': 'Tom'}. Що поверне d.get('age', 18)?",
+    "Type": "Practice",
+    "Options": ["Помилку", "None", "18"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "hard"
+  },
+  "TASK_PY_struct_019": {
+    "Question": "Як створити пустий словник?",
+    "Type": "Practice",
+    "Options": ["d = []", "d = ()", "d = {}"],
+    "CorrectOptionIndex": 2,
+    "Difficulty": "easy"
+  },
+  "TASK_PY_struct_020": {
+    "Question": "Що виведе print(list('ab'))?",
+    "Type": "Practice",
+    "Options": ["['ab']", "['a', 'b']", "Помилка"],
+    "CorrectOptionIndex": 1,
+    "Difficulty": "hard"
+  }
+}
+</pre>
+                </div>
+				
+				<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					users.json
+                    </div>
+<pre>
+{
+  "U_20260503140822": {
+    "Id": "U_20260503140822",
+    "Name": "Grisha",
+    "LearningStyle": "visual",
+    "Progress": {
+      "math": {
+        "Deadline": "2026-05-07T00:00:00",
+        "Topics": {
+          "topic_1_intro": {
+            "KnowledgePercentage": 55,
+            "RecentScores": [
+              90,
+              20
+            ]
+          },
+          "topic_2_discriminant": {
+            "KnowledgePercentage": 0,
+            "RecentScores": []
+          },
+          "topic_3_vieta_and_factoring": {
+            "KnowledgePercentage": 0,
+            "RecentScores": []
+          }
+        }
+      }
+    },
+    "ArchivedTopics": {}
+  }
+}
+</pre>
+                </div>
+            </article>
+
+            <article id="STEM-examples" class="code-block">
+                <h3>Приклади</h3>
+                <div class="code-header" onclick="toggleCode(this)">
+                    Console Output
+                </div>
+<pre>
+[System]: Виконується глобальна перевірка оновлень індустрії для всіх предметів...
+[System]: Синхронізацію завершено!
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 2
+
+Введіть ім'я нового користувача: student
+=== ВИБІР СТИЛЮ НАВЧАННЯ ===
+1. Візуальний - схеми, діаграми, картинки
+2. Аудіальний - пояснення, описання, вислови
+3. Кінестетичний - приклади, практика, дії
+
+Оберіть стиль: 1
+
+[System]: Користувача student створено!
+[System]: Стиль навчання: Візуальний
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 4
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. student (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+Введіть нове ім'я для student: учень
+[System]: Ім'я змінено.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 1
+[System]: Ви вперше починаєте вивчати предмет 'MATH'.
+Введіть дату дедлайну для цього предмета (у форматі ДД.ММ.РРРР): 06.05.2026
+[System]: Дедлайн успішно встановлено!
+[AI]: Вітаю, учень! Я ваш персональний тьютор з предмету MATH.
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 1
+
+[AI]: Дедлайн призначено на: 06.05.2026
+[AI]: До дедлайну залишилося днів: 3
+[AI]: Залишилось вивчити тем: 3.
+[AI]: Потрібно проходити 1 тем(и) на день.
+[AI]: Сьогодні рекомендується вивчити:
+[AI]: 1. Вступ до квадратних рівнянь та їх класифікація
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 3
+
+=== СПИСОК ТЕМ ===
+1. Вступ до квадратних рівнянь та їх класифікація
+2. Дискримінант та універсальна формула коренів
+3. Теорема Вієта та розкладання на множники
+
+0. Повернутись до меню
+
+Оберіть номер теми: 0
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 5
+
+=== СПИСОК ТЕМ ===
+1. Вступ до квадратних рівнянь та їх класифікація
+2. Дискримінант та універсальна формула коренів
+3. Теорема Вієта та розкладання на множники
+
+0. Повернутись до меню
+
+Оберіть номер теми: 0
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 2
+
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 1/3]
+
+Уявіть собі нескінченну координатну площину, на якій намальована плавна, симетрична дуга у формі підкови — це парабола.
+Квадратне рівняння виду ax^2 + bx + c = 0 — це математичний інструмент, який допомагає нам побачити, у яких саме точках ця
+'підкова' перетинає горизонтальну лінію (вісь Х). Уявіть коефіцієнти як кольорові повзунки в графічному редакторі: червоний
+повзунок 'a' визначає, наскільки парабола широка чи вузька, і куди дивляться її гілки (вгору чи вниз).
+
+------------------------------------------
+[N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 2/3]
+
+Синій повзунок 'b' зсуває нашу параболу вліво або вправо, а зелений повзунок 'c' (вільний член) працює як ліфт, піднімаючи
+графік вгору або опускаючи вниз. Рівняння називається квадратним, бо його найстарший член (x^2) формує квадратну залежність.
+Якщо ми графічно 'приберемо' повзунок 'a' (тобто a=0), наша красива дуга миттєво вирівняється і перетвориться на звичайну
+пряму лінію. Тому правило 'a ≠ 0' є візуальною гарантією того, що ми працюємо саме з дугою.
+
+--------------------------------------------------------------------
+[P] Попередня сторінка    [N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 3/3]
+
+Якщо ми 'вимкнемо' повзунок 'b' або 'c' (зробимо їх нулями), наша фігура стане набагато простішою — такі рівняння називаються
+неповними. Уявіть графік рівняння ax^2 + c = 0: він ідеально симетричний відносно вертикальної осі Y, ніби метелик із розкритими
+крилами. А якщо 'вимкнути' вільний член (ax^2 + bx = 0), графік обов'язково пройде через самісінький центр координат (точку 0,0).
+Візуалізація цих властивостей дозволяє передбачати відповідь ще до початку обчислень.
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+Оберіть дію: b
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 0
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 0
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 5
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+[System]: Поточний стиль навчання: Візуальний
+=== ВИБІР СТИЛЮ НАВЧАННЯ ===
+1. Візуальний - схеми, діаграми, картинки
+2. Аудіальний - пояснення, описання, вислови
+3. Кінестетичний - приклади, практика, дії
+
+Оберіть стиль: 3
+
+[System]: Стиль навчання змінено на Кінестетичний.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 1
+[AI]: Вітаю, учень! Я ваш персональний тьютор з предмету MATH.
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 2
+
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 1/3]
+
+Математика потребує дій! Візьміть ручку, аркуш паперу і давайте власноруч складемо квадратне рівняння. Напишіть по
+центру `x^2`. Тепер додайте до нього `7x`. І наприкінці допишіть `+ 10 = 0`. Ви щойно створили зведене квадратне рівняння!
+Тепер візьміть маркер: підкресліть числа перед іксами. Перед x^2 нічого немає, отже там ховається 1 — напишіть її.
+Обведіть кружечком число 7 (це коефіцієнт 'b'). І підкресліть двома лініями 10 (це вільний член 'c').
+
+------------------------------------------
+[N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 2/3]
+
+Щоб зрозуміти, як працюють неповні квадратні рівняння, давайте їх фізично розв'яжемо. Напишіть рівняння `x^2 - 25 = 0`.
+Перенесіть 25 на іншу сторону: `x^2 = 25`. Тепер запитайте себе: яке число треба помножити саме на себе, щоб отримати 25?
+апишіть: `x = 5`. Але зачекайте! Напишіть поруч `-5 * -5`. Воно теж дає 25! Тому рукою допишіть: `x1 = 5, x2 = -5`.
+Ви щойно розв'язали неповне рівняння методом добування кореня.
+
+--------------------------------------------------------------------
+[P] Попередня сторінка    [N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 3/3]
+
+Тепер розберемо інший тип неповного рівняння: `x^2 - 7x = 0`. Тут немає вільного числа, але є ікс в обох доданках.
+Напишіть його. Тепер фізично винесіть ікс за дужки: `x(x - 7) = 0`. Коли добуток двох множників дорівнює нулю? Коли хоча
+б один із них нуль! Запишіть два варіанти: `x = 0` (це наша перша відповідь) або `x - 7 = 0`. З другого рівняння
+переносимо 7 і отримуємо `x = 7`. Цей процес розбиття одного великого рівняння на два маленьких — найкращий спосіб тренування!
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+Оберіть дію: t
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Визначте коефіцієнти a, b, c для рівняння 3x^2 - 5x + 2 = 0:
+  1. a=3, b=5, c=2
+  2. a=3, b=-5, c=2
+  3. a=-3, b=-5, c=-2
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 2 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 3 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 3
+Правильно!
+
+Питання 4 (Theory): Скільки коренів завжди має рівняння виду ax^2 = 0?
+  1. Жодного
+  2. Один (x = 0)
+  3. Два (x = 0 та x = a)
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 5 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 6 (Theory): Що потрібно зробити, щоб перетворити будь-яке незведене квадратне рівняння на зведене?
+  1. Помножити на a
+  2. Поділити всі члени на a
+  3. Відняти a від обох частин
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 7 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 8 (Practice): Знайдіть корені рівняння 3x^2 - 12x = 0:
+  1. 0 та 4
+  2. 0 та -4
+  3. 3 та 12
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 10 (Theory): Як називається квадратне рівняння, у якому старший коефіцієнт (a) дорівнює 1?
+  1. Зведене
+  2. Неповне
+  3. Лінійне
+Ваша відповідь (номер): 1
+Правильно!
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 100%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 5
+
+=== СПИСОК ТЕМ ===
+1. Вступ до квадратних рівнянь та їх класифікація
+2. Дискримінант та універсальна формула коренів
+3. Теорема Вієта та розкладання на множники
+
+0. Повернутись до меню
+
+Оберіть номер теми: 1
+
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 2 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 3 (Theory): Яке з наведених рівнянь називається квадратним?
+  1. ax + b = 0
+  2. ax^2 + bx + c = 0
+  3. ax^3 + bx^2 + c = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 4 (Practice): Розв'яжіть рівняння -x^2 + 9 = 0:
+  1. 3 та -3
+  2. Коренів немає
+  3. тільки 9
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 5 (Theory): Яка обов'язкова умова повинна виконуватись для коефіцієнта 'a' у квадратному рівнянні?
+  1. a > 0
+  2. a = 1
+  3. a ≠ 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 6 (Practice): Які корені має рівняння x^2 + 25 = 0?
+  1. 5 та -5
+  2. тільки 5
+  3. Дійсних коренів немає
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 7 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 8 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Theory): Який найвищий степінь змінної у квадратному рівнянні?
+  1. 1
+  2. 2
+  3. 3
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 10 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 60%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 6
+
+=== ВАША СТАТИСТИКА ===
+ - Вступ до квадратних рівнянь та їх класифікація: 60%
+ - Дискримінант та універсальна формула коренів: 0%
+ - Теорема Вієта та розкладання на множники: 0%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 7
+
+Введіть дату дедлайну (у форматі ДД.ММ.РРРР): 05.05.2026
+[System]: Дату дедлайну успішно змінено.
+[AI]: Дедлайн призначено на: 05.05.2026
+[AI]: До дедлайну залишилося днів: 2
+[AI]: Залишилось вивчити тем: 3.
+[AI]: Потрібно проходити 2 тем(и) на день.
+[AI]: Сьогодні рекомендується вивчити:
+[AI]: 1. Дискримінант та універсальна формула коренів
+[AI]: 2. Теорема Вієта та розкладання на множники
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 9
+
+[AI]: Дедлайн призначено на: 05.05.2026
+[AI]: До дедлайну залишилося днів: 1
+[AI]: Залишилось вивчити тем: 3.
+[AI]: Потрібно проходити 3 тем(и) на день.
+[AI]: Сьогодні рекомендується вивчити:
+[AI]: 1. Дискримінант та універсальна формула коренів
+[AI]: 2. Теорема Вієта та розкладання на множники
+[AI]: 3. Вступ до квадратних рівнянь та їх класифікація
+
+==================================
+Сьогоднішня дата: 04.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 8
+
+[System]: Перевірка оновлень у файлі підручника...
+[AI]: Ваш підручник актуальний.
+
+==================================
+Сьогоднішня дата: 04.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 0
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 0
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 3
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+[System]: Ви впевнені, що хочете видалити цього користувача? (y/n): y
+[System]: Користувача видалено.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 0
+</pre>
+            </article>
+
+            <article id="STEM-tests">
+                <h3>Перевірка</h3>
+
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Ініціалізація користувача та робота з обліковими записами
+                    </div>
+<pre>
+Перевіримо коректність створення нових користувачів, редагування вже існуючих та видалення
+----------------------------------------------------------------------------------
+[System]: Виконується глобальна перевірка оновлень індустрії для всіх предметів...
+[System]: Синхронізацію завершено!
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 2
+
+Введіть ім'я нового користувача: student
+=== ВИБІР СТИЛЮ НАВЧАННЯ ===
+1. Візуальний - схеми, діаграми, картинки
+2. Аудіальний - пояснення, описання, вислови
+3. Кінестетичний - приклади, практика, дії
+
+Оберіть стиль: 1
+
+[System]: Користувача student створено!
+[System]: Стиль навчання: Візуальний
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 4
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. student (ID: U_20260503171843)
+Оберіть користувача (0 для відміни): 2
+
+Введіть нове ім'я для student: учень
+[System]: Ім'я змінено.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 5
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503171843)
+Оберіть користувача (0 для відміни): 2
+
+[System]: Поточний стиль навчання: Візуальний
+=== ВИБІР СТИЛЮ НАВЧАННЯ ===
+1. Візуальний - схеми, діаграми, картинки
+2. Аудіальний - пояснення, описання, вислови
+3. Кінестетичний - приклади, практика, дії
+
+Оберіть стиль: 3
+
+[System]: Стиль навчання змінено на Кінестетичний.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503171843)
+Оберіть користувача (0 для відміни): 0
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 3
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503171843)
+Оберіть користувача (0 для відміни): 2
+
+[System]: Ви впевнені, що хочете видалити цього користувача? (y/n): y
+[System]: Користувача видалено.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+Оберіть користувача (0 для відміни): 0
+----------------------------------------------------------------------------------
+Як бачимо усі пункти меню працюють коректно, програма успішно створює нових
+користувачів, дозволяє редагувати та видаляти вже існуючі облікові записи.
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Встановлення дедлайну та планування графіку
+                    </div>
+<pre>
+Перевіримо логіку встановлення дедлайну
+----------------------------------------------------------------------------------
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 1
+[System]: Ви вперше починаєте вивчати предмет 'MATH'.
+Введіть дату дедлайну для цього предмета (у форматі ДД.ММ.РРРР): 06.05.2026
+[System]: Дедлайн успішно встановлено!
+[AI]: Вітаю, учень! Я ваш персональний тьютор з предмету MATH.
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 1
+
+[AI]: Дедлайн призначено на: 06.05.2026
+[AI]: До дедлайну залишилося днів: 3
+[AI]: Залишилось вивчити тем: 3.
+[AI]: Потрібно проходити 1 тем(и) на день.
+[AI]: Сьогодні рекомендується вивчити:
+[AI]: 1. Вступ до квадратних рівнянь та їх класифікація
+
+...
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 6
+
+=== ВАША СТАТИСТИКА ===
+ - Вступ до квадратних рівнянь та їх класифікація: 60%
+ - Дискримінант та універсальна формула коренів: 0%
+ - Теорема Вієта та розкладання на множники: 0%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 7
+
+Введіть дату дедлайну (у форматі ДД.ММ.РРРР): 05.05.2026
+[System]: Дату дедлайну успішно змінено.
+[AI]: Дедлайн призначено на: 05.05.2026
+[AI]: До дедлайну залишилося днів: 2
+[AI]: Залишилось вивчити тем: 3.
+[AI]: Потрібно проходити 2 тем(и) на день.
+[AI]: Сьогодні рекомендується вивчити:
+[AI]: 1. Дискримінант та універсальна формула коренів
+[AI]: 2. Теорема Вієта та розкладання на множники
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію:
+----------------------------------------------------------------------------------
+Програма запитує користувача встановити дату дедлайну при початку вивчення нового предмету
+та одразу будує графік навчання і рекомендує теми для проходження, причому в першу чергу
+рекомендуються вивчити теми з найнижчим рівнем знань.
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Збирання інформації по навчальним дисциплінам
+                    </div>
+<pre>
+Перевіримо динамічне зчитування підручників без зміни коду програми
+----------------------------------------------------------------------------------
+[System]: Виконується глобальна перевірка оновлень індустрії для всіх предметів...
+[System]: Синхронізацію завершено!
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+Оберіть користувача (0 для відміни): 1
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 2
+[System]: Ви вперше починаєте вивчати предмет 'PYTHON'.
+Введіть дату дедлайну для цього предмета (у форматі ДД.ММ.РРРР): 06.05.2026
+[System]: Дедлайн успішно встановлено!
+[AI]: Вітаю, Grisha! Я ваш персональний тьютор з предмету PYTHON.
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 6
+
+=== ВАША СТАТИСТИКА ===
+ - Вступ до Python, Змінні та Базові типи даних: 0%
+ - Структури даних: Списки, Кортежі та Словники: 0%
+
+*додамо до textbook_python.json нову тему під час роботи програми*
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 8
+
+[System]: Перевірка оновлень у файлі підручника...
+[AI]: Індустрія оновилася.
+[AI]: Додано нові теми:
+- Керуючі конструкції: Умови та Цикли
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 6
+
+=== ВАША СТАТИСТИКА ===
+ - Вступ до Python, Змінні та Базові типи даних: 0%
+ - Структури даних: Списки, Кортежі та Словники: 0%
+ - Керуючі конструкції: Умови та Цикли: 0%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію:
+----------------------------------------------------------------------------------
+При кожному запуску програми відбувається глобальна синхронізація даних з усіх
+предметів, але додатково під час роботи можна запустити перевірку наявності оновлень,
+що повідомить користувача про зміни у навчальній програмі у разі їх виникнення.
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Видача користувачу навчального матеріалу
+                    </div>
+<pre>
+Перевіримо адаптацію контенту під персональний стиль навчання.
+----------------------------------------------------------------------------------
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 2
+
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 1/3]
+
+Уявіть собі нескінченну координатну площину, на якій намальована плавна, симетрична дуга у формі підкови — це парабола.
+Квадратне рівняння виду ax^2 + bx + c = 0 — це математичний інструмент, який допомагає нам побачити, у яких саме точках ця
+'підкова' перетинає горизонтальну лінію (вісь Х). Уявіть коефіцієнти як кольорові повзунки в графічному редакторі: червоний
+повзунок 'a' визначає, наскільки парабола широка чи вузька, і куди дивляться її гілки (вгору чи вниз).
+
+------------------------------------------
+[N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 2/3]
+
+Синій повзунок 'b' зсуває нашу параболу вліво або вправо, а зелений повзунок 'c' (вільний член) працює як ліфт, піднімаючи
+графік вгору або опускаючи вниз. Рівняння називається квадратним, бо його найстарший член (x^2) формує квадратну залежність.
+Якщо ми графічно 'приберемо' повзунок 'a' (тобто a=0), наша красива дуга миттєво вирівняється і перетвориться на звичайну
+пряму лінію. Тому правило 'a ≠ 0' є візуальною гарантією того, що ми працюємо саме з дугою.
+
+--------------------------------------------------------------------
+[P] Попередня сторінка    [N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 3/3]
+
+Якщо ми 'вимкнемо' повзунок 'b' або 'c' (зробимо їх нулями), наша фігура стане набагато простішою — такі рівняння називаються
+неповними. Уявіть графік рівняння ax^2 + c = 0: він ідеально симетричний відносно вертикальної осі Y, ніби метелик із розкритими
+крилами. А якщо 'вимкнути' вільний член (ax^2 + bx = 0), графік обов'язково пройде через самісінький центр координат (точку 0,0).
+Візуалізація цих властивостей дозволяє передбачати відповідь ще до початку обчислень.
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+Оберіть дію: b
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 0
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 0
+
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 5
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+[System]: Поточний стиль навчання: Візуальний
+=== ВИБІР СТИЛЮ НАВЧАННЯ ===
+1. Візуальний - схеми, діаграми, картинки
+2. Аудіальний - пояснення, описання, вислови
+3. Кінестетичний - приклади, практика, дії
+
+Оберіть стиль: 3
+
+[System]: Стиль навчання змінено на Кінестетичний.
+=== СИСТЕМА ЕЛЕКТРОННОГО ПІДРУЧНИКА ===
+1. Увійти
+2. Додати нового користувача
+3. Видалити користувача
+4. Редагувати ім'я користувача
+5. Змінити стиль навчання
+0. Вихід з програми
+Оберіть дію: 1
+
+=== СПИСОК КОРИСТУВАЧІВ ===
+1. Grisha (ID: U_20260503140822)
+2. учень (ID: U_20260503154048)
+Оберіть користувача (0 для відміни): 2
+
+=== ВИБІР ПРЕДМЕТА ===
+1. MATH
+2. PYTHON
+
+0. Повернутись до меню користувачів
+
+Оберіть номер предмета: 1
+[AI]: Вітаю, учень! Я ваш персональний тьютор з предмету MATH.
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 2
+
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 1/3]
+
+Математика потребує дій! Візьміть ручку, аркуш паперу і давайте власноруч складемо квадратне рівняння. Напишіть по
+центру `x^2`. Тепер додайте до нього `7x`. І наприкінці допишіть `+ 10 = 0`. Ви щойно створили зведене квадратне рівняння!
+Тепер візьміть маркер: підкресліть числа перед іксами. Перед x^2 нічого немає, отже там ховається 1 — напишіть її.
+Обведіть кружечком число 7 (це коефіцієнт 'b'). І підкресліть двома лініями 10 (це вільний член 'c').
+
+------------------------------------------
+[N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 2/3]
+
+Щоб зрозуміти, як працюють неповні квадратні рівняння, давайте їх фізично розв'яжемо. Напишіть рівняння `x^2 - 25 = 0`.
+Перенесіть 25 на іншу сторону: `x^2 = 25`. Тепер запитайте себе: яке число треба помножити саме на себе, щоб отримати 25?
+апишіть: `x = 5`. Але зачекайте! Напишіть поруч `-5 * -5`. Воно теж дає 25! Тому рукою допишіть: `x1 = 5, x2 = -5`.
+Ви щойно розв'язали неповне рівняння методом добування кореня.
+
+--------------------------------------------------------------------
+[P] Попередня сторінка    [N] Наступна сторінка    [B] Назад до меню
+Оберіть дію: n
+[ ТЕМА: Вступ до квадратних рівнянь та їх класифікація ]
+
+[Сторінка 3/3]
+
+Тепер розберемо інший тип неповного рівняння: `x^2 - 7x = 0`. Тут немає вільного числа, але є ікс в обох доданках.
+Напишіть його. Тепер фізично винесіть ікс за дужки: `x(x - 7) = 0`. Коли добуток двох множників дорівнює нулю? Коли хоча
+б один із них нуль! Запишіть два варіанти: `x = 0` (це наша перша відповідь) або `x - 7 = 0`. З другого рівняння
+переносимо 7 і отримуємо `x = 7`. Цей процес розбиття одного великого рівняння на два маленьких — найкращий спосіб тренування!
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+----------------------------------------------------------------------------------
+Програма надає матеріал підручника відповідно до обраного користувачем стилю.
+Додатково передбаченна зворотня сумісність з версіями матеріалу щоб не мають
+конкретного стилю, в такому разі матеріал виводитимется незалежно від стилю.
+Додатково якщо у підручнику з поточного предмету не передбачена обраний стиль,
+то аналогічно відображатимется базовий варіант подання інформації.
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Тестування користувача по пройденій темі
+                    </div>
+<pre>
+Перевіримо алгоритм генерації тестів
+----------------------------------------------------------------------------------
+...
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+Оберіть дію: t
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Визначте коефіцієнти a, b, c для рівняння 3x^2 - 5x + 2 = 0:
+  1. a=3, b=5, c=2
+  2. a=3, b=-5, c=2
+  3. a=-3, b=-5, c=-2
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 2 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 3 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 3
+Правильно!
+
+Питання 4 (Theory): Скільки коренів завжди має рівняння виду ax^2 = 0?
+  1. Жодного
+  2. Один (x = 0)
+  3. Два (x = 0 та x = a)
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 5 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 6 (Theory): Що потрібно зробити, щоб перетворити будь-яке незведене квадратне рівняння на зведене?
+  1. Помножити на a
+  2. Поділити всі члени на a
+  3. Відняти a від обох частин
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 7 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 8 (Practice): Знайдіть корені рівняння 3x^2 - 12x = 0:
+  1. 0 та 4
+  2. 0 та -4
+  3. 3 та 12
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 10 (Theory): Як називається квадратне рівняння, у якому старший коефіцієнт (a) дорівнює 1?
+  1. Зведене
+  2. Неповне
+  3. Лінійне
+Ваша відповідь (номер): 1
+Правильно!
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 100%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 5
+
+=== СПИСОК ТЕМ ===
+1. Вступ до квадратних рівнянь та їх класифікація
+2. Дискримінант та універсальна формула коренів
+3. Теорема Вієта та розкладання на множники
+
+0. Повернутись до меню
+
+Оберіть номер теми: 1
+
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 2 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 3 (Theory): Яке з наведених рівнянь називається квадратним?
+  1. ax + b = 0
+  2. ax^2 + bx + c = 0
+  3. ax^3 + bx^2 + c = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 4 (Practice): Розв'яжіть рівняння -x^2 + 9 = 0:
+  1. 3 та -3
+  2. Коренів немає
+  3. тільки 9
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 5 (Theory): Яка обов'язкова умова повинна виконуватись для коефіцієнта 'a' у квадратному рівнянні?
+  1. a > 0
+  2. a = 1
+  3. a ≠ 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 6 (Practice): Які корені має рівняння x^2 + 25 = 0?
+  1. 5 та -5
+  2. тільки 5
+  3. Дійсних коренів немає
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 7 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 8 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Theory): Який найвищий степінь змінної у квадратному рівнянні?
+  1. 1
+  2. 2
+  3. 3
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 10 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 60%
+----------------------------------------------------------------------------------
+Програма успішно генерує унікальний тест, в якому як теоретичні, так і практичні питання.
+Завдання є різними між тестами та перемішані між собою, за для уникнення механічного списування.
+</pre>
+                </div>
+				
+                <div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					Аналіз успішності та оптимізація навчання
+                    </div>
+<pre>
+Перевіримо точність оцінювання та логіку ковзного середнього
+----------------------------------------------------------------------------------
+...
+
+-------------------------------------------------------
+[P] Попередня сторінка    [T] Тест    [B] Назад до меню
+Оберіть дію: t
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Визначте коефіцієнти a, b, c для рівняння 3x^2 - 5x + 2 = 0:
+  1. a=3, b=5, c=2
+  2. a=3, b=-5, c=2
+  3. a=-3, b=-5, c=-2
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 2 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 3 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 3
+Правильно!
+
+Питання 4 (Theory): Скільки коренів завжди має рівняння виду ax^2 = 0?
+  1. Жодного
+  2. Один (x = 0)
+  3. Два (x = 0 та x = a)
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 5 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 6 (Theory): Що потрібно зробити, щоб перетворити будь-яке незведене квадратне рівняння на зведене?
+  1. Помножити на a
+  2. Поділити всі члени на a
+  3. Відняти a від обох частин
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 7 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 8 (Practice): Знайдіть корені рівняння 3x^2 - 12x = 0:
+  1. 0 та 4
+  2. 0 та -4
+  3. 3 та 12
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 2
+Правильно!
+
+Питання 10 (Theory): Як називається квадратне рівняння, у якому старший коефіцієнт (a) дорівнює 1?
+  1. Зведене
+  2. Неповне
+  3. Лінійне
+Ваша відповідь (номер): 1
+Правильно!
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 100%
+
+==================================
+Сьогоднішня дата: 03.05.2026
+1. Переглянути план
+2. Пройти наступний урок
+3. Обрати урок самостійно
+4. Пройти тест для наступної теми
+5. Обрати тему для тестування
+6. Моя статистика
+7. Змінити дату дедлайну
+8. Перевірити оновлення в індустрії
+9. ПЕРЕЙТИ НА НАСТУПНИЙ ДЕНЬ
+0. Повернутись до вибору предмета
+Оберіть дію: 5
+
+=== СПИСОК ТЕМ ===
+1. Вступ до квадратних рівнянь та їх класифікація
+2. Дискримінант та універсальна формула коренів
+3. Теорема Вієта та розкладання на множники
+
+0. Повернутись до меню
+
+Оберіть номер теми: 1
+
+[AI]: Починаємо тест! Питань: 10
+
+Питання 1 (Practice): Яке з рівнянь має корені x1=0, x2=5?
+  1. x^2 - 25 = 0
+  2. x^2 + 5x = 0
+  3. x^2 - 5x = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 2 (Practice): Якщо 5x^2 = 20, то x дорівнює:
+  1. тільки 2
+  2. 2 та -2
+  3. 4 та -4
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 3 (Theory): Яке з наведених рівнянь називається квадратним?
+  1. ax + b = 0
+  2. ax^2 + bx + c = 0
+  3. ax^3 + bx^2 + c = 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 4 (Practice): Розв'яжіть рівняння -x^2 + 9 = 0:
+  1. 3 та -3
+  2. Коренів немає
+  3. тільки 9
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 5 (Theory): Яка обов'язкова умова повинна виконуватись для коефіцієнта 'a' у квадратному рівнянні?
+  1. a > 0
+  2. a = 1
+  3. a ≠ 0
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 6 (Practice): Які корені має рівняння x^2 + 25 = 0?
+  1. 5 та -5
+  2. тільки 5
+  3. Дійсних коренів немає
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 3
+
+Питання 7 (Theory): Якщо у квадратному рівнянні b = 0 або c = 0, як воно називається?
+  1. Зведене
+  2. Неповне
+  3. Просте
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 8 (Theory): Яким методом найпростіше розв'язати рівняння виду ax^2 + bx = 0?
+  1. Винесенням x за дужки
+  2. Діленням на b
+  3. Використанням дискримінанта
+Ваша відповідь (номер): 1
+Правильно!
+
+Питання 9 (Theory): Який найвищий степінь змінної у квадратному рівнянні?
+  1. 1
+  2. 2
+  3. 3
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+Питання 10 (Practice): Розв'яжіть неповне рівняння x^2 - 7x = 0:
+  1. x = 7
+  2. x = 0 та x = 7
+  3. x = 0 та x = -7
+Ваша відповідь (номер): 1
+Помилка, правильною є відповідь: 2
+
+[AI]: Тест завершено! Ваш рівень знань з цієї теми: 60%
+----------------------------------------------------------------------------------
+Програма успішно зараховує бали за тест та оновлює знання з теми. 
+Пройшовши перший тест користувач відповів на всі 10 питань правильно та отримав 100% знань.
+Проте проходячи другий раз відповів правильно лише двічі, що робить його 100% результат
+нестабільним і натомість показує 60% знань, що є середнім арифметичним 20% та 100%.
+Таким чином користувачу доведется декілька разів гарно скласти тест аби його знання
+з теми вважалися стабільними, а весь матеріал засвоєним.
+</pre>
+                </div>
+				
+                <!--<div class="code-block">
+                    <div class="code-header" onclick="toggleCode(this)">
+					...
+                    </div>
+<pre>
+...
+</pre>
+				</div>-->
+				
+            </article>
+
+            <article id="STEM-conclusion">
+                <h3>Висновки</h3>
+                <p>
+					У ході виконання проєкту було розроблено консольний застосунок мовою C# для моделювання електронного підручника із вбудованим штучним інтелектом.
+					<br/><br/>Під час проектування системи було застосовано багаторівневу архітектуру з чітким розділенням на логічні шари: моделі даних, бізнес-логіку, інфраструктуру та інтерфейс. Успішно імплементовано принцип інверсії залежностей, де головний контролер AITutorEngine отримує об'єкти для роботи з базою даних та часом виключно через абстракції — інтерфейси IStorage та IClock. Взаємодія між моделями даних реалізована переважно через агрегацію: профіль користувача містить словники прогресу з різних предметів, які, у свою чергу, агрегують детальну статистику за темами та архівовані дані.
+					<br/><br/>Було розроблено алгоритми штучного інтелекту для оптимізації та персоналізації навчального процесу. Рушій ШІ динамічно розраховує щоденне навантаження студента на основі встановленої дати дедлайну та поточного часу системи. Для оцінювання успішності впроваджено алгоритм «ковзного середнього», який зберігає результати останніх п'яти спроб проходження тестів. Для генерації тестів активно застосовувалися методи класу Random, що забезпечило випадкову вибірку, балансування теоретичних і практичних завдань та їх перемішування.
+					<br/><br/>Для збереження стану системи реалізовано роботу з текстовими файлами у форматі JSON за допомогою бібліотеки System.Text.Json. Застосовано гнучкі налаштування серіалізації, зокрема JsonStringEnumConverter для коректного збереження перерахувань. Розроблено потужний механізм синхронізації даних: під час запуску програми система автоматично сканує файли підручників і синхронізує їх із профілями користувачів. Нові теми інтегруються в навчальний план, а видалені — безпечно переміщуються до архіву із збереженням прогресу студента.
+					<br/><br/>Було розроблено адаптивний багаторівневий консольний інтерфейс з системою авторизації. Завдяки інкапсуляції властивостей об'єктів та використанню перерахування LearningStyle, програма динамічно підлаштовує видачу навчального контенту під обраний тип сприйняття конкретного користувача.
+					<br/><br/>У результаті побудови проєкту було закріплено навички проектування чистої архітектури, використання інтерфейсів та впровадження залежностей, роботи з узагальненими колекціями і методами LINQ, безпечної серіалізації складних ієрархічних об'єктів у JSON, а також створення алгоритмів динамічного аналізу даних для моделювання поведінки інтелектуальних систем.
+				</p>
+            </article>
+        </section>
+	</div>
 
     <script src="script.js"></script>
 </body>
