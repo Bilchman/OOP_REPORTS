@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -23,37 +23,66 @@ body {
     overflow-y: auto;
 }
 
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.sidebar .subtitle {
+    color: #bac2de;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.state-message {
+    color: #bac2de;
+    font-size: 14px;
+    padding: 8px 0;
+}
+
 .lab-title {
     cursor: pointer;
-    padding: 8px 0;
+    padding: 8px;
+    margin-left: -8px;
     font-weight: bold;
     margin-top: 10px;
+    border-left: 3px solid transparent;
+    border-radius: 4px;
+}
+.lab-title:hover {
+    background: #313244;
+}
+.lab-title.active {
+    color: #b4befe;
+    border-left: 3px solid #b4befe;
+}
+
+/* Підменю розділів лабораторної — плавно розгортається під назвою */
+.submenu-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+    margin-left: 15px;
+}
+.submenu-wrap.open {
+    grid-template-rows: 1fr;
 }
 
 .submenu {
     list-style: none;
-    margin-left: 15px;
-    display: none; /* приховано поки не відкриємо */
+    overflow: hidden;
+    min-height: 0;
 }
-
-    .submenu li {
-        margin: 6px 0;
-    }
-
-    .submenu a {
-        color: #bac2de;
-        text-decoration: none;
-        font-size: 14px;
-    }
-
-        .submenu a:hover {
-            color: #b4befe;
-        }
-
-.subsubmenu {
-    display: none;
-    margin-left: 20px;
-    cursor: pointer;
+.submenu li {
+    margin: 6px 0;
+}
+.submenu a {
+    color: #bac2de;
+    text-decoration: none;
+    font-size: 14px;
+}
+.submenu a:hover {
+    color: #b4befe;
 }
 
 /* ===== ПРАВА ЧАСТИНА ===== */
@@ -63,20 +92,19 @@ body {
     overflow-y: auto;
     margin-left: 300px; /* щоб не залізло під меню */
     padding: 20px;
-    /*max-width: 900px;*/
 }
 .content h1,
 .content h2,
 .content h3 {
     text-align: center;
 }
+
 .lab-section {
     display: none; /* всі лабораторні приховані */
 }
-
-    .lab-section.active {
-        display: block; /* показується лише активна */
-    }
+.lab-section.active {
+    display: block; /* показується лише активна */
+}
 
 article {
     margin-top: 30px;
@@ -87,6 +115,7 @@ article {
         margin-bottom: 10px;
         color: #b4befe;
     }
+
 /* Заголовок коду — завжди видно */
 .code-header {
     background: #45475a;
@@ -97,36 +126,38 @@ article {
     border-radius: 6px 6px 0 0;
 }
 
-/* Блок коду */
-.code-block pre {
-    max-height: 0; /* спочатку прихований */
-    overflow: hidden; /* вертикальне ховання */
-    overflow-x: auto; /* горизонтальний скрол */
-    background: #1e1e2e;
-    color: #cdd6f4;
-    padding: 0 15px; /* спочатку padding нуль */
-    font-family: monospace;
-    white-space: pre;
-    transition: max-height 0.4s ease, padding 0.4s ease;
-    border-radius: 0 0 6px 6px; /* закруглення внизу */
-    margin: 3px auto;
+/* Блок коду — плавне розгортання без "стрибка" (grid-rows замість
+   величезного max-height) */
+.code-collapse {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+.code-block.open .code-collapse {
+    grid-template-rows: 1fr;
 }
 
-.code-block.open pre {
-    max-height: 100000px; /* Достатньо велике, щоб вміст помістився */
-    padding: 15px; /* Додаємо відступи при розгортанні */
-
+.code-collapse pre {
+    overflow: hidden;
+    min-height: 0;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 15px;
+    font-family: monospace;
+    white-space: pre;
+    border-radius: 0 0 6px 6px;
+    margin: 3px auto;
 }
 
 .photo {
     padding: 10px;
     max-width: 30%;
     display: block;
-    border-radius:20px;
+    border-radius: 20px;
     margin: 0 auto;
 }
 
-ul, ol { /* або ol */
-    padding-left: 20px; /* Збільш відступ, щоб двозначне число помістилося */
+ul, ol {
+    padding-left: 20px;
     list-style-position: outside;
 }
